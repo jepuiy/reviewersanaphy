@@ -1457,7 +1457,7 @@
             
             // Initialize male reproductive quiz with first 10 questions (for performance)
             const maleContainer = document.getElementById('male-reproductive-questions');
-            maleReproductiveQuestions.slice(0, 10).forEach((q, index) => {
+            maleReproductiveQuestions.slice(0, 50).forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
                 questionDiv.innerHTML = `
@@ -1478,7 +1478,7 @@
             
             // Initialize female reproductive quiz with first 10 questions (for performance)
             const femaleContainer = document.getElementById('female-reproductive-questions');
-            femaleReproductiveQuestions.slice(0, 10).forEach((q, index) => {
+            femaleReproductiveQuestions.slice(0, 50).forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
                 questionDiv.innerHTML = `
@@ -1499,11 +1499,11 @@
             
             // Set up submit buttons
             document.getElementById('submit-male').addEventListener('click', function() {
-                calculateScore('male', maleReproductiveQuestions.slice(0, 10));
+                calculateScore('male', maleReproductiveQuestions.slice(0, 50));
             });
             
             document.getElementById('submit-female').addEventListener('click', function() {
-                calculateScore('female', femaleReproductiveQuestions.slice(0, 10));
+                calculateScore('female', femaleReproductiveQuestions.slice(0, 50));
             });
             
             // Set up navigation
@@ -1511,8 +1511,8 @@
             setupNavigation('female');
             
             // Set up immediate feedback for each question
-            setupImmediateFeedback('male', maleReproductiveQuestions.slice(0, 10));
-            setupImmediateFeedback('female', femaleReproductiveQuestions.slice(0, 10));
+            setupImmediateFeedback('male', maleReproductiveQuestions.slice(0, 50));
+            setupImmediateFeedback('female', femaleReproductiveQuestions.slice(0, 50));
         }
         
         function setupNavigation(quizType) {
