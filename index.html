@@ -1,30 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Styled Links</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer Quizzes for Ley</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px 40px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h3 {
+            color: #e74c3c;
+            font-size: 1.8em;
+            margin-bottom: 50px;
+            font-weight: 400;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+        
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
         .nav-link {
-            color: blue;
+            color: white;
             text-decoration: none;
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ccc;
-            display: inline-block;
+            padding: 25px 30px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: left 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
         }
         
         .nav-link:hover {
-            background-color: #f0f0f0;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .nav-link.lymphatic {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .nav-link.respiratory {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .nav-link.urinary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .nav-link.reproductive {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .nav-link.digestive {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .icon {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h3 {
+                font-size: 1.3em;
+            }
+            
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-link {
+                font-size: 1.1em;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Reviewer quizzes for ley</h1>
-    <h3>iloveyou</h3>
-    
-    <a href="lymphatic.html" class="nav-link">Lymphatic</a>
-    <a href="respiratory.html" class="nav-link">Respiratory</a>
-    <a href="urinary.html" class="nav-link">Urinary</a>
-    <a href="reproductive.html" class="nav-link">Reproductive</a>
-    <a href="digestive.html" class="nav-link">Digestive</a>
+    <div class="container">
+        <h1>📚 Reviewer Quizzes for Ley</h1>
+        <h3>💝 iloveyou</h3>
+        
+        <div class="nav-links">
+            <a href="lymphatic.html" class="nav-link lymphatic">
+                <span class="icon">🧬</span>
+                <span>Lymphatic System</span>
+            </a>
+            <a href="respiratory.html" class="nav-link respiratory">
+                <span class="icon">🫁</span>
+                <span>Respiratory System</span>
+            </a>
+            <a href="urinary.html" class="nav-link urinary">
+                <span class="icon">💧</span>
+                <span>Urinary System</span>
+            </a>
+            <a href="reproductive.html" class="nav-link reproductive">
+                <span class="icon">🌸</span>
+                <span>Reproductive System</span>
+            </a>
+            <a href="digestive.html" class="nav-link digestive">
+                <span class="icon">🍎</span>
+                <span>Digestive System</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p><i>Goodluck baby and I love you! - jeff 🥰<i></p><br>
+            <p><b>Philippians 4:13<br>I can do all things through Christ who strengthens me<b></p>
+        </div>
+    </div>
 </body>
 </html>
