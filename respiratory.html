@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respiratory System Quiz - Set 2</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #4a90e2;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --correct-color: #4CAF50;
+            --incorrect-color: #f44336;
+            --highlight-color: #FFD700;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .verse {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .personal-note {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(74, 144, 226, 0.2);
+        }
+        
+        .quiz-section {
+            display: none;
+        }
+        
+        .quiz-section.active {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 3px solid var(--correct-color);
+        }
+        
+        .incorrect {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-left: 3px solid var(--incorrect-color);
+        }
+        
+        .correct-answer {
+            font-weight: bold;
+            color: var(--highlight-color);
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+        
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .nav-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Respiratory System Quiz - Set 2</h1>
+        <div class="verse">"Cast all your anxiety on him because he cares for you, 1 Peter 5:7"</div>
+        <div class="personal-note">for leonah only :D</div>
+    </header>
+    
+    <div class="quiz-container">
+        <div class="tabs">
+            <button class="tab active" data-target="upper-respiratory-quiz">Upper Respiratory System (50 Questions)</button>
+            <button class="tab" data-target="lower-respiratory-quiz">Lower Respiratory System (50 Questions)</button>
+        </div>
+        
+        <div id="upper-respiratory-quiz" class="quiz-section active">
+            <!-- Upper Respiratory System Quiz Content -->
+            <div id="upper-respiratory-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-upper" class="nav-btn" disabled>Previous</button>
+                <button id="next-upper" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-upper" class="submit-btn">Submit Upper Respiratory Quiz</button>
+            
+            <div id="upper-respiratory-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+        
+        <div id="lower-respiratory-quiz" class="quiz-section">
+            <!-- Lower Respiratory System Quiz Content -->
+            <div id="lower-respiratory-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-lower" class="nav-btn" disabled>Previous</button>
+                <button id="next-lower" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-lower" class="submit-btn">Submit Lower Respiratory Quiz</button>
+            
+            <div id="lower-respiratory-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data - 50 questions for each section
+        const upperRespiratoryQuestions = [
+            {
+                question: "What is the primary function of the nasal conchae?",
+                options: [
+                    "To produce mucus",
+                    "To increase surface area for air filtration",
+                    "To detect odors",
+                    "To warm incoming air"
+                ],
+                correct: 1,
+                explanation: "The nasal conchae (turbinates) greatly increase the surface area of the mucosa exposed to air, which helps filter, warm, and humidify incoming air."
+            },
+            {
+                question: "Which structure separates the nasal cavity from the oral cavity?",
+                options: [
+                    "Septum",
+                    "Uvula",
+                    "Palate",
+                    "Epiglottis"
+                ],
+                correct: 2,
+                explanation: "The palate separates the nasal cavity from the oral cavity, with the hard palate anteriorly and the soft palate posteriorly."
+            },
+            {
+                question: "What is the function of the epiglottis?",
+                options: [
+                    "To produce sound",
+                    "To filter air",
+                    "To prevent food from entering the trachea",
+                    "To warm air"
+                ],
+                correct: 2,
+                explanation: "The epiglottis acts as a switch between the trachea and esophagus, routing food to the esophagus and air to the trachea."
+            },
+            {
+                question: "Which part of the pharynx is directly behind the nasal cavity?",
+                options: [
+                    "Oropharynx",
+                    "Laryngopharynx",
+                    "Nasopharynx",
+                    "Hypopharynx"
+                ],
+                correct: 2,
+                explanation: "The nasopharynx is the superior portion of the pharynx, directly behind the nasal cavity."
+            },
+            {
+                question: "What is the Adam's apple?",
+                options: [
+                    "Thyroid cartilage",
+                    "Cricoid cartilage",
+                    "Epiglottis",
+                    "Arytenoid cartilage"
+                ],
+                correct: 0,
+                explanation: "The Adam's apple is the common name for the thyroid cartilage, the largest cartilage of the larynx that protrudes anteriorly."
+            },
+            {
+                question: "Which tonsils are located in the oropharynx?",
+                options: [
+                    "Pharyngeal tonsils",
+                    "Palatine tonsils",
+                    "Lingual tonsils",
+                    "Tubal tonsils"
+                ],
+                correct: 1,
+                explanation: "The palatine tonsils are located in the oropharynx at the end of the soft palate."
+            },
+            {
+                question: "What is the function of the uvula?",
+                options: [
+                    "To produce speech sounds",
+                    "To prevent food from entering the nasal cavity during swallowing",
+                    "To filter air",
+                    "To detect odors"
+                ],
+                correct: 1,
+                explanation: "The uvula helps prevent food and liquid from entering the nasal cavity during swallowing by closing off the nasopharynx."
+            },
+            {
+                question: "Which structure houses the vocal cords?",
+                options: [
+                    "Pharynx",
+                    "Trachea",
+                    "Larynx",
+                    "Bronchus"
+                ],
+                correct: 2,
+                explanation: "The larynx (voice box) contains the vocal cords that vibrate to produce sound."
+            },
+            {
+                question: "What is the glottis?",
+                options: [
+                    "The opening between the vocal cords",
+                    "The cartilage that forms the Adam's apple",
+                    "The flap that covers the larynx",
+                    "The space between the nasal cavity and pharynx"
+                ],
+                correct: 0,
+                explanation: "The glottis is the opening between the vocal cords through which air passes."
+            },
+            {
+                question: "Which sinus is located in the frontal bone?",
+                options: [
+                    "Maxillary sinus",
+                    "Frontal sinus",
+                    "Sphenoidal sinus",
+                    "Ethmoidal sinus"
+                ],
+                correct: 1,
+                explanation: "The frontal sinus is located in the frontal bone above the eyebrows."
+            },
+            {
+                question: "What is rhinitis?",
+                options: [
+                    "Inflammation of the sinuses",
+                    "Inflammation of the nasal mucosa",
+                    "Inflammation of the throat",
+                    "Inflammation of the larynx"
+                ],
+                correct: 1,
+                explanation: "Rhinitis is inflammation of the nasal mucosa, often caused by cold viruses or allergens."
+            },
+            {
+                question: "Which structure connects the middle ear to the nasopharynx?",
+                options: [
+                    "Eustachian tube",
+                    "Nasolacrimal duct",
+                    "Trachea",
+                    "Bronchus"
+                ],
+                correct: 0,
+                explanation: "The Eustachian tube (pharyngotympanic tube) connects the middle ear to the nasopharynx, helping to equalize pressure."
+            },
+            {
+                question: "What is the function of the cilia in the nasal cavity?",
+                options: [
+                    "To warm air",
+                    "To produce mucus",
+                    "To move mucus toward the pharynx",
+                    "To detect odors"
+                ],
+                correct: 2,
+                explanation: "Cilia in the nasal cavity create a gentle current that moves contaminated mucus posteriorly toward the throat where it can be swallowed."
+            },
+            {
+                question: "Which cartilage forms a complete ring around the trachea?",
+                options: [
+                    "Thyroid cartilage",
+                    "Cricoid cartilage",
+                    "Arytenoid cartilage",
+                    "Epiglottis"
+                ],
+                correct: 1,
+                explanation: "The cricoid cartilage is the only complete ring of cartilage around the trachea, providing structural support."
+            },
+            {
+                question: "What is the function of the paranasal sinuses?",
+                options: [
+                    "To produce mucus",
+                    "To lighten the skull and resonate speech",
+                    "To filter air",
+                    "To warm air"
+                ],
+                correct: 1,
+                explanation: "The paranasal sinuses lighten the skull and act as resonance chambers for speech."
+            },
+            {
+                question: "Which structure is commonly referred to as the 'throat'?",
+                options: [
+                    "Larynx",
+                    "Pharynx",
+                    "Trachea",
+                    "Esophagus"
+                ],
+                correct: 1,
+                explanation: "The pharynx is commonly called the throat and serves as a common passageway for food and air."
+            },
+            {
+                question: "What is the function of the nasal mucosa?",
+                options: [
+                    "To detect odors only",
+                    "To warm, moisten, and filter incoming air",
+                    "To produce sound",
+                    "To prevent food aspiration"
+                ],
+                correct: 1,
+                explanation: "The nasal mucosa warms, moistens, and filters incoming air before it reaches the lungs."
+            },
+            {
+                question: "Which structure is responsible for preventing aspiration during swallowing?",
+                options: [
+                    "Uvula",
+                    "Epiglottis",
+                    "Vocal cords",
+                    "Tongue"
+                ],
+                correct: 1,
+                explanation: "The epiglottis tips downward during swallowing to cover the opening of the larynx, preventing food and liquid from entering the airway."
+            },
+            {
+                question: "What is the name of the slit-like opening between the vocal cords?",
+                options: [
+                    "Glottis",
+                    "Rima",
+                    "Vestibule",
+                    "Fissure"
+                ],
+                correct: 0,
+                explanation: "The glottis is the slit-like opening between the vocal cords through which air passes."
+            },
+            {
+                question: "Which part of the pharynx is a passageway for air only?",
+                options: [
+                    "Oropharynx",
+                    "Laryngopharynx",
+                    "Nasopharynx",
+                    "All of the above"
+                ],
+                correct: 2,
+                explanation: "The nasopharynx serves as a passageway for air only, while the oropharynx and laryngopharynx serve both air and food."
+            },
+            {
+                question: "What is the function of the thyroid cartilage?",
+                options: [
+                    "To produce sound",
+                    "To protect the vocal cords",
+                    "To connect the larynx to the trachea",
+                    "To prevent aspiration"
+                ],
+                correct: 1,
+                explanation: "The thyroid cartilage forms the anterior wall of the larynx and helps protect the vocal cords."
+            },
+            {
+                question: "Which structure is affected in laryngitis?",
+                options: [
+                    "Pharynx",
+                    "Larynx",
+                    "Trachea",
+                    "Bronchi"
+                ],
+                correct: 1,
+                explanation: "Laryngitis is inflammation of the larynx, often resulting in hoarseness or loss of voice."
+            },
+            {
+                question: "What is the function of the soft palate?",
+                options: [
+                    "To separate the nasal and oral cavities",
+                    "To produce speech sounds",
+                    "To move during swallowing",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The soft palate separates the nasal and oral cavities, moves during swallowing, and helps produce certain speech sounds."
+            },
+            {
+                question: "Which structure is commonly removed in a tonsillectomy?",
+                options: [
+                    "Pharyngeal tonsils",
+                    "Palatine tonsils",
+                    "Lingual tonsils",
+                    "All of the above"
+                ],
+                correct: 1,
+                explanation: "A tonsillectomy typically involves removal of the palatine tonsils, which are located in the oropharynx."
+            },
+            {
+                question: "What is the function of the arytenoid cartilages?",
+                options: [
+                    "To protect the larynx",
+                    "To attach the vocal cords",
+                    "To connect the larynx to the trachea",
+                    "To produce mucus"
+                ],
+                correct: 1,
+                explanation: "The arytenoid cartilages attach to the vocal cords and help control their tension and position."
+            },
+            {
+                question: "Which structure is affected in sinusitis?",
+                options: [
+                    "Nasal cavity",
+                    "Paranasal sinuses",
+                    "Pharynx",
+                    "Larynx"
+                ],
+                correct: 1,
+                explanation: "Sinusitis is inflammation of the paranasal sinuses, often causing facial pain and nasal congestion."
+            },
+            {
+                question: "What is the function of the nasal septum?",
+                options: [
+                    "To divide the nasal cavity",
+                    "To produce mucus",
+                    "To warm air",
+                    "To filter air"
+                ],
+                correct: 0,
+                explanation: "The nasal septum divides the nasal cavity into right and left halves."
+            },
+            {
+                question: "Which structure is commonly called the 'voice box'?",
+                options: [
+                    "Pharynx",
+                    "Larynx",
+                    "Trachea",
+                    "Bronchus"
+                ],
+                correct: 1,
+                explanation: "The larynx is commonly called the voice box because it houses the vocal cords that produce sound."
+            },
+            {
+                question: "What is the function of the pharyngotympanic tube?",
+                options: [
+                    "To drain the middle ear",
+                    "To connect the pharynx to the larynx",
+                    "To produce sound",
+                    "To filter air"
+                ],
+                correct: 0,
+                explanation: "The pharyngotympanic tube (Eustachian tube) drains the middle ear and helps equalize pressure."
+            },
+            {
+                question: "Which structure is affected in pharyngitis?",
+                options: [
+                    "Larynx",
+                    "Pharynx",
+                    "Trachea",
+                    "Bronchi"
+                ],
+                correct: 1,
+                explanation: "Pharyngitis is inflammation of the pharynx, commonly known as a sore throat."
+            },
+            {
+                question: "What is the function of the vestibular folds?",
+                options: [
+                    "To produce sound",
+                    "To protect the vocal cords",
+                    "To warm air",
+                    "To filter air"
+                ],
+                correct: 1,
+                explanation: "The vestibular folds (false vocal cords) help protect the true vocal cords."
+            },
+            {
+                question: "Which structure is commonly called the 'windpipe'?",
+                options: [
+                    "Pharynx",
+                    "Larynx",
+                    "Trachea",
+                    "Bronchus"
+                ],
+                correct: 2,
+                explanation: "The trachea is commonly called the windpipe and carries air from the larynx to the bronchi."
+            },
+            {
+                question: "What is the function of the nasal vestibule?",
+                options: [
+                    "To filter large particles from air",
+                    "To warm air",
+                    "To moisten air",
+                    "To detect odors"
+                ],
+                correct: 0,
+                explanation: "The nasal vestibule is the anterior part of the nasal cavity that contains hairs to filter large particles from incoming air."
+            },
+            {
+                question: "Which structure is affected in epiglottitis?",
+                options: [
+                    "Epiglottis",
+                    "Larynx",
+                    "Pharynx",
+                    "Trachea"
+                ],
+                correct: 0,
+                explanation: "Epiglottitis is inflammation of the epiglottis, which can be life-threatening if it obstructs the airway."
+            },
+            {
+                question: "What is the function of the conchae in the nasal cavity?",
+                options: [
+                    "To increase surface area",
+                    "To create turbulence in airflow",
+                    "To trap particles in mucus",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The conchae increase surface area, create turbulence in airflow, and help trap particles in mucus."
+            },
+            {
+                question: "Which structure connects the larynx to the bronchi?",
+                options: [
+                    "Pharynx",
+                    "Trachea",
+                    "Esophagus",
+                    "Nasopharynx"
+                ],
+                correct: 1,
+                explanation: "The trachea connects the larynx to the bronchi, allowing air to pass to and from the lungs."
+            },
+            {
+                question: "What is the function of the hyoid bone?",
+                options: [
+                    "To support the tongue",
+                    "To anchor the larynx",
+                    "To assist in swallowing",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The hyoid bone supports the tongue, anchors the larynx, and assists in swallowing."
+            },
+            {
+                question: "Which structure is affected in tonsillitis?",
+                options: [
+                    "Pharyngeal tonsils",
+                    "Palatine tonsils",
+                    "Lingual tonsils",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Tonsillitis can affect any of the tonsils - pharyngeal, palatine, or lingual."
+            },
+            {
+                question: "What is the function of the nasolacrimal duct?",
+                options: [
+                    "To drain tears into the nasal cavity",
+                    "To connect the nose to the pharynx",
+                    "To produce mucus",
+                    "To filter air"
+                ],
+                correct: 0,
+                explanation: "The nasolacrimal duct drains tears from the eyes into the nasal cavity."
+            },
+            {
+                question: "Which structure is commonly called the 'Adam's apple'?",
+                options: [
+                    "Thyroid cartilage",
+                    "Cricoid cartilage",
+                    "Epiglottis",
+                    "Hyoid bone"
+                ],
+                correct: 0,
+                explanation: "The thyroid cartilage is commonly called the Adam's apple, especially prominent in males."
+            },
+            {
+                question: "What is the function of the vocal ligaments?",
+                options: [
+                    "To produce sound when vibrated",
+                    "To protect the airway",
+                    "To warm air",
+                    "To filter air"
+                ],
+                correct: 0,
+                explanation: "The vocal ligaments vibrate as air passes through to produce sound."
+            },
+            {
+                question: "Which structure is affected in rhinosinusitis?",
+                options: [
+                    "Nasal cavity only",
+                    "Paranasal sinuses only",
+                    "Both nasal cavity and paranasal sinuses",
+                    "Pharynx"
+                ],
+                correct: 2,
+                explanation: "Rhinosinusitis affects both the nasal cavity and paranasal sinuses."
+            },
+            {
+                question: "What is the function of the pharyngeal constrictor muscles?",
+                options: [
+                    "To propel food toward the esophagus",
+                    "To produce speech sounds",
+                    "To filter air",
+                    "To warm air"
+                ],
+                correct: 0,
+                explanation: "The pharyngeal constrictor muscles contract sequentially to propel food toward the esophagus during swallowing."
+            },
+            {
+                question: "Which structure is commonly called the 'throat'?",
+                options: [
+                    "Larynx",
+                    "Pharynx",
+                    "Trachea",
+                    "Esophagus"
+                ],
+                correct: 1,
+                explanation: "The pharynx is commonly called the throat and serves as a passageway for both air and food."
+            },
+            {
+                question: "What is the function of the cricothyroid ligament?",
+                options: [
+                    "To connect the cricoid and thyroid cartilages",
+                    "To produce sound",
+                    "To protect the airway",
+                    "To warm air"
+                ],
+                correct: 0,
+                explanation: "The cricothyroid ligament connects the cricoid and thyroid cartilages of the larynx."
+            },
+            {
+                question: "Which structure is affected in laryngeal cancer?",
+                options: [
+                    "Pharynx",
+                    "Larynx",
+                    "Trachea",
+                    "Bronchi"
+                ],
+                correct: 1,
+                explanation: "Laryngeal cancer affects the larynx, often associated with smoking and alcohol use."
+            },
+            {
+                question: "What is the function of the nasal meatuses?",
+                options: [
+                    "To increase surface area",
+                    "To create air turbulence",
+                    "To drain paranasal sinuses",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The nasal meatuses are grooves beneath the conchae that increase surface area, create air turbulence, and drain the paranasal sinuses."
+            },
+            {
+                question: "Which structure is commonly removed in an adenoidectomy?",
+                options: [
+                    "Pharyngeal tonsils",
+                    "Palatine tonsils",
+                    "Lingual tonsils",
+                    "All of the above"
+                ],
+                correct: 0,
+                explanation: "An adenoidectomy involves removal of the pharyngeal tonsils (adenoids) located in the nasopharynx."
+            },
+            {
+                question: "What is the function of the trachealis muscle?",
+                options: [
+                    "To complete the posterior wall of the trachea",
+                    "To allow esophageal expansion during swallowing",
+                    "To help regulate airflow",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The trachealis muscle completes the posterior wall of the trachea, allows esophageal expansion during swallowing, and helps regulate airflow."
+            },
+            {
+                question: "Which structure is affected in vocal cord nodules?",
+                options: [
+                    "Vocal cords",
+                    "Epiglottis",
+                    "Trachea",
+                    "Bronchi"
+                ],
+                correct: 0,
+                explanation: "Vocal cord nodules are benign growths on the vocal cords, often caused by vocal strain."
+            }
+        ];
+
+        const lowerRespiratoryQuestions = [
+            {
+                question: "What is the function of the tracheal cartilages?",
+                options: [
+                    "To keep the trachea patent (open)",
+                    "To allow esophageal expansion",
+                    "To produce sound",
+                    "Both A and B"
+                ],
+                correct: 3,
+                explanation: "The C-shaped tracheal cartilages keep the trachea patent while allowing the esophagus to expand anteriorly during swallowing."
+            },
+            {
+                question: "Which main bronchus is more likely to trap inhaled foreign objects?",
+                options: [
+                    "Left main bronchus",
+                    "Right main bronchus",
+                    "Both equally",
+                    "Neither"
+                ],
+                correct: 1,
+                explanation: "The right main bronchus is wider, shorter, and more vertical than the left, making it more likely to trap inhaled foreign objects."
+            },
+            {
+                question: "What is the function of the alveoli?",
+                options: [
+                    "To conduct air",
+                    "To produce sound",
+                    "To exchange gases",
+                    "To filter air"
+                ],
+                correct: 2,
+                explanation: "The alveoli are the site of gas exchange between air and blood in the lungs."
+            },
+            {
+                question: "Which structure is known as the 'respiratory membrane'?",
+                options: [
+                    "The wall of the trachea",
+                    "The wall of the bronchi",
+                    "The wall of the alveoli",
+                    "The wall of the bronchioles"
+                ],
+                correct: 2,
+                explanation: "The respiratory membrane is the thin barrier between alveolar air and pulmonary capillary blood where gas exchange occurs."
+            },
+            {
+                question: "What is the function of surfactant?",
+                options: [
+                    "To kill bacteria",
+                    "To reduce surface tension in alveoli",
+                    "To produce mucus",
+                    "To filter air"
+                ],
+                correct: 1,
+                explanation: "Surfactant reduces surface tension in the alveoli, preventing their collapse during exhalation."
+            },
+            {
+                question: "Which cells produce surfactant?",
+                options: [
+                    "Type I alveolar cells",
+                    "Type II alveolar cells",
+                    "Alveolar macrophages",
+                    "Goblet cells"
+                ],
+                correct: 1,
+                explanation: "Type II alveolar cells (septal cells) produce surfactant."
+            },
+            {
+                question: "What is the function of the pleural fluid?",
+                options: [
+                    "To lubricate the pleural surfaces",
+                    "To create surface tension",
+                    "To exchange gases",
+                    "To produce sound"
+                ],
+                correct: 0,
+                explanation: "Pleural fluid lubricates the pleural surfaces, allowing them to glide easily during breathing."
+            },
+            {
+                question: "Which structure is the site of gas exchange in the lungs?",
+                options: [
+                    "Trachea",
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli"
+                ],
+                correct: 3,
+                explanation: "The alveoli are the only structures in the respiratory system where gas exchange occurs."
+            },
+            {
+                question: "What is the function of the bronchial tree?",
+                options: [
+                    "To conduct air to and from alveoli",
+                    "To exchange gases",
+                    "To produce sound",
+                    "To filter blood"
+                ],
+                correct: 0,
+                explanation: "The bronchial tree conducts air to and from the alveoli where gas exchange occurs."
+            },
+            {
+                question: "Which structure separates the lungs?",
+                options: [
+                    "Diaphragm",
+                    "Mediastinum",
+                    "Pleura",
+                    "Pericardium"
+                ],
+                correct: 1,
+                explanation: "The mediastinum is the central compartment of the thoracic cavity that separates the lungs."
+            },
+            {
+                question: "What is the function of the diaphragm?",
+                options: [
+                    "To separate thoracic and abdominal cavities",
+                    "To assist in breathing",
+                    "To protect abdominal organs",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The diaphragm separates the thoracic and abdominal cavities, assists in breathing, and protects abdominal organs."
+            },
+            {
+                question: "Which lung has three lobes?",
+                options: [
+                    "Right lung",
+                    "Left lung",
+                    "Both lungs",
+                    "Neither lung"
+                ],
+                correct: 0,
+                explanation: "The right lung has three lobes (superior, middle, inferior), while the left lung has two lobes (superior, inferior)."
+            },
+            {
+                question: "What is the function of the pulmonary capillaries?",
+                options: [
+                    "To conduct air",
+                    "To exchange gases",
+                    "To produce sound",
+                    "To filter air"
+                ],
+                correct: 1,
+                explanation: "Pulmonary capillaries surround the alveoli and are the site of gas exchange between blood and air."
+            },
+            {
+                question: "Which structure is affected in bronchitis?",
+                options: [
+                    "Trachea",
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli"
+                ],
+                correct: 1,
+                explanation: "Bronchitis is inflammation of the bronchi, often causing coughing and mucus production."
+            },
+            {
+                question: "What is the function of the respiratory bronchioles?",
+                options: [
+                    "To conduct air only",
+                    "To exchange gases",
+                    "Both conduction and gas exchange",
+                    "To produce sound"
+                ],
+                correct: 2,
+                explanation: "Respiratory bronchioles are transitional structures that both conduct air and participate in gas exchange."
+            },
+            {
+                question: "Which structure is the smallest conducting airway?",
+                options: [
+                    "Terminal bronchiole",
+                    "Respiratory bronchiole",
+                    "Alveolar duct",
+                    "Alveolus"
+                ],
+                correct: 0,
+                explanation: "The terminal bronchiole is the smallest airway that only conducts air (no gas exchange)."
+            },
+            {
+                question: "What is the function of the alveolar macrophages?",
+                options: [
+                    "To produce surfactant",
+                    "To phagocytize debris and pathogens",
+                    "To exchange gases",
+                    "To produce mucus"
+                ],
+                correct: 1,
+                explanation: "Alveolar macrophages (dust cells) phagocytize debris and pathogens that reach the alveoli."
+            },
+            {
+                question: "Which structure is affected in emphysema?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli",
+                    "All of the above"
+                ],
+                correct: 2,
+                explanation: "Emphysema primarily affects the alveoli, causing destruction of their walls and reduced gas exchange."
+            },
+            {
+                question: "What is the function of the pleural membranes?",
+                options: [
+                    "To produce pleural fluid",
+                    "To create a pressure gradient for breathing",
+                    "To protect the lungs",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The pleural membranes produce pleural fluid, create a pressure gradient for breathing, and protect the lungs."
+            },
+            {
+                question: "Which structure is the entrance point for bronchi, blood vessels, and nerves into the lung?",
+                options: [
+                    "Apex",
+                    "Base",
+                    "Hilum",
+                    "Fissure"
+                ],
+                correct: 2,
+                explanation: "The hilum is the region where bronchi, blood vessels, and nerves enter and exit the lung."
+            },
+            {
+                question: "What is the function of the bronchial arteries?",
+                options: [
+                    "To carry deoxygenated blood",
+                    "To supply oxygen to lung tissue",
+                    "To exchange gases",
+                    "To produce mucus"
+                ],
+                correct: 1,
+                explanation: "Bronchial arteries supply oxygenated blood to the lung tissue itself."
+            },
+            {
+                question: "Which structure is affected in pneumonia?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Pneumonia can affect various parts of the lung, including bronchi, bronchioles, and alveoli."
+            },
+            {
+                question: "What is the function of the alveolar pores (of Kohn)?",
+                options: [
+                    "To allow collateral airflow between alveoli",
+                    "To exchange gases",
+                    "To produce surfactant",
+                    "To filter air"
+                ],
+                correct: 0,
+                explanation: "Alveolar pores allow collateral airflow between adjacent alveoli, providing alternative pathways for air."
+            },
+            {
+                question: "Which structure is the functional unit of the lung?",
+                options: [
+                    "Bronchopulmonary segment",
+                    "Lobule",
+                    "Acinus",
+                    "Alveolus"
+                ],
+                correct: 2,
+                explanation: "The acinus, consisting of a respiratory bronchiole and its branches, is considered the functional unit of the lung."
+            },
+            {
+                question: "What is the function of the pulmonary veins?",
+                options: [
+                    "To carry deoxygenated blood to the lungs",
+                    "To carry oxygenated blood from the lungs",
+                    "To supply blood to lung tissue",
+                    "To drain lymph from the lungs"
+                ],
+                correct: 1,
+                explanation: "Pulmonary veins carry oxygenated blood from the lungs back to the heart."
+            },
+            {
+                question: "Which structure is affected in asthma?",
+                options: [
+                    "Trachea",
+                    "Bronchi and bronchioles",
+                    "Alveoli",
+                    "Pleura"
+                ],
+                correct: 1,
+                explanation: "Asthma primarily affects the bronchi and bronchioles, causing inflammation and bronchoconstriction."
+            },
+            {
+                question: "What is the function of the pulmonary arteries?",
+                options: [
+                    "To carry oxygenated blood to the lungs",
+                    "To carry deoxygenated blood to the lungs",
+                    "To supply blood to lung tissue",
+                    "To drain lymph from the lungs"
+                ],
+                correct: 1,
+                explanation: "Pulmonary arteries carry deoxygenated blood from the heart to the lungs for oxygenation."
+            },
+            {
+                question: "Which structure separates the lobes of the lungs?",
+                options: [
+                    "Pleura",
+                    "Fissures",
+                    "Hilum",
+                    "Mediastinum"
+                ],
+                correct: 1,
+                explanation: "Fissures are grooves that separate the lobes of the lungs."
+            },
+            {
+                question: "What is the function of the cilia in the trachea and bronchi?",
+                options: [
+                    "To exchange gases",
+                    "To move mucus upward toward the pharynx",
+                    "To produce sound",
+                    "To filter air"
+                ],
+                correct: 1,
+                explanation: "Cilia in the trachea and bronchi move mucus and trapped particles upward toward the pharynx (mucociliary escalator)."
+            },
+            {
+                question: "Which structure is affected in pulmonary edema?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli",
+                    "All of the above"
+                ],
+                correct: 2,
+                explanation: "Pulmonary edema involves fluid accumulation in the alveoli, impairing gas exchange."
+            },
+            {
+                question: "What is the function of the bronchiolar smooth muscle?",
+                options: [
+                    "To produce mucus",
+                    "To regulate airflow by changing diameter",
+                    "To exchange gases",
+                    "To produce sound"
+                ],
+                correct: 1,
+                explanation: "Bronchiolar smooth muscle regulates airflow by changing the diameter of the bronchioles."
+            },
+            {
+                question: "Which structure is the most superior part of the lung?",
+                options: [
+                    "Base",
+                    "Apex",
+                    "Hilum",
+                    "Fissure"
+                ],
+                correct: 1,
+                explanation: "The apex is the most superior part of the lung, extending above the clavicle."
+            },
+            {
+                question: "What is the function of the goblet cells in the respiratory tract?",
+                options: [
+                    "To produce mucus",
+                    "To move mucus",
+                    "To exchange gases",
+                    "To produce surfactant"
+                ],
+                correct: 0,
+                explanation: "Goblet cells produce mucus that traps particles and moistens the airway."
+            },
+            {
+                question: "Which structure is affected in lung cancer?",
+                options: [
+                    "Bronchial epithelium",
+                    "Alveolar epithelium",
+                    "Pleural membranes",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Lung cancer can originate in various lung tissues, including bronchial epithelium, alveolar epithelium, and pleural membranes."
+            },
+            {
+                question: "What is the function of the respiratory zone?",
+                options: [
+                    "To conduct air only",
+                    "To exchange gases",
+                    "To produce sound",
+                    "To filter air"
+                ],
+                correct: 1,
+                explanation: "The respiratory zone is where gas exchange occurs, consisting of respiratory bronchioles, alveolar ducts, and alveoli."
+            },
+            {
+                question: "Which structure is the most inferior part of the lung?",
+                options: [
+                    "Apex",
+                    "Base",
+                    "Hilum",
+                    "Fissure"
+                ],
+                correct: 1,
+                explanation: "The base is the most inferior part of the lung, resting on the diaphragm."
+            },
+            {
+                question: "What is the function of the conducting zone?",
+                options: [
+                    "To conduct air to respiratory zone",
+                    "To warm, moisten, and filter air",
+                    "To produce sound",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The conducting zone conducts air to the respiratory zone while warming, moistening, and filtering it, and also produces sound in the larynx."
+            },
+            {
+                question: "Which structure is affected in pleurisy?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli",
+                    "Pleura"
+                ],
+                correct: 3,
+                explanation: "Pleurisy is inflammation of the pleura, often causing sharp chest pain during breathing."
+            },
+            {
+                question: "What is the function of the alveolar ducts?",
+                options: [
+                    "To conduct air only",
+                    "To exchange gases",
+                    "Both conduction and gas exchange",
+                    "To produce sound"
+                ],
+                correct: 2,
+                explanation: "Alveolar ducts both conduct air and participate in gas exchange, as they are lined with alveoli."
+            },
+            {
+                question: "Which structure contains the vocal cords?",
+                options: [
+                    "Trachea",
+                    "Larynx",
+                    "Pharynx",
+                    "Bronchus"
+                ],
+                correct: 1,
+                explanation: "The larynx contains the vocal cords that produce sound when air passes through them."
+            },
+            {
+                question: "What is the function of the carina?",
+                options: [
+                    "To divide the trachea into bronchi",
+                    "To produce cough reflex",
+                    "To exchange gases",
+                    "Both A and B"
+                ],
+                correct: 3,
+                explanation: "The carina is the ridge at the bifurcation of the trachea that divides it into bronchi and is sensitive, triggering cough reflex when stimulated."
+            },
+            {
+                question: "Which structure is affected in tuberculosis?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Tuberculosis can affect various parts of the lung, including bronchi, bronchioles, and alveoli, forming granulomas."
+            },
+            {
+                question: "What is the function of the bronchial tree?",
+                options: [
+                    "To provide structural support",
+                    "To conduct air",
+                    "To increase surface area",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The bronchial tree provides structural support, conducts air, and increases surface area for gas exchange."
+            },
+            {
+                question: "Which structure is the site of oxygen and carbon dioxide exchange?",
+                options: [
+                    "Trachea",
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli"
+                ],
+                correct: 3,
+                explanation: "The alveoli are the primary site of oxygen and carbon dioxide exchange between air and blood."
+            },
+            {
+                question: "What is the function of the type I alveolar cells?",
+                options: [
+                    "To produce surfactant",
+                    "To form the respiratory membrane",
+                    "To phagocytize debris",
+                    "To produce mucus"
+                ],
+                correct: 1,
+                explanation: "Type I alveolar cells form the thin respiratory membrane where gas exchange occurs."
+            },
+            {
+                question: "Which structure is affected in chronic obstructive pulmonary disease (COPD)?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Alveoli",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "COPD typically affects multiple structures, including bronchi (chronic bronchitis), bronchioles, and alveoli (emphysema)."
+            },
+            {
+                question: "What is the function of the pulmonary ligament?",
+                options: [
+                    "To connect the lung to the mediastinum",
+                    "To conduct air",
+                    "To exchange gases",
+                    "To produce sound"
+                ],
+                correct: 0,
+                explanation: "The pulmonary ligament is a fold of pleura that connects the lung to the mediastinum, providing stability."
+            },
+            {
+                question: "Which structure is the last part of the conducting zone?",
+                options: [
+                    "Terminal bronchiole",
+                    "Respiratory bronchiole",
+                    "Alveolar duct",
+                    "Alveolus"
+                ],
+                correct: 0,
+                explanation: "The terminal bronchiole is the last part of the conducting zone, after which the respiratory zone begins."
+            },
+            {
+                question: "What is the function of the alveolar sacs?",
+                options: [
+                    "To conduct air only",
+                    "To exchange gases",
+                    "Both conduction and gas exchange",
+                    "To produce sound"
+                ],
+                correct: 1,
+                explanation: "Alveolar sacs are clusters of alveoli that are the primary sites of gas exchange."
+            },
+            {
+                question: "Which structure is affected in cystic fibrosis?",
+                options: [
+                    "Bronchi",
+                    "Bronchioles",
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "Cystic fibrosis affects both bronchi and bronchioles, causing thick mucus production that obstructs airways."
+            },
+            {
+                question: "What is the function of the visceral pleura?",
+                options: [
+                    "To line the thoracic cavity",
+                    "To cover the lungs",
+                    "To separate the lungs",
+                    "To produce pleural fluid"
+                ],
+                correct: 1,
+                explanation: "The visceral pleura covers the surface of the lungs."
+            },
+            {
+                question: "Which structure is the first part of the respiratory zone?",
+                options: [
+                    "Terminal bronchiole",
+                    "Respiratory bronchiole",
+                    "Alveolar duct",
+                    "Alveolus"
+                ],
+                correct: 1,
+                explanation: "The respiratory bronchiole is the first part of the respiratory zone, where gas exchange begins."
+            },
+            {
+                question: "What is the function of the parietal pleura?",
+                options: [
+                    "To cover the lungs",
+                    "To line the thoracic cavity",
+                    "To separate the lungs",
+                    "To produce pleural fluid"
+                ],
+                correct: 1,
+                explanation: "The parietal pleura lines the thoracic cavity, including the rib cage and diaphragm."
+            }
+        ];
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            // Set up tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all quiz sections
+                    document.querySelectorAll('.quiz-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the targeted quiz section
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Initialize upper respiratory quiz with first 10 questions (for performance)
+            const upperContainer = document.getElementById('upper-respiratory-questions');
+            upperRespiratoryQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="upper-q${index}-opt${i}" name="upper-q${index}" value="${i}">
+                                <label for="upper-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="upper-feedback-${index}"></div>
+                `;
+                upperContainer.appendChild(questionDiv);
+            });
+            
+            // Initialize lower respiratory quiz with first 10 questions (for performance)
+            const lowerContainer = document.getElementById('lower-respiratory-questions');
+            lowerRespiratoryQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="lower-q${index}-opt${i}" name="lower-q${index}" value="${i}">
+                                <label for="lower-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="lower-feedback-${index}"></div>
+                `;
+                lowerContainer.appendChild(questionDiv);
+            });
+            
+            // Set up submit buttons
+            document.getElementById('submit-upper').addEventListener('click', function() {
+                calculateScore('upper', upperRespiratoryQuestions.slice(0, 10));
+            });
+            
+            document.getElementById('submit-lower').addEventListener('click', function() {
+                calculateScore('lower', lowerRespiratoryQuestions.slice(0, 10));
+            });
+            
+            // Set up navigation
+            setupNavigation('upper');
+            setupNavigation('lower');
+            
+            // Set up immediate feedback for each question
+            setupImmediateFeedback('upper', upperRespiratoryQuestions.slice(0, 10));
+            setupImmediateFeedback('lower', lowerRespiratoryQuestions.slice(0, 10));
+        }
+        
+        function setupNavigation(quizType) {
+            const questions = document.querySelectorAll(`#${quizType}-respiratory-questions .question`);
+            let currentQuestion = 0;
+            
+            // Show first question initially
+            if (questions.length > 0) {
+                questions[0].style.display = 'block';
+            }
+            
+            // Hide all but the first question
+            for (let i = 1; i < questions.length; i++) {
+                questions[i].style.display = 'none';
+            }
+            
+            // Next button
+            document.getElementById(`next-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion < questions.length - 1) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion++;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`prev-${quizType}`).disabled = false;
+                    if (currentQuestion === questions.length - 1) {
+                        this.disabled = true;
+                    }
+                }
+            });
+            
+            // Previous button
+            document.getElementById(`prev-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion--;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`next-${quizType}`).disabled = false;
+                    if (currentQuestion === 0) {
+                        this.disabled = true;
+                    }
+                }
+            });
+        }
+        
+        function setupImmediateFeedback(quizType, questions) {
+            questions.forEach((q, index) => {
+                const options = document.querySelectorAll(`input[name="${quizType}-q${index}"]`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                options.forEach(option => {
+                    option.addEventListener('change', function() {
+                        const selectedValue = parseInt(this.value);
+                        
+                        if (selectedValue === q.correct) {
+                            feedbackElement.innerHTML = `
+                                <div class="correct">Correct! ${q.explanation}</div>
+                            `;
+                            feedbackElement.className = "feedback correct";
+                        } else {
+                            feedbackElement.innerHTML = `
+                                <div class="incorrect">Incorrect. ${q.explanation}</div>
+                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                            `;
+                            feedbackElement.className = "feedback incorrect";
+                        }
+                        
+                        feedbackElement.style.display = 'block';
+                    });
+                });
+            });
+        }
+        
+        function calculateScore(quizType, questions) {
+            let score = 0;
+            const totalQuestions = questions.length;
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="${quizType}-q${index}"]:checked`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                if (selectedOption) {
+                    const selectedValue = parseInt(selectedOption.value);
+                    
+                    if (selectedValue === q.correct) {
+                        score++;
+                        feedbackElement.innerHTML = `
+                            <div class="correct">Correct! ${q.explanation}</div>
+                        `;
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.innerHTML = `
+                            <div class="incorrect">Incorrect. ${q.explanation}</div>
+                            <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                        `;
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                } else {
+                    feedbackElement.innerHTML = `
+                        <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
+                        <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                    `;
+                    feedbackElement.className = "feedback incorrect";
+                }
+                
+                feedbackElement.style.display = 'block';
+            });
+            
+            const percentage = (score / totalQuestions) * 100;
+            const resultsElement = document.getElementById(`${quizType}-respiratory-results`);
+            resultsElement.innerHTML = `
+                <div class="score">Your Score: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</div>
+                <p>${getPerformanceMessage(percentage)}</p>
+            `;
+            resultsElement.style.display = 'block';
+            
+            // Scroll to results
+            resultsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getPerformanceMessage(percentage) {
+            if (percentage >= 90) return "Excellent work! You have a strong understanding of the respiratory system.";
+            if (percentage >= 80) return "Good job! You have a solid grasp of most respiratory system concepts.";
+            if (percentage >= 70) return "Not bad! Review the incorrect answers to improve your understanding.";
+            if (percentage >= 60) return "You passed, but there's room for improvement. Review the material carefully.";
+            return "You need to study the respiratory system more thoroughly. Review the explanations for each question.";
+        }
+        
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>

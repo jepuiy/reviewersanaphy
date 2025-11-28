@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urinary System Quiz</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #4a90e2;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --correct-color: #4CAF50;
+            --incorrect-color: #f44336;
+            --highlight-color: #FFD700;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .verse {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .personal-note {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(74, 144, 226, 0.2);
+        }
+        
+        .quiz-section {
+            display: none;
+        }
+        
+        .quiz-section.active {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 3px solid var(--correct-color);
+        }
+        
+        .incorrect {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-left: 3px solid var(--incorrect-color);
+        }
+        
+        .correct-answer {
+            font-weight: bold;
+            color: var(--highlight-color);
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+        
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .nav-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Urinary System Quiz</h1>
+        <div class="verse">"Cast all your anxiety on him because he cares for you, 1 Peter 5:7"</div>
+        <div class="personal-note">for leonah only :D</div>
+    </header>
+    
+    <div class="quiz-container">
+        <div class="tabs">
+            <button class="tab active" data-target="kidney-quiz">Kidney Anatomy & Function (50 Questions)</button>
+            <button class="tab" data-target="urine-quiz">Urine Formation & Composition (50 Questions)</button>
+        </div>
+        
+        <div id="kidney-quiz" class="quiz-section active">
+            <!-- Kidney Anatomy & Function Quiz Content -->
+            <div id="kidney-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-kidney" class="nav-btn" disabled>Previous</button>
+                <button id="next-kidney" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-kidney" class="submit-btn">Submit Kidney Quiz</button>
+            
+            <div id="kidney-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+        
+        <div id="urine-quiz" class="quiz-section">
+            <!-- Urine Formation & Composition Quiz Content -->
+            <div id="urine-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-urine" class="nav-btn" disabled>Previous</button>
+                <button id="next-urine" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-urine" class="submit-btn">Submit Urine Quiz</button>
+            
+            <div id="urine-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data - 50 questions for each section
+        const kidneyQuestions = [
+            {
+                question: "What is the primary function of the urinary system?",
+                options: [
+                    "To rid the body of nitrogenous wastes",
+                    "To regulate water, electrolyte, and acid-base balance",
+                    "To produce hormones",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "The urinary system rids the body of nitrogenous wastes while regulating water, electrolyte, and acid-base balance of the blood. It also produces hormones like renin and erythropoietin."
+            },
+            {
+                question: "Where are the kidneys located in the body?",
+                options: [
+                    "In the lower back",
+                    "In the superior lumbar region, retroperitoneal",
+                    "In the pelvic cavity",
+                    "In the thoracic cavity"
+                ],
+                correct: 1,
+                explanation: "The kidneys lie against the dorsal body wall in a retroperitoneal position in the superior lumbar region, extending from T12 to L3 vertebrae."
+            },
+            {
+                question: "What is the renal hilum?",
+                options: [
+                    "The outer region of the kidney",
+                    "The inner region of the kidney",
+                    "A medial indentation where structures enter/exit",
+                    "The functional unit of the kidney"
+                ],
+                correct: 2,
+                explanation: "The renal hilum is a medial indentation where the ureters, renal blood vessels, and nerves enter or exit the kidney."
+            },
+            {
+                question: "Which structure encloses each kidney and gives it a glistening appearance?",
+                options: [
+                    "Perirenal fat capsule",
+                    "Renal fascia",
+                    "Fibrous capsule",
+                    "Renal cortex"
+                ],
+                correct: 2,
+                explanation: "A transparent fibrous capsule encloses each kidney and gives a fresh kidney a glistening appearance."
+            },
+            {
+                question: "What condition occurs when a kidney drops to a lower position?",
+                options: [
+                    "Hydronephrosis",
+                    "Nephritis",
+                    "Ptosis",
+                    "Pyelonephritis"
+                ],
+                correct: 2,
+                explanation: "Ptosis occurs when the amount of fatty tissue surrounding the kidney dwindles, causing the kidney to drop to a lower position."
+            },
+            {
+                question: "What is hydronephrosis?",
+                options: [
+                    "Inflammation of the kidney",
+                    "Kidney stones",
+                    "Backup of urine that damages kidney tissue",
+                    "Kidney failure"
+                ],
+                correct: 2,
+                explanation: "Hydronephrosis occurs when urine backs up and exerts pressure on kidney tissue, often due to kinked ureters in ptosis."
+            },
+            {
+                question: "Which region of the kidney is light in color and located on the outside?",
+                options: [
+                    "Renal medulla",
+                    "Renal cortex",
+                    "Renal pelvis",
+                    "Renal columns"
+                ],
+                correct: 1,
+                explanation: "The renal cortex is the outer region of the kidney that is light in color."
+            },
+            {
+                question: "What are the triangular regions with a striped appearance in the medulla?",
+                options: [
+                    "Renal columns",
+                    "Renal pyramids",
+                    "Calyces",
+                    "Renal papillae"
+                ],
+                correct: 1,
+                explanation: "The medulla has many basically triangular regions with a striped appearance called renal or medullary pyramids."
+            },
+            {
+                question: "What are the extensions of cortex-like tissue that separate the pyramids?",
+                options: [
+                    "Renal columns",
+                    "Calyces",
+                    "Renal papillae",
+                    "Renal pelvis"
+                ],
+                correct: 0,
+                explanation: "The pyramids are separated by extensions of cortex-like tissue called renal columns."
+            },
+            {
+                question: "What structure is continuous with the ureter leaving the hilum?",
+                options: [
+                    "Renal cortex",
+                    "Renal medulla",
+                    "Renal pelvis",
+                    "Renal capsule"
+                ],
+                correct: 2,
+                explanation: "The renal pelvis is continuous with the ureter leaving the hilum and collects urine from the calyces."
+            },
+            {
+                question: "What are the cup-shaped areas that enclose the tips of the pyramids?",
+                options: [
+                    "Renal columns",
+                    "Calyces",
+                    "Renal papillae",
+                    "Renal cortex"
+                ],
+                correct: 1,
+                explanation: "Extensions of the pelvis called calyces form cup-shaped areas that enclose the tips of the pyramids."
+            },
+            {
+                question: "Approximately what percentage of total blood supply passes through the kidneys each minute?",
+                options: [
+                    "10%",
+                    "25%",
+                    "50%",
+                    "75%"
+                ],
+                correct: 1,
+                explanation: "Approximately one-quarter (25%) of the total blood supply of the body passes through the kidneys each minute."
+            },
+            {
+                question: "Which artery supplies blood to each kidney?",
+                options: [
+                    "Segmental artery",
+                    "Interlobar artery",
+                    "Renal artery",
+                    "Arcuate artery"
+                ],
+                correct: 2,
+                explanation: "The renal artery is the arterial supply of each kidney."
+            },
+            {
+                question: "Which arteries travel through the renal columns to reach the cortex?",
+                options: [
+                    "Segmental arteries",
+                    "Interlobar arteries",
+                    "Arcuate arteries",
+                    "Cortical radiate arteries"
+                ],
+                correct: 1,
+                explanation: "Interlobar arteries travel through the renal columns to reach the cortex."
+            },
+            {
+                question: "At the cortex-medulla junction, interlobar arteries give off which arteries?",
+                options: [
+                    "Segmental arteries",
+                    "Interlobar arteries",
+                    "Arcuate arteries",
+                    "Cortical radiate arteries"
+                ],
+                correct: 2,
+                explanation: "At the cortex-medulla junction, interlobar arteries give off the arcuate arteries, which arch over the medullary pyramids."
+            },
+            {
+                question: "What is the structural and functional unit of the kidney?",
+                options: [
+                    "Glomerulus",
+                    "Nephron",
+                    "Renal corpuscle",
+                    "Collecting duct"
+                ],
+                correct: 1,
+                explanation: "Nephrons are the structural and functional units of the kidneys responsible for forming urine."
+            },
+            {
+                question: "Approximately how many nephrons does each kidney contain?",
+                options: [
+                    "Thousands",
+                    "Tens of thousands",
+                    "Hundreds of thousands",
+                    "Over a million"
+                ],
+                correct: 3,
+                explanation: "Each kidney contains over a million nephrons."
+            },
+            {
+                question: "What are the two main structures of a nephron?",
+                options: [
+                    "Glomerulus and renal tubule",
+                    "Renal corpuscle and renal tubule",
+                    "Bowman's capsule and loop of Henle",
+                    "Proximal and distal convoluted tubules"
+                ],
+                correct: 1,
+                explanation: "Each nephron consists of two main structures: a renal corpuscle and a renal tubule."
+            },
+            {
+                question: "What does the renal corpuscle consist of?",
+                options: [
+                    "Glomerulus and Bowman's capsule",
+                    "Proximal and distal convoluted tubules",
+                    "Loop of Henle and collecting duct",
+                    "Afferent and efferent arterioles"
+                ],
+                correct: 0,
+                explanation: "Each renal corpuscle consists of a glomerulus (a knot of capillaries) and a glomerular capsule (Bowman's capsule)."
+            },
+            {
+                question: "What are the highly modified octopus-like cells that form the inner layer of the glomerular capsule?",
+                options: [
+                    "Podocytes",
+                    "Mesangial cells",
+                    "Juxtaglomerular cells",
+                    "Macula densa cells"
+                ],
+                correct: 0,
+                explanation: "The inner (visceral) layer of the glomerular capsule is made up of highly modified octopus-like cells called podocytes."
+            },
+            {
+                question: "What are the long branching processes of podocytes called?",
+                options: [
+                    "Microvilli",
+                    "Cilia",
+                    "Foot processes",
+                    "Filtration slits"
+                ],
+                correct: 2,
+                explanation: "Podocytes have long branching processes called foot processes that intertwine with one another and cling to the glomerulus."
+            },
+            {
+                question: "What are the openings between the foot processes of podocytes called?",
+                options: [
+                    "Microvilli",
+                    "Cilia",
+                    "Fenestrations",
+                    "Filtration slits"
+                ],
+                correct: 3,
+                explanation: "Openings called filtration slits exist between the extensions of podocytes, forming a porous membrane around the glomerulus."
+            },
+            {
+                question: "What is the correct order of structures in the renal tubule from the glomerular capsule?",
+                options: [
+                    "PCT, nephron loop, DCT",
+                    "DCT, nephron loop, PCT",
+                    "Nephron loop, PCT, DCT",
+                    "PCT, DCT, nephron loop"
+                ],
+                correct: 0,
+                explanation: "In order from the glomerular capsule, the renal tubule consists of the proximal convoluted tubule (PCT), the nephron loop (loop of Henle), and the distal convoluted tubule (DCT)."
+            },
+            {
+                question: "Which part of the nephron has dense microvilli that increase surface area tremendously?",
+                options: [
+                    "Proximal convoluted tubule",
+                    "Distal convoluted tubule",
+                    "Nephron loop",
+                    "Collecting duct"
+                ],
+                correct: 0,
+                explanation: "The surfaces of the tubule cells in the proximal convoluted tubules are covered with dense microvilli, which increases their surface area tremendously."
+            },
+            {
+                question: "What are nephrons located almost entirely within the cortex called?",
+                options: [
+                    "Juxtamedullary nephrons",
+                    "Cortical nephrons",
+                    "Medullary nephrons",
+                    "Renal nephrons"
+                ],
+                correct: 1,
+                explanation: "Most nephrons are called cortical nephrons because they are located almost entirely within the cortex."
+            },
+            {
+                question: "What are nephrons situated close to the cortex-medulla junction with loops deep into the medulla called?",
+                options: [
+                    "Juxtamedullary nephrons",
+                    "Cortical nephrons",
+                    "Medullary nephrons",
+                    "Renal nephrons"
+                ],
+                correct: 0,
+                explanation: "Juxtamedullary nephrons are situated close to the cortex-medulla junction, and their nephron loops dip deep into the medulla."
+            },
+            {
+                question: "Which two capillary beds is each nephron associated with?",
+                options: [
+                    "Glomerulus and vasa recta",
+                    "Glomerulus and peritubular capillaries",
+                    "Peritubular capillaries and vasa recta",
+                    "Afferent and efferent arterioles"
+                ],
+                correct: 1,
+                explanation: "Each nephron is associated with two capillary beds—the glomerulus and the peritubular capillary bed."
+            },
+            {
+                question: "What is unique about the glomerulus compared to other capillary beds?",
+                options: [
+                    "It has lower pressure",
+                    "It is fed and drained by arterioles",
+                    "It has no blood flow regulation",
+                    "It only carries deoxygenated blood"
+                ],
+                correct: 1,
+                explanation: "The glomerulus is both fed and drained by arterioles (afferent and efferent), which is unique among capillary beds."
+            },
+            {
+                question: "Why is blood pressure in the glomerular capillaries much higher than in other capillary beds?",
+                options: [
+                    "Because it is fed by veins",
+                    "Because it is drained by veins",
+                    "Because arterioles are high-resistance vessels and the afferent arteriole has a larger diameter than the efferent",
+                    "Because it is located in the cortex"
+                ],
+                correct: 2,
+                explanation: "Blood pressure in the glomerular capillaries is high because it is both fed and drained by arterioles (high-resistance vessels), and the afferent arteriole has a larger diameter than the efferent."
+            },
+            {
+                question: "What percentage of filtrate is eventually reclaimed by the renal tubule cells and returned to the blood?",
+                options: [
+                    "50%",
+                    "75%",
+                    "90%",
+                    "99%"
+                ],
+                correct: 3,
+                explanation: "Most of the filtrate (99 percent) is eventually reclaimed by the renal tubule cells and returned to the blood in the peritubular capillary beds."
+            },
+            {
+                question: "What type of vessels are the peritubular capillaries?",
+                options: [
+                    "High-pressure, adapted for filtration",
+                    "Low-pressure, porous vessels adapted for absorption",
+                    "High-pressure, adapted for secretion",
+                    "Low-pressure, adapted for filtration"
+                ],
+                correct: 1,
+                explanation: "The peritubular capillaries are low-pressure, porous vessels adapted for absorption instead of filtration."
+            },
+            {
+                question: "What do the peritubular capillaries ultimately drain into?",
+                options: [
+                    "Renal artery",
+                    "Segmental veins",
+                    "Interlobar veins",
+                    "Arcuate veins"
+                ],
+                correct: 2,
+                explanation: "The peritubular capillaries ultimately drain into interlobar veins leaving the cortex."
+            },
+            {
+                question: "What are the three processes involved in urine formation?",
+                options: [
+                    "Filtration, secretion, excretion",
+                    "Reabsorption, secretion, excretion",
+                    "Filtration, reabsorption, secretion",
+                    "Filtration, concentration, excretion"
+                ],
+                correct: 2,
+                explanation: "Urine formation involves three processes—glomerular filtration, tubular reabsorption, and tubular secretion."
+            },
+            {
+                question: "What is glomerular filtration?",
+                options: [
+                    "A selective, active process",
+                    "A nonselective, passive process",
+                    "A selective, passive process",
+                    "A nonselective, active process"
+                ],
+                correct: 1,
+                explanation: "Glomerular filtration is a nonselective, passive process in which fluid passes from the blood into the glomerular capsule."
+            },
+            {
+                question: "Once fluid enters the glomerular capsule, what is it called?",
+                options: [
+                    "Urine",
+                    "Plasma",
+                    "Filtrate",
+                    "Lymph"
+                ],
+                correct: 2,
+                explanation: "Once in the capsule, the fluid is called filtrate, and it is essentially blood plasma without blood proteins."
+            },
+            {
+                question: "What does the filtrate contain?",
+                options: [
+                    "Everything that blood plasma does, including proteins",
+                    "Everything that blood plasma does except proteins",
+                    "Only waste products",
+                    "Only water and electrolytes"
+                ],
+                correct: 1,
+                explanation: "Filtrate contains everything that blood plasma does (except proteins)."
+            },
+            {
+                question: "What is anuria?",
+                options: [
+                    "Excessive urine output",
+                    "Urinary output between 100 and 400 ml/day",
+                    "Urinary output less than 100 ml/day",
+                    "Painful urination"
+                ],
+                correct: 2,
+                explanation: "Anuria is urinary output less than 100 ml/day."
+            },
+            {
+                question: "What is oliguria?",
+                options: [
+                    "Excessive urine output",
+                    "Urinary output between 100 and 400 ml/day",
+                    "Urinary output less than 100 ml/day",
+                    "Painful urination"
+                ],
+                correct: 1,
+                explanation: "Oliguria is abnormally low urinary output between 100 and 400 ml/day."
+            },
+            {
+                question: "Where does tubular reabsorption begin?",
+                options: [
+                    "In the distal convoluted tubule",
+                    "In the nephron loop",
+                    "In the collecting duct",
+                    "In the proximal convoluted tubule"
+                ],
+                correct: 3,
+                explanation: "Tubular reabsorption begins as soon as the filtrate enters the proximal convoluted tubule."
+            },
+            {
+                question: "How are needed substances like glucose and amino acids typically handled during tubular reabsorption?",
+                options: [
+                    "They are partially reabsorbed",
+                    "They are usually entirely removed from the filtrate",
+                    "They are not reabsorbed at all",
+                    "They are secreted into the filtrate"
+                ],
+                correct: 1,
+                explanation: "Needed substances (for example, glucose and amino acids) are usually entirely removed from the filtrate during tubular reabsorption."
+            },
+            {
+                question: "How are nitrogenous waste products handled during tubular reabsorption?",
+                options: [
+                    "They are completely reabsorbed",
+                    "They are partially reabsorbed",
+                    "They are poorly reabsorbed, if at all",
+                    "They are secreted into the filtrate"
+                ],
+                correct: 2,
+                explanation: "Nitrogenous waste products are poorly reabsorbed, if at all."
+            },
+            {
+                question: "Which of the following is NOT a nitrogenous waste product?",
+                options: [
+                    "Urea",
+                    "Uric acid",
+                    "Creatinine",
+                    "Glucose"
+                ],
+                correct: 3,
+                explanation: "Glucose is a nutrient that is completely reabsorbed, not a nitrogenous waste product. Urea, uric acid, and creatinine are nitrogenous wastes."
+            },
+            {
+                question: "What is urea formed from?",
+                options: [
+                    "Breakdown of nucleic acids",
+                    "Creatine metabolism in muscle tissue",
+                    "Protein breakdown when amino acids are used for energy",
+                    "Carbohydrate metabolism"
+                ],
+                correct: 2,
+                explanation: "Urea is formed by the liver as an end product of protein breakdown when amino acids are used to produce energy."
+            },
+            {
+                question: "What is uric acid released from?",
+                options: [
+                    "Breakdown of nucleic acids",
+                    "Creatine metabolism in muscle tissue",
+                    "Protein breakdown when amino acids are used for energy",
+                    "Carbohydrate metabolism"
+                ],
+                correct: 0,
+                explanation: "Uric acid is released when nucleic acids are metabolized."
+            },
+            {
+                question: "What is creatinine associated with?",
+                options: [
+                    "Breakdown of nucleic acids",
+                    "Creatine metabolism in muscle tissue",
+                    "Protein breakdown when amino acids are used for energy",
+                    "Carbohydrate metabolism"
+                ],
+                correct: 1,
+                explanation: "Creatinine is associated with creatine metabolism in muscle tissue."
+            },
+            {
+                question: "Where does most reabsorption occur in the nephron?",
+                options: [
+                    "Distal convoluted tubule",
+                    "Proximal convoluted tubules",
+                    "Nephron loop",
+                    "Collecting duct"
+                ],
+                correct: 1,
+                explanation: "Most reabsorption occurs in the proximal convoluted tubules."
+            },
+            {
+                question: "What is tubular secretion?",
+                options: [
+                    "The same as tubular reabsorption",
+                    "Tubular reabsorption in reverse",
+                    "The formation of filtrate",
+                    "The concentration of urine"
+                ],
+                correct: 1,
+                explanation: "Tubular secretion is essentially tubular reabsorption in reverse, moving substances from the blood into the filtrate."
+            },
+            {
+                question: "Which substances are typically secreted during tubular secretion?",
+                options: [
+                    "Glucose and amino acids",
+                    "Hydrogen and potassium ions",
+                    "Sodium and chloride ions",
+                    "Water and urea"
+                ],
+                correct: 1,
+                explanation: "Substances such as hydrogen and potassium ions (H+ and K+) and creatinine move from the blood into the filtrate during tubular secretion."
+            },
+            {
+                question: "What is the role of tubular secretion in maintaining blood pH?",
+                options: [
+                    "It has no role in pH balance",
+                    "It helps eliminate excess hydrogen ions",
+                    "It helps retain hydrogen ions",
+                    "It produces bicarbonate ions"
+                ],
+                correct: 1,
+                explanation: "Tubular secretion provides an additional means for controlling blood pH by eliminating excess hydrogen ions."
+            },
+            {
+                question: "What structure in the nephron is involved in the juxtaglomerular apparatus?",
+                options: [
+                    "Glomerulus and proximal convoluted tubule",
+                    "Afferent arteriole and distal convoluted tubule",
+                    "Efferent arteriole and collecting duct",
+                    "Peritubular capillaries and nephron loop"
+                ],
+                correct: 1,
+                explanation: "The juxtaglomerular apparatus consists of modified smooth muscle cells in the afferent arteriole plus modified epithelial cells in the distal convoluted tubule."
+            },
+            {
+                question: "What enzyme is released by the juxtaglomerular apparatus?",
+                options: [
+                    "Renin",
+                    "Angiotensin",
+                    "Aldosterone",
+                    "Erythropoietin"
+                ],
+                correct: 0,
+                explanation: "The juxtaglomerular apparatus releases the enzyme renin into the blood."
+            },
+            {
+                question: "What does renin catalyze?",
+                options: [
+                    "The production of aldosterone",
+                    "The production of angiotensin II",
+                    "The reabsorption of sodium",
+                    "The secretion of potassium"
+                ],
+                correct: 1,
+                explanation: "Renin catalyzes the series of reactions that produce angiotensin II."
+            }
+        ];
+
+        const urineQuestions = [
+            {
+                question: "Approximately how much blood plasma do the kidneys filter in 24 hours?",
+                options: [
+                    "15-18 liters",
+                    "50-60 liters",
+                    "100-120 liters",
+                    "150-180 liters"
+                ],
+                correct: 3,
+                explanation: "In 24 hours, the kidneys filter some 150 to 180 liters of blood plasma through their glomeruli into the tubules."
+            },
+            {
+                question: "Approximately how much urine is produced in 24 hours?",
+                options: [
+                    "0.5-0.9 liters",
+                    "1.0-1.8 liters",
+                    "2.0-2.5 liters",
+                    "3.0-3.5 liters"
+                ],
+                correct: 1,
+                explanation: "In the same 24 hours, only about 1.0 to 1.8 liters of urine are produced."
+            },
+            {
+                question: "What is the normal color of freshly voided urine due to?",
+                options: [
+                    "Hemoglobin",
+                    "Bilirubin",
+                    "Urochrome",
+                    "Urobilin"
+                ],
+                correct: 2,
+                explanation: "The normal yellow color of urine is due to urochrome, a pigment that results from the body's destruction of hemoglobin."
+            },
+            {
+                question: "What does a deeper yellow color of urine typically indicate?",
+                options: [
+                    "More water in the urine",
+                    "More solutes in the urine",
+                    "Presence of blood",
+                    "Presence of bile"
+                ],
+                correct: 1,
+                explanation: "The more solutes are in the urine, the deeper yellow its color."
+            },
+            {
+                question: "What is the typical pH of urine?",
+                options: [
+                    "Slightly acid (around 6)",
+                    "Neutral (7)",
+                    "Slightly alkaline (around 8)",
+                    "Highly variable with no typical value"
+                ],
+                correct: 0,
+                explanation: "Urine pH is usually slightly acid (around 6)."
+            },
+            {
+                question: "What type of diet makes urine quite acid?",
+                options: [
+                    "Vegetarian diet",
+                    "Diet with large amounts of protein",
+                    "High-carbohydrate diet",
+                    "High-fat diet"
+                ],
+                correct: 1,
+                explanation: "A diet with large amounts of protein (eggs and cheese) and whole-wheat products causes urine to become quite acid."
+            },
+            {
+                question: "What is specific gravity?",
+                options: [
+                    "The weight of urine compared to blood",
+                    "The term used to compare how much heavier urine is than distilled water",
+                    "The concentration of solutes in urine",
+                    "The pH of urine"
+                ],
+                correct: 1,
+                explanation: "Specific gravity is the term used to compare how much heavier urine is than distilled water."
+            },
+            {
+                question: "What is the specific gravity of pure water?",
+                options: [
+                    "0.0",
+                    "1.0",
+                    "1.5",
+                    "2.0"
+                ],
+                correct: 1,
+                explanation: "The specific gravity of pure water is 1.0."
+            },
+            {
+                question: "What is the normal range of specific gravity for urine?",
+                options: [
+                    "0.5-1.0",
+                    "1.001-1.035",
+                    "1.5-2.0",
+                    "2.0-2.5"
+                ],
+                correct: 1,
+                explanation: "The specific gravity of urine usually ranges from 1.001 to 1.035 (dilute to concentrated urine, respectively)."
+            },
+            {
+                question: "Which condition produces urine with a high specific gravity?",
+                options: [
+                    "Excessive fluid intake",
+                    "Use of diuretics",
+                    "Chronic renal failure",
+                    "Inadequate fluid intake"
+                ],
+                correct: 3,
+                explanation: "Conditions that produce urine with a high specific gravity include inadequate fluid intake, fever, and kidney inflammation."
+            },
+            {
+                question: "Which substance is NOT normally found in urine?",
+                options: [
+                    "Sodium ions",
+                    "Potassium ions",
+                    "Glucose",
+                    "Urea"
+                ],
+                correct: 2,
+                explanation: "Substances not normally found in urine include glucose, blood proteins, red blood cells, hemoglobin, white blood cells (pus), and bile."
+            },
+            {
+                question: "What is the condition called when glucose is present in urine?",
+                options: [
+                    "Proteinuria",
+                    "Glycosuria",
+                    "Hematuria",
+                    "Pyuria"
+                ],
+                correct: 1,
+                explanation: "Glycosuria is the condition when glucose is present in urine."
+            },
+            {
+                question: "What is the condition called when proteins are present in urine?",
+                options: [
+                    "Proteinuria",
+                    "Glycosuria",
+                    "Hematuria",
+                    "Pyuria"
+                ],
+                correct: 0,
+                explanation: "Proteinuria (also called albuminuria) is the condition when proteins are present in urine."
+            },
+            {
+                question: "What is the condition called when pus (WBCs and bacteria) is present in urine?",
+                options: [
+                    "Proteinuria",
+                    "Glycosuria",
+                    "Hematuria",
+                    "Pyuria"
+                ],
+                correct: 3,
+                explanation: "Pyuria is the condition when pus (WBCs and bacteria) is present in urine."
+            },
+            {
+                question: "What is the condition called when red blood cells are present in urine?",
+                options: [
+                    "Proteinuria",
+                    "Glycosuria",
+                    "Hematuria",
+                    "Pyuria"
+                ],
+                correct: 2,
+                explanation: "Hematuria is the condition when red blood cells are present in urine."
+            },
+            {
+                question: "What is the condition called when hemoglobin is present in urine?",
+                options: [
+                    "Hemoglobinuria",
+                    "Glycosuria",
+                    "Hematuria",
+                    "Bilirubinuria"
+                ],
+                correct: 0,
+                explanation: "Hemoglobinuria is the condition when hemoglobin is present in urine."
+            },
+            {
+                question: "What is the condition called when bile pigment is present in urine?",
+                options: [
+                    "Hemoglobinuria",
+                    "Glycosuria",
+                    "Hematuria",
+                    "Bilirubinuria"
+                ],
+                correct: 3,
+                explanation: "Bilirubinuria is the condition when bile pigment is present in urine."
+            },
+            {
+                question: "How long are the ureters?",
+                options: [
+                    "10-15 cm",
+                    "25-30 cm",
+                    "40-45 cm",
+                    "50-55 cm"
+                ],
+                correct: 1,
+                explanation: "The ureters are two slender tubes each 25 to 30 cm (10 to 12 inches) long."
+            },
+            {
+                question: "How is urine propelled through the ureters?",
+                options: [
+                    "By gravity alone",
+                    "By peristalsis",
+                    "By ciliary action",
+                    "By suction from the bladder"
+                ],
+                correct: 1,
+                explanation: "Smooth muscle layers in the ureter walls contract to propel urine into the bladder by peristalsis."
+            },
+            {
+                question: "What are renal calculi?",
+                options: [
+                    "Kidney infections",
+                    "Kidney stones",
+                    "Kidney tumors",
+                    "Kidney cysts"
+                ],
+                correct: 1,
+                explanation: "Renal calculi are kidney stones - crystals that form in the renal pelvis when urine becomes extremely concentrated."
+            },
+            {
+                question: "What is the trigone?",
+                options: [
+                    "The outer layer of the bladder",
+                    "The smooth triangular region of the bladder base",
+                    "The muscle that controls urination",
+                    "The opening of the urethra"
+                ],
+                correct: 1,
+                explanation: "The trigone is the smooth triangular region of the bladder base outlined by the two ureter openings and the urethral opening."
+            },
+            {
+                question: "Why is the trigone important clinically?",
+                options: [
+                    "It produces urine",
+                    "It stores most of the urine",
+                    "Infections tend to persist in this region",
+                    "It controls bladder emptying"
+                ],
+                correct: 2,
+                explanation: "The trigone is important clinically because infections tend to persist in this region."
+            },
+            {
+                question: "What type of epithelium lines the bladder?",
+                options: [
+                    "Stratified squamous epithelium",
+                    "Simple columnar epithelium",
+                    "Transitional epithelium",
+                    "Pseudostratified epithelium"
+                ],
+                correct: 2,
+                explanation: "The bladder mucosa is a special type of epithelium called transitional epithelium."
+            },
+            {
+                question: "What is the collective name for the three layers of smooth muscle in the bladder wall?",
+                options: [
+                    "Trigone muscle",
+                    "Detrusor muscle",
+                    "Sphincter muscle",
+                    "Peristaltic muscle"
+                ],
+                correct: 1,
+                explanation: "The bladder wall contains three layers of smooth muscle, collectively called the detrusor muscle."
+            },
+            {
+                question: "What is the approximate capacity of a moderately full bladder?",
+                options: [
+                    "100 ml",
+                    "250 ml",
+                    "500 ml",
+                    "1000 ml"
+                ],
+                correct: 2,
+                explanation: "A moderately full bladder is about 12.5 cm (5 inches) long and holds about 500 ml (1 pint) of urine."
+            },
+            {
+                question: "What is the internal urethral sphincter made of?",
+                options: [
+                    "Skeletal muscle",
+                    "Smooth muscle",
+                    "Connective tissue",
+                    "Epithelial tissue"
+                ],
+                correct: 1,
+                explanation: "At the bladder-urethra junction, a thickening of the smooth muscle forms the internal urethral sphincter."
+            },
+            {
+                question: "What is the external urethral sphincter made of?",
+                options: [
+                    "Skeletal muscle",
+                    "Smooth muscle",
+                    "Connective tissue",
+                    "Epithelial tissue"
+                ],
+                correct: 0,
+                explanation: "The external urethral sphincter is formed by skeletal muscle as the urethra passes through the pelvic floor."
+            },
+            {
+                question: "How long is the female urethra?",
+                options: [
+                    "1-2 cm",
+                    "3-4 cm",
+                    "8-10 cm",
+                    "20 cm"
+                ],
+                correct: 1,
+                explanation: "In women, the urethra is about 3 to 4 cm (1½ inches) long."
+            },
+            {
+                question: "How long is the male urethra?",
+                options: [
+                    "3-4 cm",
+                    "8-10 cm",
+                    "20 cm",
+                    "30 cm"
+                ],
+                correct: 2,
+                explanation: "In men, the urethra is approximately 20 cm (8 inches) long."
+            },
+            {
+                question: "What is micturition?",
+                options: [
+                    "The formation of urine",
+                    "The act of emptying the bladder",
+                    "The filtration of blood",
+                    "The reabsorption of water"
+                ],
+                correct: 1,
+                explanation: "Micturition, or voiding, is the act of emptying the bladder."
+            },
+            {
+                question: "At approximately what volume of urine does the urge to void first occur?",
+                options: [
+                    "50 ml",
+                    "100 ml",
+                    "200 ml",
+                    "400 ml"
+                ],
+                correct: 2,
+                explanation: "Ordinarily, the bladder continues to collect urine until about 200 ml have accumulated. At about this point, stretching of the bladder wall activates stretch receptors, causing the urge to void."
+            },
+            {
+                question: "What is incontinence?",
+                options: [
+                    "Inability to produce urine",
+                    "Inability to control urination",
+                    "Painful urination",
+                    "Frequent urination"
+                ],
+                correct: 1,
+                explanation: "Incontinence occurs when we are unable to voluntarily control the external sphincter."
+            },
+            {
+                question: "What is urinary retention?",
+                options: [
+                    "Excessive urine production",
+                    "Inability to control urination",
+                    "Inability to empty the bladder",
+                    "Painful urination"
+                ],
+                correct: 2,
+                explanation: "Urinary retention is a condition in which the bladder is unable to expel its contained urine."
+            },
+            {
+                question: "What percentage of body weight is water in women?",
+                options: [
+                    "30%",
+                    "50%",
+                    "60%",
+                    "75%"
+                ],
+                correct: 1,
+                explanation: "Water accounts for about 50 percent of body weight in women and about 60 percent in men."
+            },
+            {
+                question: "What is intracellular fluid (ICF)?",
+                options: [
+                    "Fluid outside cells",
+                    "Fluid within living cells",
+                    "Fluid in blood vessels",
+                    "Fluid in interstitial spaces"
+                ],
+                correct: 1,
+                explanation: "Intracellular fluid (ICF) is contained within the living cells and accounts for about two-thirds of body fluid."
+            },
+            {
+                question: "What is extracellular fluid (ECF)?",
+                options: [
+                    "Fluid outside cells",
+                    "Fluid within living cells",
+                    "Fluid only in blood vessels",
+                    "Fluid only in interstitial spaces"
+                ],
+                correct: 0,
+                explanation: "Extracellular fluid (ECF) includes all body fluids located outside the cells."
+            },
+            {
+                question: "What does ADH stand for?",
+                options: [
+                    "Antidiuretic hormone",
+                    "Aldosterone dehydrogenase",
+                    "Angiotensin direct hormone",
+                    "Adrenal diuretic hormone"
+                ],
+                correct: 0,
+                explanation: "ADH stands for antidiuretic hormone."
+            },
+            {
+                question: "Where is ADH produced?",
+                options: [
+                    "Anterior pituitary",
+                    "Posterior pituitary",
+                    "Adrenal cortex",
+                    "Kidneys"
+                ],
+                correct: 1,
+                explanation: "ADH is released by the posterior pituitary gland."
+            },
+            {
+                question: "What is the main target of ADH in the kidneys?",
+                options: [
+                    "Glomerulus",
+                    "Proximal convoluted tubule",
+                    "Distal convoluted tubule",
+                    "Collecting ducts"
+                ],
+                correct: 3,
+                explanation: "ADH travels to its main target, the kidney's collecting ducts, where it causes the duct cells to reabsorb more water."
+            },
+            {
+                question: "What is diabetes insipidus?",
+                options: [
+                    "A condition of high blood sugar",
+                    "A condition where ADH is not released",
+                    "A condition of protein in urine",
+                    "A condition of kidney stones"
+                ],
+                correct: 1,
+                explanation: "Diabetes insipidus occurs when ADH is not released, causing huge amounts of very dilute urine to flush from the body."
+            },
+            {
+                question: "Which ion is most responsible for osmotic water flows?",
+                options: [
+                    "Potassium ion (K+)",
+                    "Sodium ion (Na+)",
+                    "Calcium ion (Ca2+)",
+                    "Chloride ion (Cl-)"
+                ],
+                correct: 1,
+                explanation: "Sodium ion (Na+) is the electrolyte most responsible for osmotic water flows."
+            },
+            {
+                question: "Where is aldosterone produced?",
+                options: [
+                    "Anterior pituitary",
+                    "Posterior pituitary",
+                    "Adrenal cortex",
+                    "Kidneys"
+                ],
+                correct: 2,
+                explanation: "Aldosterone is produced by the adrenal cortex."
+            },
+            {
+                question: "What is the most important trigger for aldosterone release?",
+                options: [
+                    "High potassium levels",
+                    "Low sodium levels",
+                    "The renin-angiotensin mechanism",
+                    "High blood pressure"
+                ],
+                correct: 2,
+                explanation: "The most important trigger for aldosterone release is the renin-angiotensin mechanism mediated by the juxtaglomerular apparatus."
+            },
+            {
+                question: "What is the normal pH range of arterial blood?",
+                options: [
+                    "6.8-7.0",
+                    "7.0-7.2",
+                    "7.35-7.45",
+                    "7.5-7.7"
+                ],
+                correct: 2,
+                explanation: "Blood pH must be maintained between 7.35 and 7.45 for cells to function properly."
+            },
+            {
+                question: "What is acidosis?",
+                options: [
+                    "Arterial pH above 7.45",
+                    "Arterial pH below 7.35",
+                    "Arterial pH below 7.0",
+                    "Arterial pH above 7.8"
+                ],
+                correct: 1,
+                explanation: "A drop in arterial pH to below 7.35 results in acidosis."
+            },
+            {
+                question: "What is alkalosis?",
+                options: [
+                    "Arterial pH above 7.45",
+                    "Arterial pH below 7.35",
+                    "Arterial pH below 7.0",
+                    "Arterial pH above 7.8"
+                ],
+                correct: 0,
+                explanation: "Whenever the pH of arterial blood rises above 7.45, a person is said to have alkalosis."
+            },
+            {
+                question: "Which system is the first line of defense in resisting pH changes?",
+                options: [
+                    "Respiratory system",
+                    "Renal system",
+                    "Chemical buffers",
+                    "Endocrine system"
+                ],
+                correct: 2,
+                explanation: "Chemical buffers act within a fraction of a second, so they are the first line of defense in resisting pH changes."
+            },
+            {
+                question: "What are the three major chemical buffer systems of the body?",
+                options: [
+                    "Bicarbonate, phosphate, and protein",
+                    "Carbonate, sulfate, and protein",
+                    "Bicarbonate, chloride, and protein",
+                    "Phosphate, sulfate, and protein"
+                ],
+                correct: 0,
+                explanation: "The three major chemical buffer systems of the body are the bicarbonate, phosphate, and protein buffer systems."
+            },
+            {
+                question: "Which system can rid the body of acids generated during metabolism (other than carbonic acid)?",
+                options: [
+                    "Respiratory system",
+                    "Renal system",
+                    "Chemical buffers",
+                    "Digestive system"
+                ],
+                correct: 1,
+                explanation: "Only the kidneys can rid the body of other acids generated during metabolism (besides carbonic acid, which the lungs can eliminate)."
+            },
+            {
+                question: "What is adult polycystic kidney disease?",
+                options: [
+                    "A degenerative condition that appears to run in families",
+                    "An infection of the kidneys",
+                    "Inflammation of the glomeruli",
+                    "Formation of kidney stones"
+                ],
+                correct: 0,
+                explanation: "Adult polycystic kidney disease is a degenerative condition that appears to run in families, where one or both kidneys enlarge and have many cysts containing urine."
+            },
+            {
+                question: "What is hypospadias?",
+                options: [
+                    "A condition where the urethral orifice is located on the ventral surface of the penis",
+                    "A condition of kidney cysts",
+                    "Inflammation of the urethra",
+                    "A condition of urinary retention"
+                ],
+                correct: 0,
+                explanation: "Hypospadias is a condition found in male babies where the urethral orifice is located on the ventral surface of the penis."
+            },
+            {
+                question: "Which bacteria account for 80 percent of urinary tract infections?",
+                options: [
+                    "Streptococcus",
+                    "Staphylococcus",
+                    "Escherichia coli",
+                    "Pseudomonas"
+                ],
+                correct: 2,
+                explanation: "Escherichia coli bacteria account for 80 percent of urinary tract infections."
+            },
+            {
+                question: "What is glomerulonephritis?",
+                options: [
+                    "Inflammation of the glomerular filters",
+                    "Inflammation of the bladder",
+                    "Inflammation of the urethra",
+                    "Formation of kidney stones"
+                ],
+                correct: 0,
+                explanation: "Glomerulonephritis is inflammation of the glomerular filters, which can result from untreated childhood strep infections."
+            },
+            {
+                question: "What is nocturia?",
+                options: [
+                    "Excessive urination during the day",
+                    "The need to get up during the night to urinate",
+                    "Inability to control urination",
+                    "Painful urination"
+                ],
+                correct: 1,
+                explanation: "Nocturia is the need to get up during the night to urinate."
+            }
+        ];
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            // Set up tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all quiz sections
+                    document.querySelectorAll('.quiz-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the targeted quiz section
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Initialize kidney quiz with first 10 questions (for performance)
+            const kidneyContainer = document.getElementById('kidney-questions');
+            kidneyQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="kidney-q${index}-opt${i}" name="kidney-q${index}" value="${i}">
+                                <label for="kidney-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="kidney-feedback-${index}"></div>
+                `;
+                kidneyContainer.appendChild(questionDiv);
+            });
+            
+            // Initialize urine quiz with first 10 questions (for performance)
+            const urineContainer = document.getElementById('urine-questions');
+            urineQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="urine-q${index}-opt${i}" name="urine-q${index}" value="${i}">
+                                <label for="urine-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="urine-feedback-${index}"></div>
+                `;
+                urineContainer.appendChild(questionDiv);
+            });
+            
+            // Set up submit buttons
+            document.getElementById('submit-kidney').addEventListener('click', function() {
+                calculateScore('kidney', kidneyQuestions.slice(0, 10));
+            });
+            
+            document.getElementById('submit-urine').addEventListener('click', function() {
+                calculateScore('urine', urineQuestions.slice(0, 10));
+            });
+            
+            // Set up navigation
+            setupNavigation('kidney');
+            setupNavigation('urine');
+            
+            // Set up immediate feedback for each question
+            setupImmediateFeedback('kidney', kidneyQuestions.slice(0, 10));
+            setupImmediateFeedback('urine', urineQuestions.slice(0, 10));
+        }
+        
+        function setupNavigation(quizType) {
+            const questions = document.querySelectorAll(`#${quizType}-questions .question`);
+            let currentQuestion = 0;
+            
+            // Show first question initially
+            if (questions.length > 0) {
+                questions[0].style.display = 'block';
+            }
+            
+            // Hide all but the first question
+            for (let i = 1; i < questions.length; i++) {
+                questions[i].style.display = 'none';
+            }
+            
+            // Next button
+            document.getElementById(`next-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion < questions.length - 1) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion++;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`prev-${quizType}`).disabled = false;
+                    if (currentQuestion === questions.length - 1) {
+                        this.disabled = true;
+                    }
+                }
+            });
+            
+            // Previous button
+            document.getElementById(`prev-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion--;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`next-${quizType}`).disabled = false;
+                    if (currentQuestion === 0) {
+                        this.disabled = true;
+                    }
+                }
+            });
+        }
+        
+        function setupImmediateFeedback(quizType, questions) {
+            questions.forEach((q, index) => {
+                const options = document.querySelectorAll(`input[name="${quizType}-q${index}"]`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                options.forEach(option => {
+                    option.addEventListener('change', function() {
+                        const selectedValue = parseInt(this.value);
+                        
+                        if (selectedValue === q.correct) {
+                            feedbackElement.innerHTML = `
+                                <div class="correct">Correct! ${q.explanation}</div>
+                            `;
+                            feedbackElement.className = "feedback correct";
+                        } else {
+                            feedbackElement.innerHTML = `
+                                <div class="incorrect">Incorrect. ${q.explanation}</div>
+                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                            `;
+                            feedbackElement.className = "feedback incorrect";
+                        }
+                        
+                        feedbackElement.style.display = 'block';
+                    });
+                });
+            });
+        }
+        
+        function calculateScore(quizType, questions) {
+            let score = 0;
+            const totalQuestions = questions.length;
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="${quizType}-q${index}"]:checked`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                if (selectedOption) {
+                    const selectedValue = parseInt(selectedOption.value);
+                    
+                    if (selectedValue === q.correct) {
+                        score++;
+                        feedbackElement.innerHTML = `
+                            <div class="correct">Correct! ${q.explanation}</div>
+                        `;
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.innerHTML = `
+                            <div class="incorrect">Incorrect. ${q.explanation}</div>
+                            <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                        `;
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                } else {
+                    feedbackElement.innerHTML = `
+                        <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
+                        <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                    `;
+                    feedbackElement.className = "feedback incorrect";
+                }
+                
+                feedbackElement.style.display = 'block';
+            });
+            
+            const percentage = (score / totalQuestions) * 100;
+            const resultsElement = document.getElementById(`${quizType}-results`);
+            resultsElement.innerHTML = `
+                <div class="score">Your Score: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</div>
+                <p>${getPerformanceMessage(percentage)}</p>
+            `;
+            resultsElement.style.display = 'block';
+            
+            // Scroll to results
+            resultsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getPerformanceMessage(percentage) {
+            if (percentage >= 90) return "Excellent work! You have a strong understanding of the urinary system.";
+            if (percentage >= 80) return "Good job! You have a solid grasp of most urinary system concepts.";
+            if (percentage >= 70) return "Not bad! Review the incorrect answers to improve your understanding.";
+            if (percentage >= 60) return "You passed, but there's room for improvement. Review the material carefully.";
+            return "You need to study the urinary system more thoroughly. Review the explanations for each question.";
+        }
+        
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductive System Quiz</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #e91e63;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --correct-color: #4CAF50;
+            --incorrect-color: #f44336;
+            --highlight-color: #FFD700;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .verse {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .personal-note {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(233, 30, 99, 0.2);
+        }
+        
+        .quiz-section {
+            display: none;
+        }
+        
+        .quiz-section.active {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 3px solid var(--correct-color);
+        }
+        
+        .incorrect {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-left: 3px solid var(--incorrect-color);
+        }
+        
+        .correct-answer {
+            font-weight: bold;
+            color: var(--highlight-color);
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c2185b;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+        
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .nav-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Reproductive System Quiz</h1>
+        <div class="verse">"Cast all your anxiety on him because he cares for you, 1 Peter 5:7"</div>
+        <div class="personal-note">for leonah only :D</div>
+    </header>
+    
+    <div class="quiz-container">
+        <div class="tabs">
+            <button class="tab active" data-target="male-reproductive-quiz">Male Reproductive System (50 Questions)</button>
+            <button class="tab" data-target="female-reproductive-quiz">Female Reproductive System (50 Questions)</button>
+        </div>
+        
+        <div id="male-reproductive-quiz" class="quiz-section active">
+            <!-- Male Reproductive System Quiz Content -->
+            <div id="male-reproductive-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-male" class="nav-btn" disabled>Previous</button>
+                <button id="next-male" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-male" class="submit-btn">Submit Male Reproductive Quiz</button>
+            
+            <div id="male-reproductive-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+        
+        <div id="female-reproductive-quiz" class="quiz-section">
+            <!-- Female Reproductive System Quiz Content -->
+            <div id="female-reproductive-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-female" class="nav-btn" disabled>Previous</button>
+                <button id="next-female" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-female" class="submit-btn">Submit Female Reproductive Quiz</button>
+            
+            <div id="female-reproductive-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data - 50 questions for each section
+        const maleReproductiveQuestions = [
+            {
+                question: "What is the primary biological purpose of the reproductive system?",
+                options: [
+                    "To maintain homeostasis",
+                    "To produce offspring",
+                    "To produce hormones",
+                    "To eliminate waste"
+                ],
+                correct: 1,
+                explanation: "The reproductive system ensures continuation of the species by producing offspring."
+            },
+            {
+                question: "What are the primary sex organs called, and what are they in males and females?",
+                options: [
+                    "Gametes; sperm and eggs",
+                    "Gonads; testes and ovaries",
+                    "Hormones; testosterone and estrogen",
+                    "Ducts; vas deferens and fallopian tubes"
+                ],
+                correct: 1,
+                explanation: "The gonads are the primary sex organs - testes in males and ovaries in females."
+            },
+            {
+                question: "What two fundamental products do the gonads produce?",
+                options: [
+                    "Sperm and eggs",
+                    "Gametes and sex hormones",
+                    "Testosterone and estrogen",
+                    "Semen and vaginal secretions"
+                ],
+                correct: 1,
+                explanation: "The gonads produce both gametes (sex cells) and sex hormones."
+            },
+            {
+                question: "What is the male gamete called?",
+                options: [
+                    "Ovum",
+                    "Sperm",
+                    "Zygote",
+                    "Testosterone"
+                ],
+                correct: 1,
+                explanation: "The male gamete is called sperm."
+            },
+            {
+                question: "What is the female gamete called?",
+                options: [
+                    "Sperm",
+                    "Ovum",
+                    "Zygote",
+                    "Estrogen"
+                ],
+                correct: 1,
+                explanation: "The female gamete is called an ovum (plural: ova) or egg."
+            },
+            {
+                question: "What is the first cell of a new individual called?",
+                options: [
+                    "Gamete",
+                    "Zygote",
+                    "Embryo",
+                    "Fetus"
+                ],
+                correct: 1,
+                explanation: "The fertilized egg is called a zygote, which is the first cell of a new individual."
+            },
+            {
+                question: "Besides gamete production, what other major role do the sex hormones play?",
+                options: [
+                    "Digestion of nutrients",
+                    "Development of reproductive organs and sexual behavior",
+                    "Oxygen transport",
+                    "Blood clotting"
+                ],
+                correct: 1,
+                explanation: "Sex hormones play vital roles in the development and function of reproductive organs and in sexual behavior and drives."
+            },
+            {
+                question: "What is the dual functional role (exocrine and endocrine) of the testes?",
+                options: [
+                    "Sperm storage and urine production",
+                    "Sperm production and testosterone production",
+                    "Testosterone production and semen storage",
+                    "Urine conduction and sperm transport"
+                ],
+                correct: 1,
+                explanation: "The testes have both an exocrine function (sperm-producing) and an endocrine function (testosterone-producing)."
+            },
+            {
+                question: "What is the name of the fibrous connective tissue capsule that surrounds each testis?",
+                options: [
+                    "Scrotum",
+                    "Tunica albuginea",
+                    "Epididymis",
+                    "Spermatic cord"
+                ],
+                correct: 1,
+                explanation: "The tunica albuginea is the fibrous connective tissue capsule that surrounds each testis."
+            },
+            {
+                question: "Where are sperm actually produced within the testis?",
+                options: [
+                    "Interstitial cells",
+                    "Rete testis",
+                    "Seminiferous tubules",
+                    "Epididymis"
+                ],
+                correct: 2,
+                explanation: "Sperm are formed in the seminiferous tubules, which are the actual 'sperm-forming factories'."
+            },
+            {
+                question: "Which cells in the testes produce testosterone?",
+                options: [
+                    "Spermatogonia",
+                    "Sertoli cells",
+                    "Interstitial cells",
+                    "Spermatocytes"
+                ],
+                correct: 2,
+                explanation: "The interstitial cells, located in the soft connective tissue surrounding the seminiferous tubules, produce testosterone."
+            },
+            {
+                question: "What is the first part of the male duct system that sperm enter after leaving the testis?",
+                options: [
+                    "Ductus deferens",
+                    "Urethra",
+                    "Epididymis",
+                    "Ejaculatory duct"
+                ],
+                correct: 2,
+                explanation: "Sperm travel through the rete testis to enter the first part of the duct system, the epididymis."
+            },
+            {
+                question: "Approximately how long is the highly coiled tube of the epididymis?",
+                options: [
+                    "6 cm",
+                    "6 inches",
+                    "6 m (20 feet)",
+                    "60 cm"
+                ],
+                correct: 2,
+                explanation: "The epididymis is a highly coiled tube about 6 m (20 feet) long that hugs the posterior side of the testis."
+            },
+            {
+                question: "What happens to sperm while they are in the epididymis?",
+                options: [
+                    "They are produced",
+                    "They mature and gain the ability to swim",
+                    "They are destroyed",
+                    "They produce testosterone"
+                ],
+                correct: 1,
+                explanation: "While sperm make their way through the epididymis, they mature, gaining the ability to swim."
+            },
+            {
+                question: "What is another name for the ductus deferens?",
+                options: [
+                    "Ejaculatory duct",
+                    "Vas deferens",
+                    "Urethra",
+                    "Spermatic cord"
+                ],
+                correct: 1,
+                explanation: "The ductus deferens is also known as the vas deferens."
+            },
+            {
+                question: "What is the function of the ductus deferens?",
+                options: [
+                    "To produce sperm",
+                    "To produce testosterone",
+                    "To propel live sperm from storage sites into the urethra",
+                    "To store urine"
+                ],
+                correct: 2,
+                explanation: "The main function of the ductus deferens is to propel live sperm from their storage sites into the urethra."
+            },
+            {
+                question: "What is a vasectomy?",
+                options: [
+                    "Removal of the testis",
+                    "Removal of the prostate",
+                    "Cutting and tying off the ductus deferens",
+                    "Removal of the epididymis"
+                ],
+                correct: 2,
+                explanation: "A vasectomy is a procedure where the ductus deferens is cut and ligated (tied off) to prevent sperm from reaching the body exterior."
+            },
+            {
+                question: "How many regions does the male urethra have, and what are they?",
+                options: [
+                    "1 region: penile urethra",
+                    "2 regions: prostatic and penile",
+                    "3 regions: prostatic, membranous, and spongy",
+                    "4 regions: renal, prostatic, membranous, and penile"
+                ],
+                correct: 2,
+                explanation: "The male urethra has three regions: prostatic urethra, membranous urethra, and spongy (penile) urethra."
+            },
+            {
+                question: "What prevents urine and sperm from passing through the urethra at the same time?",
+                options: [
+                    "The prostate gland",
+                    "The bladder sphincter (internal urethral sphincter)",
+                    "The epididymis",
+                    "The seminal vesicles"
+                ],
+                correct: 1,
+                explanation: "When ejaculation occurs, the bladder sphincter constricts, preventing urine from passing into the urethra and sperm from entering the urinary bladder."
+            },
+            {
+                question: "Which accessory gland produces about 60% of the seminal fluid?",
+                options: [
+                    "Prostate gland",
+                    "Bulbo-urethral glands",
+                    "Seminal vesicles",
+                    "Cowper's glands"
+                ],
+                correct: 2,
+                explanation: "The seminal vesicles produce about 60% of the seminal fluid volume of semen."
+            },
+            {
+                question: "What is the function of the fructose in seminal fluid?",
+                options: [
+                    "To activate sperm",
+                    "To provide energy fuel for sperm",
+                    "To neutralize vaginal acidity",
+                    "To lubricate the urethra"
+                ],
+                correct: 1,
+                explanation: "The fructose in seminal vesicle secretion provides essentially all of the energy fuel for sperm."
+            },
+            {
+                question: "What is the function of the prostate gland secretion?",
+                options: [
+                    "To provide energy for sperm",
+                    "To activate sperm",
+                    "To lubricate the urethra",
+                    "To cleanse the urethra"
+                ],
+                correct: 1,
+                explanation: "Prostate gland secretion is a milky fluid that plays a role in activating sperm."
+            },
+            {
+                question: "What is the function of the bulbo-urethral glands?",
+                options: [
+                    "To produce most of the seminal fluid",
+                    "To activate sperm",
+                    "To produce a mucus that cleanses and lubricates the urethra",
+                    "To produce testosterone"
+                ],
+                correct: 2,
+                explanation: "The bulbo-urethral glands produce a thick, clear mucus that cleanses the urethra of acidic urine and serves as a lubricant."
+            },
+            {
+                question: "What is the approximate pH of semen, and why is this important?",
+                options: [
+                    "Acidic (pH 3.5-4) to kill bacteria",
+                    "Neutral (pH 7) to maintain balance",
+                    "Alkaline (pH 7.2-7.6) to neutralize the acidic vagina",
+                    "Variable pH depending on diet"
+                ],
+                correct: 2,
+                explanation: "Semen is alkaline (pH 7.2-7.6) to help neutralize the acidic environment of the female's vagina (pH 3.5-4), protecting the delicate sperm."
+            },
+            {
+                question: "Approximately how many sperm are there in each milliliter of semen?",
+                options: [
+                    "1-5 million",
+                    "10-20 million",
+                    "50-150 million",
+                    "500 million-1 billion"
+                ],
+                correct: 2,
+                explanation: "There are between 50 and 150 million sperm in each milliliter of semen."
+            },
+            {
+                question: "What is considered a sperm count that makes impregnation improbable?",
+                options: [
+                    "Less than 100 million per milliliter",
+                    "Less than 50 million per milliliter",
+                    "Less than 20 million per milliliter",
+                    "Less than 5 million per milliliter"
+                ],
+                correct: 2,
+                explanation: "A sperm count lower than 20 million per milliliter makes impregnation improbable."
+            },
+            {
+                question: "Why must the testes be kept at a temperature lower than body temperature?",
+                options: [
+                    "To prevent bacterial growth",
+                    "To conserve energy",
+                    "To produce viable sperm",
+                    "To increase testosterone production"
+                ],
+                correct: 2,
+                explanation: "Viable sperm cannot be produced at normal body temperature. The scrotum provides a temperature about 3°C lower, which is necessary for healthy sperm production."
+            },
+            {
+                question: "What is the function of the erectile tissue in the penis?",
+                options: [
+                    "To produce sperm",
+                    "To produce testosterone",
+                    "To fill with blood during sexual excitement, causing erection",
+                    "To transport urine"
+                ],
+                correct: 2,
+                explanation: "Erectile tissue fills with blood during sexual excitement, causing the penis to enlarge and become rigid (erection)."
+            },
+            {
+                question: "What is the surgical removal of the foreskin called?",
+                options: [
+                    "Vasectomy",
+                    "Circumcision",
+                    "Orchidectomy",
+                    "Prostatectomy"
+                ],
+                correct: 1,
+                explanation: "Circumcision is the surgical removal of the foreskin (prepuce) shortly after birth."
+            },
+            {
+                question: "What is the definition of spermatogenesis?",
+                options: [
+                    "Sperm maturation",
+                    "Sperm production",
+                    "Sperm transport",
+                    "Testosterone production"
+                ],
+                correct: 1,
+                explanation: "Spermatogenesis is sperm production, which begins during puberty and continues throughout life."
+            },
+            {
+                question: "Where does spermatogenesis occur?",
+                options: [
+                    "Epididymis",
+                    "Seminiferous tubules",
+                    "Ductus deferens",
+                    "Interstitial cells"
+                ],
+                correct: 1,
+                explanation: "Sperm are formed in the seminiferous tubules of the testis."
+            },
+            {
+                question: "What are the primitive stem cells that begin spermatogenesis called?",
+                options: [
+                    "Spermatocytes",
+                    "Spermatids",
+                    "Spermatogonia",
+                    "Spermatozoa"
+                ],
+                correct: 2,
+                explanation: "Spermatogenesis is begun by primitive stem cells called spermatogonia."
+            },
+            {
+                question: "Which pituitary hormone stimulates spermatogenesis?",
+                options: [
+                    "LH (luteinizing hormone)",
+                    "FSH (follicle-stimulating hormone)",
+                    "Testosterone",
+                    "Estrogen"
+                ],
+                correct: 1,
+                explanation: "FSH is secreted by the anterior pituitary and stimulates spermatogenesis."
+            },
+            {
+                question: "How does meiosis differ from mitosis in terms of the number of divisions and daughter cells?",
+                options: [
+                    "Meiosis has one division producing two daughter cells",
+                    "Meiosis has two divisions producing four daughter cells",
+                    "Meiosis has one division producing four daughter cells",
+                    "Meiosis has two divisions producing two daughter cells"
+                ],
+                correct: 1,
+                explanation: "Meiosis consists of two successive divisions of the nucleus (meiosis I and II) and results in four daughter cells (gametes)."
+            },
+            {
+                question: "How many chromosomes do human sperm cells have?",
+                options: [
+                    "23 chromosomes (n)",
+                    "46 chromosomes (2n)",
+                    "92 chromosomes (4n)",
+                    "Variable number of chromosomes"
+                ],
+                correct: 0,
+                explanation: "Sperm cells have only 23 chromosomes (the n number), half the usual 46 chromosomes found in other body cells."
+            },
+            {
+                question: "What is the process called where spermatids are converted to functional sperm?",
+                options: [
+                    "Spermatogenesis",
+                    "Spermiogenesis",
+                    "Meiosis",
+                    "Mitosis"
+                ],
+                correct: 1,
+                explanation: "Spermiogenesis is the last stage of sperm development where spermatids are converted to functional sperm by sloughing off excess cytoplasm and forming a tail."
+            },
+            {
+                question: "What are the three regions of a mature sperm?",
+                options: [
+                    "Head, body, tail",
+                    "Nucleus, cytoplasm, membrane",
+                    "Head, midpiece, tail",
+                    "Acrosome, nucleus, flagellum"
+                ],
+                correct: 2,
+                explanation: "The mature sperm has three regions: the head, midpiece, and tail."
+            },
+            {
+                question: "What is the function of the acrosome?",
+                options: [
+                    "To provide energy for movement",
+                    "To contain genetic material",
+                    "To help the sperm penetrate the egg",
+                    "To propel the sperm"
+                ],
+                correct: 2,
+                explanation: "The acrosome contains enzymes that help the sperm penetrate through the capsule of follicle cells that surround the egg."
+            },
+            {
+                question: "What is the importance of the mitochondria in the sperm midpiece?",
+                options: [
+                    "To contain genetic material",
+                    "To produce enzymes for penetration",
+                    "To provide ATP for tail movement",
+                    "To protect the sperm"
+                ],
+                correct: 2,
+                explanation: "Mitochondria in the midpiece provide the ATP needed for the whiplike movements of the tail that propel the sperm."
+            },
+            {
+                question: "Approximately how long does it take from the formation of a primary spermatocyte to release of immature sperm?",
+                options: [
+                    "24-48 hours",
+                    "1 week",
+                    "64-72 days",
+                    "6 months"
+                ],
+                correct: 2,
+                explanation: "The entire process from the formation of a primary spermatocyte to release of immature sperm in the tubule lumen takes 64 to 72 days."
+            },
+            {
+                question: "Where do sperm gain their motility and fertilizing power?",
+                options: [
+                    "Seminiferous tubules",
+                    "Rete testis",
+                    "Epididymis",
+                    "Ductus deferens"
+                ],
+                correct: 2,
+                explanation: "Sperm undergo further maturation in the epididymis, which results in increased motility and fertilizing power."
+            },
+            {
+                question: "Which pituitary hormone stimulates testosterone production?",
+                options: [
+                    "FSH (follicle-stimulating hormone)",
+                    "LH (luteinizing hormone)",
+                    "Prolactin",
+                    "Growth hormone"
+                ],
+                correct: 1,
+                explanation: "LH stimulates the interstitial cells to release testosterone."
+            },
+            {
+                question: "What are some male secondary sex characteristics stimulated by testosterone?",
+                options: [
+                    "Development of breasts",
+                    "Widening of hips",
+                    "Deepening of voice and increased hair growth",
+                    "Higher pitched voice"
+                ],
+                correct: 2,
+                explanation: "Male secondary sex characteristics include deepening of the voice, increased hair growth, enlargement of skeletal muscles, and increased bone density."
+            },
+            {
+                question: "What is the effect of negative feedback of testosterone on the anterior pituitary and hypothalamus?",
+                options: [
+                    "Stimulates FSH and LH production",
+                    "Has no effect on FSH and LH",
+                    "Inhibits FSH and LH production",
+                    "Stimulates only FSH production"
+                ],
+                correct: 2,
+                explanation: "Rising levels of testosterone exert feedback inhibition on the hypothalamus and pituitary, reducing GnRH, FSH, and LH secretion."
+            },
+            {
+                question: "What happens if testosterone is not produced in a male?",
+                options: [
+                    "Sperm production increases",
+                    "Secondary sex characteristics never appear",
+                    "Voice becomes higher pitched",
+                    "Body hair decreases"
+                ],
+                correct: 1,
+                explanation: "If testosterone is not produced, the secondary sex characteristics never appear, and reproductive organs remain childlike (sexual infantilism)."
+            },
+            {
+                question: "What is the function of the seminal fluid component of semen?",
+                options: [
+                    "To carry genetic material",
+                    "To activate and nourish sperm, and neutralize vaginal acidity",
+                    "To determine the sex of the baby",
+                    "To provide the sperm with motility"
+                ],
+                correct: 1,
+                explanation: "Seminal fluid acts as a transport medium that nourishes and activates sperm, neutralizes vaginal acidity, and contains substances that protect sperm."
+            },
+            {
+                question: "What is the function of the sperm component of semen?",
+                options: [
+                    "To provide nutrients",
+                    "To neutralize acidity",
+                    "To carry genetic material to fertilize the egg",
+                    "To lubricate the reproductive tract"
+                ],
+                correct: 2,
+                explanation: "Sperm carry the male genetic material and are responsible for fertilizing the female egg."
+            },
+            {
+                question: "What is the most probable condition of a 68-year-old gentleman who has trouble urinating?",
+                options: [
+                    "Testicular cancer",
+                    "Prostate hypertrophy",
+                    "Epididymitis",
+                    "Vasectomy"
+                ],
+                correct: 1,
+                explanation: "Prostate hypertrophy (enlargement) is common in older men and can strangle the urethra, making urination difficult."
+            },
+            {
+                question: "What is the purpose of a rectal exam for a man with urinary problems?",
+                options: [
+                    "To check for testicular cancer",
+                    "To examine the size and texture of the prostate",
+                    "To check for kidney stones",
+                    "To examine the bladder"
+                ],
+                correct: 1,
+                explanation: "Because the prostate is located immediately anterior to the rectum, its size and texture can be palpated by digital examination through the anterior rectal wall."
+            },
+            {
+                question: "Which of the following can cause production of abnormal sperm?",
+                options: [
+                    "Antibiotics like penicillin and tetracycline",
+                    "Radiation, lead, and certain pesticides",
+                    "Marijuana, tobacco, and excessive alcohol",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "All of these environmental threats can alter the normal process of sperm formation and cause production of abnormal sperm."
+            }
+        ];
+
+        const femaleReproductiveQuestions = [
+            {
+                question: "Why is the reproductive role of the female more complex than that of the male?",
+                options: [
+                    "She produces more gametes",
+                    "Her system produces more hormones",
+                    "She must nurture and protect a developing fetus during pregnancy",
+                    "Her reproductive organs are larger"
+                ],
+                correct: 2,
+                explanation: "The female must not only produce gametes (ova), but her body must also nurture and protect a developing fetus during 9 months of pregnancy."
+            },
+            {
+                question: "What are the primary female reproductive organs?",
+                options: [
+                    "Uterine tubes",
+                    "Ovaries",
+                    "Uterus",
+                    "Vagina"
+                ],
+                correct: 1,
+                explanation: "Ovaries are the primary female reproductive organs."
+            },
+            {
+                question: "What two types of products do the ovaries produce?",
+                options: [
+                    "Eggs and urine",
+                    "Eggs and estrogen/progesterone",
+                    "Sperm and testosterone",
+                    "Mucus and eggs"
+                ],
+                correct: 1,
+                explanation: "Like the testes, ovaries produce both an exocrine product (eggs, or ova) and endocrine products (estrogens and progesterone)."
+            },
+            {
+                question: "What are the tiny saclike structures in the ovaries called?",
+                options: [
+                    "Corpus luteum",
+                    "Ovarian follicles",
+                    "Oocytes",
+                    "Graafian follicles"
+                ],
+                correct: 1,
+                explanation: "An internal view of an ovary reveals many tiny saclike structures called ovarian follicles."
+            },
+            {
+                question: "What is an immature egg called?",
+                options: [
+                    "Ovum",
+                    "Oocyte",
+                    "Zygote",
+                    "Follicle"
+                ],
+                correct: 1,
+                explanation: "Each follicle consists of an immature egg, called an oocyte."
+            },
+            {
+                question: "What is the fluid-filled central region that develops in a growing follicle?",
+                options: [
+                    "Corpus luteum",
+                    "Antrum",
+                    "Cervix",
+                    "Vestibule"
+                ],
+                correct: 1,
+                explanation: "As a developing egg within a follicle begins to mature, the follicle develops a fluid-filled central region called an antrum."
+            },
+            {
+                question: "What is a mature ovarian follicle called?",
+                options: [
+                    "Primary follicle",
+                    "Vesicular follicle or Graafian follicle",
+                    "Corpus luteum",
+                    "Oocyte"
+                ],
+                correct: 1,
+                explanation: "At the mature stage, the follicle is called a vesicular follicle or Graafian follicle."
+            },
+            {
+                question: "What is the ejection of an egg from the ovary called?",
+                options: [
+                    "Fertilization",
+                    "Ovulation",
+                    "Implantation",
+                    "Menstruation"
+                ],
+                correct: 1,
+                explanation: "The developing egg is ejected from the ovary during ovulation."
+            },
+            {
+                question: "What structure forms from the ruptured follicle after ovulation?",
+                options: [
+                    "New follicle",
+                    "Corpus luteum",
+                    "Corpus albicans",
+                    "Antrum"
+                ],
+                correct: 1,
+                explanation: "After ovulation, the ruptured follicle is transformed into a structure called the corpus luteum."
+            },
+            {
+                question: "How often does ovulation typically occur?",
+                options: [
+                    "Daily",
+                    "Weekly",
+                    "Every 28 days",
+                    "Monthly from puberty to menopause"
+                ],
+                correct: 3,
+                explanation: "Ovulation generally occurs every 28 days, but it can vary. It occurs monthly from puberty to menopause."
+            },
+            {
+                question: "What structures form the duct system of the female reproductive tract?",
+                options: [
+                    "Ovaries, uterus, vagina",
+                    "Uterine tubes, uterus, vagina",
+                    "Ovaries, uterine tubes, uterus",
+                    "Uterus, cervix, vagina"
+                ],
+                correct: 1,
+                explanation: "The uterine tubes, uterus, and vagina form the duct system of the female reproductive tract."
+            },
+            {
+                question: "What is another name for the uterine tubes?",
+                options: [
+                    "Oviducts",
+                    "Fallopian tubes",
+                    "Both A and B",
+                    "Neither A nor B"
+                ],
+                correct: 2,
+                explanation: "The uterine tubes are also called fallopian tubes or oviducts."
+            },
+            {
+                question: "What is the function of the uterine tubes?",
+                options: [
+                    "To produce eggs",
+                    "To receive the ovulated oocyte and provide a site for fertilization",
+                    "To nourish a developing fetus",
+                    "To produce hormones"
+                ],
+                correct: 1,
+                explanation: "The uterine tubes receive the ovulated oocyte and provide a site where fertilization can occur."
+            },
+            {
+                question: "What are the fingerlike projections at the end of the uterine tubes called?",
+                options: [
+                    "Villi",
+                    "Cilia",
+                    "Fimbriae",
+                    "Labia"
+                ],
+                correct: 2,
+                explanation: "The distal end of each uterine tube has fingerlike projections called fimbriae."
+            },
+            {
+                question: "How is the oocyte carried toward the uterus?",
+                options: [
+                    "By muscle contractions only",
+                    "By peristalsis and ciliary action",
+                    "By gravity alone",
+                    "By blood flow"
+                ],
+                correct: 1,
+                explanation: "The oocyte is carried toward the uterus by a combination of peristalsis and the rhythmic beating of cilia."
+            },
+            {
+                question: "What is the usual site of fertilization?",
+                options: [
+                    "Ovary",
+                    "Uterus",
+                    "Uterine tube",
+                    "Vagina"
+                ],
+                correct: 2,
+                explanation: "Because the journey to the uterus takes 3 to 4 days, the usual site of fertilization is the uterine tube."
+            },
+            {
+                question: "What can happen if sexually transmitted bacteria infect the peritoneal cavity via the uterine tubes?",
+                options: [
+                    "Ovarian cancer",
+                    "Pelvic inflammatory disease (PID)",
+                    "Endometriosis",
+                    "Cervical cancer"
+                ],
+                correct: 1,
+                explanation: "Gonorrhea and other bacteria can cause pelvic inflammatory disease (PID), which can lead to scarring and infertility."
+            },
+            {
+                question: "What is the function of the uterus?",
+                options: [
+                    "To produce eggs",
+                    "To receive, retain, and nourish a fertilized egg",
+                    "To produce hormones",
+                    "To receive sperm"
+                ],
+                correct: 1,
+                explanation: "The uterus functions to receive, retain, and nourish a fertilized egg."
+            },
+            {
+                question: "What are the three regions of the uterus?",
+                options: [
+                    "Fundus, body, cervix",
+                    "Body, cervix, vagina",
+                    "Fundus, cervix, vagina",
+                    "Body, isthmus, cervix"
+                ],
+                correct: 0,
+                explanation: "The major portion is the body, the superior rounded region is the fundus, and the narrow outlet is the cervix."
+            },
+            {
+                question: "What are the three layers of the uterine wall?",
+                options: [
+                    "Endometrium, myometrium, perimetrium",
+                    "Endometrium, perimetrium, epimetrium",
+                    "Myometrium, perimetrium, epimetrium",
+                    "Endometrium, myometrium, mesometrium"
+                ],
+                correct: 0,
+                explanation: "The uterine wall has three layers: endometrium (inner mucosa), myometrium (middle muscle), and perimetrium (outer serosa)."
+            },
+            {
+                question: "Which layer of the uterus is sloughed off during menstruation?",
+                options: [
+                    "Myometrium",
+                    "Perimetrium",
+                    "Endometrium - functional layer",
+                    "Endometrium - basal layer"
+                ],
+                correct: 2,
+                explanation: "The functional layer of the endometrium is sloughed off during menstruation."
+            },
+            {
+                question: "Which layer of the uterus contracts during childbirth?",
+                options: [
+                    "Endometrium",
+                    "Myometrium",
+                    "Perimetrium",
+                    "All of the above"
+                ],
+                correct: 1,
+                explanation: "The myometrium contracts rhythmically during delivery to force the baby out."
+            },
+            {
+                question: "What is the single most important diagnostic test for detecting cervical cancer?",
+                options: [
+                    "Mammogram",
+                    "Blood test",
+                    "Pap smear",
+                    "Urine test"
+                ],
+                correct: 2,
+                explanation: "A yearly Pap smear is the single most important diagnostic test for detecting cervical cancer."
+            },
+            {
+                question: "What is the cause of most cervical cancer?",
+                options: [
+                    "Bacteria",
+                    "Human papillomavirus (HPV)",
+                    "Fungus",
+                    "Genetic factors only"
+                ],
+                correct: 1,
+                explanation: "Most cervical cancer is caused by the sexually transmitted human papillomavirus (HPV)."
+            },
+            {
+                question: "What is the vagina also called?",
+                options: [
+                    "Birth canal",
+                    "Womb",
+                    "Oviduct",
+                    "Vulva"
+                ],
+                correct: 0,
+                explanation: "The vagina is often called the birth canal."
+            },
+            {
+                question: "What is the thin fold of mucosa that partially closes the distal end of the vagina?",
+                options: [
+                    "Hymen",
+                    "Labia",
+                    "Clitoris",
+                    "Vestibule"
+                ],
+                correct: 0,
+                explanation: "The distal end of the vagina is partially closed by a thin fold of the mucosa called the hymen."
+            },
+            {
+                question: "What is another name for the female external genitalia?",
+                options: [
+                    "Vagina",
+                    "Vulva",
+                    "Perineum",
+                    "Mons pubis"
+                ],
+                correct: 1,
+                explanation: "The external genitalia are also called the vulva."
+            },
+            {
+                question: "What does the vulva include?",
+                options: [
+                    "Mons pubis, labia, clitoris, urethral and vaginal orifices, greater vestibular glands",
+                    "Vagina, uterus, uterine tubes",
+                    "Ovaries and uterine tubes",
+                    "Mons pubis and perineum only"
+                ],
+                correct: 0,
+                explanation: "The vulva includes the mons pubis, labia, clitoris, urethral and vaginal orifices, and greater vestibular glands."
+            },
+            {
+                question: "What is the female structure that corresponds to the male penis?",
+                options: [
+                    "Vagina",
+                    "Uterus",
+                    "Clitoris",
+                    "Labia"
+                ],
+                correct: 2,
+                explanation: "The clitoris is a small, protruding structure that corresponds to the male penis."
+            },
+            {
+                question: "How does the clitoris differ from the penis?",
+                options: [
+                    "It is larger",
+                    "It produces gametes",
+                    "It lacks a reproductive duct",
+                    "It is not sensitive"
+                ],
+                correct: 2,
+                explanation: "The clitoris differs from the penis in that it lacks a reproductive duct."
+            },
+            {
+                question: "What is the process of egg production called?",
+                options: [
+                    "Spermatogenesis",
+                    "Oogenesis",
+                    "Ovulation",
+                    "Fertilization"
+                ],
+                correct: 1,
+                explanation: "The process of producing female gametes (ova) is called oogenesis."
+            },
+            {
+                question: "When is a female's lifetime supply of primary oocytes already in place?",
+                options: [
+                    "At puberty",
+                    "At birth",
+                    "During childhood",
+                    "At menopause"
+                ],
+                correct: 1,
+                explanation: "By birth, a female's lifetime supply of primary oocytes is already in place in the ovarian follicles."
+            },
+            {
+                question: "Approximately how many ova are released during a woman's reproductive lifetime?",
+                options: [
+                    "300,000",
+                    "1 million",
+                    "Fewer than 500",
+                    "About 1,000"
+                ],
+                correct: 2,
+                explanation: "Fewer than 500 ova are released during a woman's lifetime, despite having 300,000 oocytes at puberty."
+            },
+            {
+                question: "Which anterior pituitary hormone promotes follicle development in the ovary?",
+                options: [
+                    "LH",
+                    "FSH",
+                    "Estrogen",
+                    "Progesterone"
+                ],
+                correct: 1,
+                explanation: "FSH stimulates primary follicles to grow and mature each month."
+            },
+            {
+                question: "Which anterior pituitary hormone causes ovulation?",
+                options: [
+                    "FSH",
+                    "LH",
+                    "Estrogen",
+                    "Progesterone"
+                ],
+                correct: 1,
+                explanation: "Ovulation occurs in response to the burstlike release of LH."
+            },
+            {
+                question: "What is released during ovulation?",
+                options: [
+                    "Primary oocyte",
+                    "Secondary oocyte",
+                    "Ovum",
+                    "Zygote"
+                ],
+                correct: 1,
+                explanation: "A secondary oocyte is ovulated, still surrounded by its follicle-cell capsule (corona radiata)."
+            },
+            {
+                question: "Besides the one functional gamete (ovum), what other cell types are produced during oogenesis?",
+                options: [
+                    "Sperm cells",
+                    "Polar bodies",
+                    "Follicle cells",
+                    "Corpus luteum cells"
+                ],
+                correct: 1,
+                explanation: "Oogenesis produces polar bodies, which are tiny cells with essentially no cytoplasm that deteriorate quickly."
+            },
+            {
+                question: "How many functional eggs result from meiosis in females?",
+                options: [
+                    "One",
+                    "Two",
+                    "Three",
+                    "Four"
+                ],
+                correct: 0,
+                explanation: "Meiosis in females yields only one functional ovum and three polar bodies."
+            },
+            {
+                question: "What are the three phases of the uterine (menstrual) cycle?",
+                options: [
+                    "Follicular, ovulatory, luteal",
+                    "Menstrual, proliferative, secretory",
+                    "Proliferative, secretory, menstrual",
+                    "Estrogen, progesterone, FSH"
+                ],
+                correct: 1,
+                explanation: "The three phases of the uterine cycle are menstrual, proliferative, and secretory."
+            },
+            {
+                question: "What happens during the proliferative phase of the uterine cycle?",
+                options: [
+                    "The endometrium is sloughing off",
+                    "The functional layer of the endometrium is regenerating",
+                    "The endometrial glands are secreting nutrients",
+                    "Ovulation occurs"
+                ],
+                correct: 1,
+                explanation: "During the proliferative phase, the basal layer of the endometrium regenerates the functional layer."
+            },
+            {
+                question: "What happens during the secretory phase of the uterine cycle?",
+                options: [
+                    "Menstrual flow occurs",
+                    "The endometrium regenerates",
+                    "Endometrial glands secrete nutrients to sustain an embryo",
+                    "The corpus luteum degenerates"
+                ],
+                correct: 2,
+                explanation: "During the secretory phase, progesterone causes the endometrial glands to grow and begin secreting nutrients into the uterine cavity."
+            },
+            {
+                question: "Which ovarian hormone promotes the formation of female secondary sex characteristics?",
+                options: [
+                    "Progesterone",
+                    "Estrogen",
+                    "FSH",
+                    "LH"
+                ],
+                correct: 1,
+                explanation: "Estrogen causes the appearance of secondary sex characteristics in females and is often called the 'feminizing hormone'."
+            },
+            {
+                question: "What are some female secondary sex characteristics?",
+                options: [
+                    "Deepening of voice",
+                    "Enlargement of accessory reproductive organs, breast development, widening of pelvis",
+                    "Increased muscle mass",
+                    "Facial hair growth"
+                ],
+                correct: 1,
+                explanation: "Female secondary sex characteristics include enlargement of reproductive organs, breast development, appearance of body hair, fat deposition, widening of pelvis, and onset of menses."
+            },
+            {
+                question: "What are three important functions of progesterone?",
+                options: [
+                    "Promotes secondary sex characteristics, maintains pregnancy, prepares breasts for milk",
+                    "Establishes menstrual cycle, maintains pregnancy, prepares breasts for milk",
+                    "Causes ovulation, maintains pregnancy, develops breasts",
+                    "Stimulates FSH release, maintains pregnancy, develops uterus"
+                ],
+                correct: 1,
+                explanation: "Progesterone works with estrogen to establish the menstrual cycle, helps maintain pregnancy, and helps prepare the breasts for milk production."
+            },
+            {
+                question: "What is the biological role of the mammary glands?",
+                options: [
+                    "To produce estrogen",
+                    "To attract mates",
+                    "To produce milk to nourish a newborn",
+                    "To produce eggs"
+                ],
+                correct: 2,
+                explanation: "The biological role of the mammary glands is to produce milk to nourish a newborn baby."
+            },
+            {
+                question: "What accounts for the bulk of breast tissue?",
+                options: [
+                    "Glandular tissue",
+                    "Adipose tissue",
+                    "Muscle tissue",
+                    "Connective tissue only"
+                ],
+                correct: 1,
+                explanation: "Adipose (fat) tissue accounts for the bulk of breast tissue, not the glandular tissue."
+            },
+            {
+                question: "What problems do mutations of the BRCA genes cause?",
+                options: [
+                    "Cervical cancer",
+                    "Ovarian cancer",
+                    "Breast cancer",
+                    "Both B and C"
+                ],
+                correct: 3,
+                explanation: "Mutations in BRCA1 and BRCA2 genes significantly increase the risk of both breast and ovarian cancer."
+            },
+            {
+                question: "What is the recommended screening for breast cancer?",
+                options: [
+                    "Monthly breast self-examination only",
+                    "Mammography starting at age 30",
+                    "Breast self-examination and mammography",
+                    "No screening needed"
+                ],
+                correct: 2,
+                explanation: "Early detection by breast self-examination and mammography is the best way to increase survival chances for breast cancer."
+            },
+            {
+                question: "What is the definition of fertilization?",
+                options: [
+                    "Implantation of the embryo",
+                    "Union of sperm and egg",
+                    "Development of the fetus",
+                    "Release of the egg"
+                ],
+                correct: 1,
+                explanation: "Fertilization occurs when the genetic material of a sperm combines with that of an ovum."
+            },
+            {
+                question: "What is the definition of a zygote?",
+                options: [
+                    "A developing embryo",
+                    "A fertilized egg",
+                    "A mature sperm",
+                    "An ovulated egg"
+                ],
+                correct: 1,
+                explanation: "A zygote is a fertilized egg, representing the first cell of a new individual."
+            },
+            {
+                question: "What is implantation?",
+                options: [
+                    "Fertilization of the egg",
+                    "Embedding of the blastocyst in the endometrium",
+                    "Development of the placenta",
+                    "Formation of the embryo"
+                ],
+                correct: 1,
+                explanation: "Implantation is the embedding of the blastocyst into the endometrial lining of the uterus."
+            },
+            {
+                question: "When is the developing offspring called an embryo?",
+                options: [
+                    "From fertilization to birth",
+                    "From week 9 to birth",
+                    "From fertilization through week 8",
+                    "From implantation to week 12"
+                ],
+                correct: 2,
+                explanation: "From fertilization through week 8, the conceptus is called an embryo."
+            },
+            {
+                question: "When is the developing offspring called a fetus?",
+                options: [
+                    "From fertilization to birth",
+                    "From week 9 through birth",
+                    "From fertilization through week 8",
+                    "From implantation to week 12"
+                ],
+                correct: 1,
+                explanation: "From week 9 through birth, the conceptus is called a fetus."
+            },
+            {
+                question: "What are the major functions of the placenta?",
+                options: [
+                    "To produce eggs and sperm",
+                    "To deliver nutrients and oxygen to the embryo/fetus and remove wastes",
+                    "To cause labor contractions",
+                    "To produce estrogen only"
+                ],
+                correct: 1,
+                explanation: "The placenta delivers nutrients and oxygen to and removes wastes from the embryonic/fetal blood, and also produces hormones."
+            },
+            {
+                question: "How does cleavage differ from normal cell divisions?",
+                options: [
+                    "Cleavage results in larger cells",
+                    "Cleavage provides many cells for embryo building without growth phases",
+                    "Cleavage occurs only in adults",
+                    "Cleasure produces specialized tissues"
+                ],
+                correct: 1,
+                explanation: "Cleavage provides a large number of cells to serve as building blocks for constructing the embryo, with little time for growth between divisions."
+            },
+            {
+                question: "What are the three primary germ layers formed from the inner cell mass?",
+                options: [
+                    "Ectoderm, mesoderm, endoderm",
+                    "Epiderm, myoderm, visceroderm",
+                    "Epithelium, muscle, nerve",
+                    "Endoderm, ectoderm, epiderm"
+                ],
+                correct: 0,
+                explanation: "The three primary germ layers are ectoderm, mesoderm, and endoderm, which give rise to all body tissues."
+            }
+        ];
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            // Set up tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all quiz sections
+                    document.querySelectorAll('.quiz-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the targeted quiz section
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Initialize male reproductive quiz with first 10 questions (for performance)
+            const maleContainer = document.getElementById('male-reproductive-questions');
+            maleReproductiveQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="male-q${index}-opt${i}" name="male-q${index}" value="${i}">
+                                <label for="male-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="male-feedback-${index}"></div>
+                `;
+                maleContainer.appendChild(questionDiv);
+            });
+            
+            // Initialize female reproductive quiz with first 10 questions (for performance)
+            const femaleContainer = document.getElementById('female-reproductive-questions');
+            femaleReproductiveQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="female-q${index}-opt${i}" name="female-q${index}" value="${i}">
+                                <label for="female-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="female-feedback-${index}"></div>
+                `;
+                femaleContainer.appendChild(questionDiv);
+            });
+            
+            // Set up submit buttons
+            document.getElementById('submit-male').addEventListener('click', function() {
+                calculateScore('male', maleReproductiveQuestions.slice(0, 10));
+            });
+            
+            document.getElementById('submit-female').addEventListener('click', function() {
+                calculateScore('female', femaleReproductiveQuestions.slice(0, 10));
+            });
+            
+            // Set up navigation
+            setupNavigation('male');
+            setupNavigation('female');
+            
+            // Set up immediate feedback for each question
+            setupImmediateFeedback('male', maleReproductiveQuestions.slice(0, 10));
+            setupImmediateFeedback('female', femaleReproductiveQuestions.slice(0, 10));
+        }
+        
+        function setupNavigation(quizType) {
+            const questions = document.querySelectorAll(`#${quizType}-reproductive-questions .question`);
+            let currentQuestion = 0;
+            
+            // Show first question initially
+            if (questions.length > 0) {
+                questions[0].style.display = 'block';
+            }
+            
+            // Hide all but the first question
+            for (let i = 1; i < questions.length; i++) {
+                questions[i].style.display = 'none';
+            }
+            
+            // Next button
+            document.getElementById(`next-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion < questions.length - 1) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion++;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`prev-${quizType}`).disabled = false;
+                    if (currentQuestion === questions.length - 1) {
+                        this.disabled = true;
+                    }
+                }
+            });
+            
+            // Previous button
+            document.getElementById(`prev-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion--;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`next-${quizType}`).disabled = false;
+                    if (currentQuestion === 0) {
+                        this.disabled = true;
+                    }
+                }
+            });
+        }
+        
+        function setupImmediateFeedback(quizType, questions) {
+            questions.forEach((q, index) => {
+                const options = document.querySelectorAll(`input[name="${quizType}-q${index}"]`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                options.forEach(option => {
+                    option.addEventListener('change', function() {
+                        const selectedValue = parseInt(this.value);
+                        
+                        if (selectedValue === q.correct) {
+                            feedbackElement.innerHTML = `
+                                <div class="correct">Correct! ${q.explanation}</div>
+                            `;
+                            feedbackElement.className = "feedback correct";
+                        } else {
+                            feedbackElement.innerHTML = `
+                                <div class="incorrect">Incorrect. ${q.explanation}</div>
+                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                            `;
+                            feedbackElement.className = "feedback incorrect";
+                        }
+                        
+                        feedbackElement.style.display = 'block';
+                    });
+                });
+            });
+        }
+        
+        function calculateScore(quizType, questions) {
+            let score = 0;
+            const totalQuestions = questions.length;
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="${quizType}-q${index}"]:checked`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                if (selectedOption) {
+                    const selectedValue = parseInt(selectedOption.value);
+                    
+                    if (selectedValue === q.correct) {
+                        score++;
+                        feedbackElement.innerHTML = `
+                            <div class="correct">Correct! ${q.explanation}</div>
+                        `;
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.innerHTML = `
+                            <div class="incorrect">Incorrect. ${q.explanation}</div>
+                            <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                        `;
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                } else {
+                    feedbackElement.innerHTML = `
+                        <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
+                        <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                    `;
+                    feedbackElement.className = "feedback incorrect";
+                }
+                
+                feedbackElement.style.display = 'block';
+            });
+            
+            const percentage = (score / totalQuestions) * 100;
+            const resultsElement = document.getElementById(`${quizType}-reproductive-results`);
+            resultsElement.innerHTML = `
+                <div class="score">Your Score: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</div>
+                <p>${getPerformanceMessage(percentage)}</p>
+            `;
+            resultsElement.style.display = 'block';
+            
+            // Scroll to results
+            resultsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getPerformanceMessage(percentage) {
+            if (percentage >= 90) return "Excellent work! You have a strong understanding of the reproductive system.";
+            if (percentage >= 80) return "Good job! You have a solid grasp of most reproductive system concepts.";
+            if (percentage >= 70) return "Not bad! Review the incorrect answers to improve your understanding.";
+            if (percentage >= 60) return "You passed, but there's room for improvement. Review the material carefully.";
+            return "You need to study the reproductive system more thoroughly. Review the explanations for each question.";
+        }
+        
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>

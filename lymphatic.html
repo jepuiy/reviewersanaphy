@@ -1,0 +1,3058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lymphatic System & Body Defenses Quiz</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #4a90e2;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --correct-color: #4CAF50;
+            --incorrect-color: #f44336;
+            --highlight-color: #FFD700;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .verse {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .personal-note {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(74, 144, 226, 0.2);
+        }
+        
+        .quiz-section {
+            display: none;
+        }
+        
+        .quiz-section.active {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 3px solid var(--correct-color);
+        }
+        
+        .incorrect {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-left: 3px solid var(--incorrect-color);
+        }
+        
+        .correct-answer {
+            font-weight: bold;
+            color: var(--highlight-color);
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+        
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .nav-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lymphatic System & Body Defenses Quiz</h1>
+        <div class="verse">"Cast all your anxiety on him because he cares for you, 1 Peter 5:7"</div>
+        <div class="personal-note">for leonah only :D</div>
+    </header>
+    
+    <div class="quiz-container">
+        <div class="tabs">
+            <button class="tab active" data-target="lymphatic-quiz">Lymphatic System (100 Questions)</button>
+            <button class="tab" data-target="defenses-quiz">Body Defenses (100 Questions)</button>
+        </div>
+        
+        <div id="lymphatic-quiz" class="quiz-section active">
+            <!-- Lymphatic System Quiz Content -->
+            <div id="lymphatic-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-lymphatic" class="nav-btn" disabled>Previous</button>
+                <button id="next-lymphatic" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-lymphatic" class="submit-btn">Submit Lymphatic System Quiz</button>
+            
+            <div id="lymphatic-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+        
+        <div id="defenses-quiz" class="quiz-section">
+            <!-- Body Defenses Quiz Content -->
+            <div id="defenses-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-defenses" class="nav-btn" disabled>Previous</button>
+                <button id="next-defenses" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-defenses" class="submit-btn">Submit Body Defenses Quiz</button>
+            
+            <div id="defenses-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data - 100 questions for each topic
+        const lymphaticQuestions = [
+            {
+                question: "What is the primary function of the lymphatic system?",
+                options: [
+                    "Transport oxygen to tissues",
+                    "Return leaked plasma to blood vessels",
+                    "Produce digestive enzymes",
+                    "Regulate body temperature"
+                ],
+                correct: 1,
+                explanation: "The lymphatic system returns leaked plasma to the blood vessels after cleansing it of bacteria and other foreign matter."
+            },
+            {
+                question: "What are the two major types of structures composing the lymphatic system?",
+                options: [
+                    "Arteries and veins",
+                    "Lymphatic vessels and lymphoid tissues/organs",
+                    "Neurons and glial cells",
+                    "Muscles and bones"
+                ],
+                correct: 1,
+                explanation: "The lymphatic system consists of (1) a meandering network of lymphatic vessels and (2) various lymphoid tissues and organs scattered throughout the body."
+            },
+            {
+                question: "What is the source of lymph?",
+                options: [
+                    "Blood plasma filtered by kidneys",
+                    "Interstitial fluid that has leaked from blood vessels",
+                    "Cerebrospinal fluid",
+                    "Synovial fluid from joints"
+                ],
+                correct: 1,
+                explanation: "Lymph is formed from interstitial fluid that has leaked from blood vessels at capillary beds."
+            },
+            {
+                question: "How do lymphatic capillaries differ structurally from blood capillaries?",
+                options: [
+                    "They have thicker walls",
+                    "They are less permeable",
+                    "They have flaplike minivalves",
+                    "They contain red blood cells"
+                ],
+                correct: 2,
+                explanation: "Lymphatic capillaries have flaplike minivalves formed by overlapping endothelial cells, making them remarkably permeable."
+            },
+            {
+                question: "What is the function of lymph nodes?",
+                options: [
+                    "Produce red blood cells",
+                    "Filter lymph and house immune cells",
+                    "Store fat for energy",
+                    "Produce digestive enzymes"
+                ],
+                correct: 1,
+                explanation: "Lymph nodes filter lymph, removing foreign material like bacteria and tumor cells, and house lymphocytes for immune surveillance."
+            },
+            {
+                question: "What is the consequence of blockage of the thoracic duct?",
+                options: [
+                    "Increased urine output",
+                    "Impaired digestion",
+                    "Accumulation of lymph in tissues (edema)",
+                    "Decreased heart rate"
+                ],
+                correct: 2,
+                explanation: "Blockage of the thoracic duct would prevent lymph from returning to the bloodstream, causing accumulation of fluid in tissues (edema)."
+            },
+            {
+                question: "What is the benefit of having fewer efferent than afferent lymphatic vessels in lymph nodes?",
+                options: [
+                    "Increases blood flow",
+                    "Speeds up lymph flow",
+                    "Slows down lymph flow for better filtration",
+                    "Reduces lymph production"
+                ],
+                correct: 2,
+                explanation: "Fewer efferent vessels slow lymph flow through nodes, allowing more time for lymphocytes and macrophages to perform their protective functions."
+            },
+            {
+                question: "Which lymphoid organ gets rid of aged red blood cells?",
+                options: [
+                    "Thymus",
+                    "Tonsils",
+                    "Spleen",
+                    "Peyer's patches"
+                ],
+                correct: 2,
+                explanation: "The spleen destroys worn-out red blood cells and returns some of their breakdown products to the liver."
+            },
+            {
+                question: "What is MALT?",
+                options: [
+                    "Mucus-Associated Lymphatic Tissue",
+                    "Membrane-Attached Lymphatic Tissue",
+                    "Mucosa-Associated Lymphoid Tissue",
+                    "Muscle-Associated Lymphatic Tissue"
+                ],
+                correct: 2,
+                explanation: "MALT stands for Mucosa-Associated Lymphoid Tissue, which includes tonsils, Peyer's patches, and the appendix."
+            },
+            {
+                question: "In which three regions of the body are lymph nodes most dense?",
+                options: [
+                    "Head, neck, and chest",
+                    "Inguinal, axillary, and cervical regions",
+                    "Abdominal, pelvic, and thoracic cavities",
+                    "Upper limbs, lower limbs, and trunk"
+                ],
+                correct: 1,
+                explanation: "Particularly large clusters of lymph nodes are found in the inguinal (groin), axillary (armpit), and cervical (neck) regions."
+            },
+            {
+                question: "What is the role of the thymus gland?",
+                options: [
+                    "Filter blood",
+                    "Produce T lymphocytes",
+                    "Store lymphocytes",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "The thymus gland is where T lymphocytes mature and become immunocompetent."
+            },
+            {
+                question: "What is the cisterna chyli?",
+                options: [
+                    "A type of lymphocyte",
+                    "An enlarged sac that receives lymph from digestive organs",
+                    "A lymph node in the neck",
+                    "A valve in lymphatic vessels"
+                ],
+                correct: 1,
+                explanation: "The cisterna chyli is an enlarged sac at the base of the thoracic duct that receives lymph from the digestive organs."
+            },
+            {
+                question: "Which cells are primarily responsible for phagocytosis in lymph nodes?",
+                options: [
+                    "Lymphocytes",
+                    "Macrophages",
+                    "Erythrocytes",
+                    "Platelets"
+                ],
+                correct: 1,
+                explanation: "Macrophages within lymph nodes engulf and destroy bacteria, viruses, and other foreign substances in the lymph."
+            },
+            {
+                question: "What is the function of tonsils?",
+                options: [
+                    "Produce hormones",
+                    "Trap and remove pathogens entering the throat",
+                    "Filter blood",
+                    "Store fat"
+                ],
+                correct: 1,
+                explanation: "Tonsils trap and remove any bacteria or other foreign pathogens entering the throat."
+            },
+            {
+                question: "Which lymphatic vessel drains lymph from the right arm and right side of head and thorax?",
+                options: [
+                    "Thoracic duct",
+                    "Right lymphatic duct",
+                    "Cisterna chyli",
+                    "Left subclavian trunk"
+                ],
+                correct: 1,
+                explanation: "The right lymphatic duct drains lymph from the right arm and the right side of the head and thorax."
+            },
+            {
+                question: "What is lymphedema?",
+                options: [
+                    "Inflammation of lymph nodes",
+                    "Swelling due to lymph accumulation",
+                    "Infection of lymphatic vessels",
+                    "Cancer of lymphatic tissue"
+                ],
+                correct: 1,
+                explanation: "Lymphedema is swelling caused by accumulation of lymph fluid due to impaired lymphatic drainage."
+            },
+            {
+                question: "Which lymphoid organ is largest in children and decreases in size after puberty?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Appendix"
+                ],
+                correct: 1,
+                explanation: "The thymus is largest in children and begins to atrophy after puberty."
+            },
+            {
+                question: "What is the function of Peyer's patches?",
+                options: [
+                    "Filter lymph",
+                    "Destroy bacteria in the intestine",
+                    "Produce T cells",
+                    "Store blood"
+                ],
+                correct: 1,
+                explanation: "Peyer's patches capture and destroy bacteria in the intestine, preventing them from penetrating the intestinal wall."
+            },
+            {
+                question: "Where do lymphatic vessels empty their contents?",
+                options: [
+                    "Into arteries",
+                    "Into veins",
+                    "Into the heart",
+                    "Into the liver"
+                ],
+                correct: 1,
+                explanation: "Lymphatic vessels eventually empty lymph into the venous system through the subclavian veins."
+            },
+            {
+                question: "What is the role of the spleen in the fetus?",
+                options: [
+                    "Filters lymph",
+                    "Produces blood cells",
+                    "Stores fat",
+                    "Produces digestive enzymes"
+                ],
+                correct: 1,
+                explanation: "In the fetus, the spleen is an important hematopoietic (blood cell-forming) site."
+            },
+            {
+                question: "What is the structural difference between lymph nodes and other lymphoid organs?",
+                options: [
+                    "Lymph nodes filter lymph, others don't",
+                    "Lymph nodes produce hormones, others don't",
+                    "Lymph nodes store fat, others don't",
+                    "Lymph nodes have capsules, others don't"
+                ],
+                correct: 0,
+                explanation: "Only lymph nodes filter lymph; other lymphoid organs have different functions."
+            },
+            {
+                question: "Which cells are found in germinal centers of lymph nodes?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages",
+                    "Neutrophils"
+                ],
+                correct: 0,
+                explanation: "Germinal centers in lymph nodes contain B cells that are generating daughter cells called plasma cells."
+            },
+            {
+                question: "What is the function of the appendix?",
+                options: [
+                    "Digest cellulose",
+                    "Store beneficial bacteria",
+                    "Destroy bacteria entering from large intestine",
+                    "Produce digestive enzymes"
+                ],
+                correct: 2,
+                explanation: "The appendix contains lymphoid tissue that helps destroy bacteria entering from the large intestine."
+            },
+            {
+                question: "How does lymph move through lymphatic vessels?",
+                options: [
+                    "By heart pumping",
+                    "By skeletal muscle contraction and breathing",
+                    "By active transport",
+                    "By osmosis"
+                ],
+                correct: 1,
+                explanation: "Lymph is transported by the milking action of skeletal muscles and pressure changes during breathing."
+            },
+            {
+                question: "What is the role of trabeculae in lymph nodes?",
+                options: [
+                    "Produce lymphocytes",
+                    "Divide node into compartments",
+                    "Filter lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "Trabeculae extend inward from the capsule to divide the lymph node into compartments."
+            },
+            {
+                question: "Which lymphoid organ is responsible for programming T cells?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Bone marrow"
+                ],
+                correct: 1,
+                explanation: "The thymus programs T cells so they can distinguish self from non-self cells."
+            },
+            {
+                question: "What happens when lymph nodes become 'swollen glands'?",
+                options: [
+                    "They produce more hormones",
+                    "They are trapping pathogens",
+                    "They are storing extra blood",
+                    "They are producing more lymph"
+                ],
+                correct: 1,
+                explanation: "Swollen lymph nodes result from the trapping function of nodes during infection."
+            },
+            {
+                question: "Which type of immunity is provided by the lymphatic system?",
+                options: [
+                    "Innate immunity only",
+                    "Adaptive immunity only",
+                    "Both innate and adaptive immunity",
+                    "Neither innate nor adaptive immunity"
+                ],
+                correct: 2,
+                explanation: "The lymphatic system provides both innate defenses (phagocytosis) and adaptive immunity (lymphocyte responses)."
+            },
+            {
+                question: "What is the function of the subcapsular sinus in lymph nodes?",
+                options: [
+                    "Produce lymphocytes",
+                    "Trap large particles",
+                    "Store lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "The subcapsular sinus traps large particles and debris as lymph enters the node."
+            },
+            {
+                question: "Which cells are primarily found in the cortex of lymph nodes?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages",
+                    "Dendritic cells"
+                ],
+                correct: 0,
+                explanation: "The cortex of lymph nodes contains follicles with B cells."
+            },
+            {
+                question: "What is the function of the medullary cords in lymph nodes?",
+                options: [
+                    "Contain B cells and plasma cells",
+                    "Filter lymph",
+                    "Produce T cells",
+                    "Store macrophages"
+                ],
+                correct: 0,
+                explanation: "Medullary cords contain B cells, plasma cells, and macrophages."
+            },
+            {
+                question: "How do cancer cells spread through the lymphatic system?",
+                options: [
+                    "Through lymph capillaries",
+                    "Through blood vessels only",
+                    "Through nerves",
+                    "Through direct extension only"
+                ],
+                correct: 0,
+                explanation: "Cancer cells can enter lymphatic capillaries and travel through lymphatic vessels to other parts of the body."
+            },
+            {
+                question: "What is the role of the spleen during hemorrhage?",
+                options: [
+                    "Produces more red blood cells",
+                    "Contracts to release stored blood",
+                    "Filters pathogens from blood",
+                    "Produces clotting factors"
+                ],
+                correct: 1,
+                explanation: "During hemorrhage, the spleen contracts and empties its contained blood into circulation."
+            },
+            {
+                question: "Which lymphoid tissue is found in the respiratory tract?",
+                options: [
+                    "Peyer's patches",
+                    "Tonsils",
+                    "Appendix",
+                    "BALT (Bronchus-Associated Lymphoid Tissue)"
+                ],
+                correct: 3,
+                explanation: "BALT (Bronchus-Associated Lymphoid Tissue) is found in the respiratory tract."
+            },
+            {
+                question: "What is the function of the thoracic duct?",
+                options: [
+                    "Drains lymph from right side of body",
+                    "Drains lymph from left side and lower body",
+                    "Drains lymph from head only",
+                    "Drains lymph from abdomen only"
+                ],
+                correct: 1,
+                explanation: "The thoracic duct receives lymph from the rest of the body except the right arm and right side of head and thorax."
+            },
+            {
+                question: "Which cells are responsible for antibody production?",
+                options: [
+                    "T cells",
+                    "B cells",
+                    "Macrophages",
+                    "Natural killer cells"
+                ],
+                correct: 1,
+                explanation: "B cells produce antibodies as part of humoral immunity."
+            },
+            {
+                question: "What is the function of the hilum in lymph nodes?",
+                options: [
+                    "Where lymph enters",
+                    "Where lymph exits",
+                    "Where blood vessels enter and exit",
+                    "Where nerves enter"
+                ],
+                correct: 1,
+                explanation: "Lymph exits the lymph node at its indented region, the hilum, via efferent lymphatic vessels."
+            },
+            {
+                question: "Which lymphoid organ is often damaged in mononucleosis?",
+                options: [
+                    "Thymus",
+                    "Spleen",
+                    "Tonsils",
+                    "Appendix"
+                ],
+                correct: 1,
+                explanation: "The spleen is often enlarged and can rupture in mononucleosis."
+            },
+            {
+                question: "What is the role of lymphatic valves?",
+                options: [
+                    "Prevent backflow of lymph",
+                    "Speed up lymph flow",
+                    "Filter lymph",
+                    "Produce lymphocytes"
+                ],
+                correct: 0,
+                explanation: "Lymphatic valves prevent backflow of lymph, ensuring one-way flow toward the heart."
+            },
+            {
+                question: "Which cells are found in the paracortex of lymph nodes?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages",
+                    "Dendritic cells"
+                ],
+                correct: 1,
+                explanation: "The paracortex of lymph nodes contains T cells."
+            },
+            {
+                question: "What is the function of the red pulp in the spleen?",
+                options: [
+                    "Produces lymphocytes",
+                    "Filters blood and removes old RBCs",
+                    "Stores platelets",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "The red pulp of the spleen filters blood and removes worn-out red blood cells."
+            },
+            {
+                question: "What is the function of the white pulp in the spleen?",
+                options: [
+                    "Filters blood",
+                    "Contains lymphocytes for immune responses",
+                    "Stores blood",
+                    "Produces red blood cells"
+                ],
+                correct: 1,
+                explanation: "The white pulp of the spleen contains lymphocytes and is involved in immune responses."
+            },
+            {
+                question: "Which lymphatic disorder is characterized by elephant-like swelling?",
+                options: [
+                    "Lymphangitis",
+                    "Lymphadenopathy",
+                    "Elephantiasis",
+                    "Lymphoma"
+                ],
+                correct: 2,
+                explanation: "Elephantiasis is characterized by massive swelling due to lymphatic filariasis."
+            },
+            {
+                question: "What is the role of the appendix in immunity?",
+                options: [
+                    "Produces T cells",
+                    "Serves as reservoir for beneficial bacteria",
+                    "Filters lymph",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "The appendix serves as a reservoir for beneficial gut bacteria and contains lymphoid tissue."
+            },
+            {
+                question: "Which cells are primarily responsible for cell-mediated immunity?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages",
+                    "Neutrophils"
+                ],
+                correct: 1,
+                explanation: "T cells are responsible for cell-mediated immunity."
+            },
+            {
+                question: "What is the function of afferent lymphatic vessels?",
+                options: [
+                    "Carry lymph away from nodes",
+                    "Carry lymph toward nodes",
+                    "Carry blood to nodes",
+                    "Carry blood away from nodes"
+                ],
+                correct: 1,
+                explanation: "Afferent lymphatic vessels carry lymph toward lymph nodes."
+            },
+            {
+                question: "What is the function of efferent lymphatic vessels?",
+                options: [
+                    "Carry lymph away from nodes",
+                    "Carry lymph toward nodes",
+                    "Carry blood to nodes",
+                    "Carry blood away from nodes"
+                ],
+                correct: 0,
+                explanation: "Efferent lymphatic vessels carry lymph away from lymph nodes."
+            },
+            {
+                question: "Which lymphoid organ is most active during youth?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Appendix"
+                ],
+                correct: 1,
+                explanation: "The thymus is most active during youth and begins to atrophy after puberty."
+            },
+            {
+                question: "What is the role of the spleen in platelet storage?",
+                options: [
+                    "Produces platelets",
+                    "Stores about one-third of body's platelets",
+                    "Destroys old platelets",
+                    "Activates platelets"
+                ],
+                correct: 1,
+                explanation: "The spleen stores about one-third of the body's platelets."
+            },
+            {
+                question: "Which cells are found in lymph?",
+                options: [
+                    "Red blood cells",
+                    "Lymphocytes",
+                    "Platelets",
+                    "All blood cells"
+                ],
+                correct: 1,
+                explanation: "Lymph contains lymphocytes but typically lacks red blood cells and platelets."
+            },
+            {
+                question: "What is the function of the right lymphatic duct?",
+                options: [
+                    "Drains entire body",
+                    "Drains right arm and right side of head and thorax",
+                    "Drains lower body",
+                    "Drains left side of body"
+                ],
+                correct: 1,
+                explanation: "The right lymphatic duct drains lymph from the right arm and the right side of the head and thorax."
+            },
+            {
+                question: "Which structure is NOT part of the lymphatic system?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Pancreas",
+                    "Tonsils"
+                ],
+                correct: 2,
+                explanation: "The pancreas is part of the digestive and endocrine systems, not the lymphatic system."
+            },
+            {
+                question: "What is the role of Peyer's patches in immunity?",
+                options: [
+                    "Filter lymph",
+                    "Destroy intestinal pathogens",
+                    "Produce T cells",
+                    "Store memory cells"
+                ],
+                correct: 1,
+                explanation: "Peyer's patches destroy bacteria in the intestine, preventing them from penetrating the intestinal wall."
+            },
+            {
+                question: "Which cells are primarily responsible for humoral immunity?",
+                options: [
+                    "T cells",
+                    "B cells",
+                    "Macrophages",
+                    "Natural killer cells"
+                ],
+                correct: 1,
+                explanation: "B cells are responsible for humoral immunity through antibody production."
+            },
+            {
+                question: "What is the function of the capsule in lymph nodes?",
+                options: [
+                    "Produces lymphocytes",
+                    "Provides structural support",
+                    "Filters lymph",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "The fibrous capsule provides structural support for lymph nodes."
+            },
+            {
+                question: "Which lymphoid organ is located in the left upper quadrant of abdomen?",
+                options: [
+                    "Liver",
+                    "Spleen",
+                    "Thymus",
+                    "Pancreas"
+                ],
+                correct: 1,
+                explanation: "The spleen is located in the left side of the abdominal cavity, beneath the diaphragm."
+            },
+            {
+                question: "What is the role of lymph in fat absorption?",
+                options: [
+                    "No role in fat absorption",
+                    "Transports absorbed fats from intestine",
+                    "Digests fats",
+                    "Stores fats"
+                ],
+                correct: 1,
+                explanation: "Lymphatic vessels called lacteals in the small intestine transport absorbed fats."
+            },
+            {
+                question: "Which cells are primarily found in the medulla of lymph nodes?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages",
+                    "Dendritic cells"
+                ],
+                correct: 2,
+                explanation: "Phagocytic macrophages are located in the central medulla of lymph nodes."
+            },
+            {
+                question: "What is the function of tonsillar crypts?",
+                options: [
+                    "Produce lymphocytes",
+                    "Trap bacteria and debris",
+                    "Filter lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "Tonsillar crypts trap bacteria and debris, allowing immune cells to encounter pathogens."
+            },
+            {
+                question: "Which lymphatic disorder involves inflammation of lymphatic vessels?",
+                options: [
+                    "Lymphangitis",
+                    "Lymphadenitis",
+                    "Lymphedema",
+                    "Lymphoma"
+                ],
+                correct: 0,
+                explanation: "Lymphangitis is inflammation of lymphatic vessels."
+            },
+            {
+                question: "What is the role of the spleen in fetal development?",
+                options: [
+                    "Filters lymph",
+                    "Produces blood cells",
+                    "Stores iron",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "In the fetus, the spleen is an important hematopoietic (blood cell-forming) site."
+            },
+            {
+                question: "Which cells are responsible for immunological memory?",
+                options: [
+                    "Plasma cells",
+                    "Memory cells",
+                    "Macrophages",
+                    "Natural killer cells"
+                ],
+                correct: 1,
+                explanation: "Memory B and T cells are responsible for immunological memory."
+            },
+            {
+                question: "What is the function of lymphatic sinuses in lymph nodes?",
+                options: [
+                    "Produce lymphocytes",
+                    "Allow lymph to flow through node",
+                    "Store lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "Lymph flows through sinuses that meander through the lymph node."
+            },
+            {
+                question: "Which lymphoid organ produces thymosin?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Bone marrow"
+                ],
+                correct: 1,
+                explanation: "The thymus produces thymosin and other hormones that help program T cells."
+            },
+            {
+                question: "What is the role of the spleen in iron metabolism?",
+                options: [
+                    "Produces iron",
+                    "Stores iron from broken-down RBCs",
+                    "Excretes iron",
+                    "Absorbs iron from diet"
+                ],
+                correct: 1,
+                explanation: "The spleen stores iron from broken-down red blood cells for reuse."
+            },
+            {
+                question: "Which cells are primarily responsible for phagocytosis in the spleen?",
+                options: [
+                    "Lymphocytes",
+                    "Macrophages",
+                    "Erythrocytes",
+                    "Platelets"
+                ],
+                correct: 1,
+                explanation: "Macrophages in the spleen phagocytize pathogens and old blood cells."
+            },
+            {
+                question: "What is the function of the cortical follicles in lymph nodes?",
+                options: [
+                    "Contain T cells",
+                    "Contain B cells",
+                    "Filter lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "The outer cortex of lymph nodes contains follicles with B cells."
+            },
+            {
+                question: "Which lymphatic vessel is the largest?",
+                options: [
+                    "Right lymphatic duct",
+                    "Thoracic duct",
+                    "Cisterna chyli",
+                    "Subclavian trunk"
+                ],
+                correct: 1,
+                explanation: "The thoracic duct is the largest lymphatic vessel."
+            },
+            {
+                question: "What is the role of the spleen in fighting infection?",
+                options: [
+                    "Produces antibodies",
+                    "Filters blood-borne pathogens",
+                    "Produces T cells",
+                    "Stores immune cells"
+                ],
+                correct: 1,
+                explanation: "The spleen filters and cleanses blood of bacteria, viruses, and other debris."
+            },
+            {
+                question: "Which cells are primarily responsible for antigen presentation?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages and dendritic cells",
+                    "Natural killer cells"
+                ],
+                correct: 2,
+                explanation: "Macrophages and dendritic cells are antigen-presenting cells (APCs)."
+            },
+            {
+                question: "What is the function of the medullary sinuses in lymph nodes?",
+                options: [
+                    "Produce lymphocytes",
+                    "Allow lymph to flow toward hilum",
+                    "Store lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "Medullary sinuses allow lymph to flow toward the hilum where it exits the node."
+            },
+            {
+                question: "Which lymphoid organ is most affected in HIV/AIDS?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Lymph nodes",
+                    "Tonsils"
+                ],
+                correct: 2,
+                explanation: "Lymph nodes are particularly affected in HIV/AIDS as the virus replicates in lymphocytes."
+            },
+            {
+                question: "What is the role of the spleen in blood storage?",
+                options: [
+                    "Stores about 500 ml of blood",
+                    "Produces blood",
+                    "Filters lymph",
+                    "Stores platelets only"
+                ],
+                correct: 0,
+                explanation: "The spleen acts as a blood reservoir, storing about 500 ml of blood."
+            },
+            {
+                question: "Which cells are primarily responsible for destroying virus-infected cells?",
+                options: [
+                    "B cells",
+                    "Cytotoxic T cells",
+                    "Macrophages",
+                    "Neutrophils"
+                ],
+                correct: 1,
+                explanation: "Cytotoxic T cells destroy virus-infected cells and cancer cells."
+            },
+            {
+                question: "What is the function of the subclavian veins in lymphatic system?",
+                options: [
+                    "Produce lymph",
+                    "Receive lymph from lymphatic ducts",
+                    "Filter lymph",
+                    "Store lymph"
+                ],
+                correct: 1,
+                explanation: "The subclavian veins receive lymph from the lymphatic ducts, returning it to bloodstream."
+            },
+            {
+                question: "Which lymphoid organ is responsible for blood filtration?",
+                options: [
+                    "Thymus",
+                    "Spleen",
+                    "Tonsils",
+                    "Appendix"
+                ],
+                correct: 1,
+                explanation: "The spleen filters blood, removing old blood cells and pathogens."
+            },
+            {
+                question: "What is the role of lymph in immune surveillance?",
+                options: [
+                    "Carries immune cells throughout body",
+                    "Produces immune cells",
+                    "Stores immune cells",
+                    "Activates immune cells"
+                ],
+                correct: 0,
+                explanation: "Lymph carries immune cells throughout the body, allowing for immune surveillance."
+            },
+            {
+                question: "Which cells are primarily found in germinal centers during immune response?",
+                options: [
+                    "Resting B cells",
+                    "Actively dividing B cells",
+                    "T cells",
+                    "Macrophages"
+                ],
+                correct: 1,
+                explanation: "Germinal centers contain actively dividing B cells during an immune response."
+            },
+            {
+                question: "What is the function of the trabecular sinuses in lymph nodes?",
+                options: [
+                    "Produce lymphocytes",
+                    "Allow lymph to flow around trabeculae",
+                    "Store lymph",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "Trabecular sinuses allow lymph to flow around the trabeculae within the node."
+            },
+            {
+                question: "Which lymphoid organ is most involved in mucosal immunity?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "MALT",
+                    "Bone marrow"
+                ],
+                correct: 2,
+                explanation: "MALT (Mucosa-Associated Lymphoid Tissue) is most involved in mucosal immunity."
+            },
+            {
+                question: "What is the role of the spleen in RBC lifecycle?",
+                options: [
+                    "Produces RBCs",
+                    "Destroys old RBCs",
+                    "Stores RBCs",
+                    "Activates RBCs"
+                ],
+                correct: 1,
+                explanation: "The spleen destroys worn-out red blood cells."
+            },
+            {
+                question: "Which cells are primarily responsible for initiating immune responses?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Dendritic cells",
+                    "Natural killer cells"
+                ],
+                correct: 2,
+                explanation: "Dendritic cells are professional antigen-presenting cells that initiate immune responses."
+            },
+            {
+                question: "What is the function of the afferent lymphatics in lymph nodes?",
+                options: [
+                    "Carry lymph away from node",
+                    "Carry lymph into node",
+                    "Carry blood to node",
+                    "Carry blood away from node"
+                ],
+                correct: 1,
+                explanation: "Afferent lymphatics carry lymph into the lymph node."
+            },
+            {
+                question: "Which lymphoid organ is most active in early life?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Appendix"
+                ],
+                correct: 1,
+                explanation: "The thymus is most active in early life and begins to atrophy after puberty."
+            },
+            {
+                question: "What is the role of the spleen in the mononuclear phagocyte system?",
+                options: [
+                    "Produces phagocytes",
+                    "Contains many macrophages",
+                    "Stores phagocytes",
+                    "Activates phagocytes"
+                ],
+                correct: 1,
+                explanation: "The spleen contains many macrophages as part of the mononuclear phagocyte system."
+            },
+            {
+                question: "Which cells are primarily responsible for antibody secretion?",
+                options: [
+                    "B cells",
+                    "Plasma cells",
+                    "Memory B cells",
+                    "T cells"
+                ],
+                correct: 1,
+                explanation: "Plasma cells (derived from B cells) secrete antibodies."
+            },
+            {
+                question: "What is the function of the efferent lymphatics in lymph nodes?",
+                options: [
+                    "Carry lymph away from node",
+                    "Carry lymph into node",
+                    "Carry blood to node",
+                    "Carry blood away from node"
+                ],
+                correct: 0,
+                explanation: "Efferent lymphatics carry lymph away from the lymph node."
+            },
+            {
+                question: "Which lymphoid organ is most affected in infectious mononucleosis?",
+                options: [
+                    "Thymus",
+                    "Spleen",
+                    "Tonsils",
+                    "Bone marrow"
+                ],
+                correct: 1,
+                explanation: "The spleen is often enlarged and can rupture in infectious mononucleosis."
+            },
+            {
+                question: "What is the role of the spleen in complement production?",
+                options: [
+                    "Major site of complement production",
+                    "Stores complement proteins",
+                    "Activates complement",
+                    "No direct role in complement"
+                ],
+                correct: 3,
+                explanation: "The spleen does not have a direct role in complement production; complement is produced mainly in the liver."
+            },
+            {
+                question: "Which cells are primarily responsible for immune regulation?",
+                options: [
+                    "Helper T cells",
+                    "Cytotoxic T cells",
+                    "Regulatory T cells",
+                    "B cells"
+                ],
+                correct: 2,
+                explanation: "Regulatory T cells help control and regulate immune responses."
+            },
+            {
+                question: "What is the function of the capsule in the spleen?",
+                options: [
+                    "Produces lymphocytes",
+                    "Provides structural support and contracts",
+                    "Filters blood",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "The splenic capsule provides structural support and can contract to release stored blood."
+            },
+            {
+                question: "Which lymphoid organ is most involved in T cell maturation?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Bone marrow"
+                ],
+                correct: 1,
+                explanation: "The thymus is where T cells mature and become immunocompetent."
+            },
+            {
+                question: "What is the role of the spleen in the inflammatory response?",
+                options: [
+                    "Produces inflammatory mediators",
+                    "Filters inflammatory cells from blood",
+                    "Stores inflammatory cells",
+                    "No direct role in inflammation"
+                ],
+                correct: 1,
+                explanation: "The spleen can filter inflammatory cells and mediators from the blood."
+            },
+            {
+                question: "Which cells are primarily responsible for immediate hypersensitivity reactions?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Mast cells",
+                    "Macrophages"
+                ],
+                correct: 2,
+                explanation: "Mast cells are responsible for immediate hypersensitivity reactions through histamine release."
+            },
+            {
+                question: "What is the function of the hilum in the spleen?",
+                options: [
+                    "Where blood enters",
+                    "Where blood vessels enter and exit",
+                    "Where lymph enters",
+                    "Where lymph exits"
+                ],
+                correct: 1,
+                explanation: "The hilum of the spleen is where blood vessels enter and exit."
+            },
+            {
+                question: "Which lymphoid organ is most involved in B cell maturation?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Bone marrow",
+                    "Tonsils"
+                ],
+                correct: 2,
+                explanation: "B cells develop immunocompetence in bone marrow."
+            },
+            {
+                question: "What is the role of the spleen in adaptive immunity?",
+                options: [
+                    "Produces T cells",
+                    "Site for lymphocyte activation",
+                    "Produces antibodies only",
+                    "No role in adaptive immunity"
+                ],
+                correct: 1,
+                explanation: "The spleen provides a site for lymphocyte proliferation and immune surveillance."
+            },
+            {
+                question: "Which cells are primarily responsible for delayed hypersensitivity reactions?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Mast cells",
+                    "Macrophages"
+                ],
+                correct: 1,
+                explanation: "T cells are responsible for delayed hypersensitivity reactions."
+            },
+            {
+                question: "What is the function of the red pulp in the spleen?",
+                options: [
+                    "Site of immune responses",
+                    "Site of blood filtration",
+                    "Produces lymphocytes",
+                    "Stores lymphocytes"
+                ],
+                correct: 1,
+                explanation: "The red pulp is the site of blood filtration in the spleen."
+            },
+            {
+                question: "Which lymphoid organ is most involved in immune responses to blood-borne pathogens?",
+                options: [
+                    "Thymus",
+                    "Spleen",
+                    "Tonsils",
+                    "Appendix"
+                ],
+                correct: 1,
+                explanation: "The spleen filters blood and responds to blood-borne pathogens."
+            },
+            {
+                question: "What is the role of the spleen in hematopoiesis?",
+                options: [
+                    "Major site in adults",
+                    "Site in fetus and certain diseases",
+                    "No role in hematopoiesis",
+                    "Stores hematopoietic cells only"
+                ],
+                correct: 1,
+                explanation: "The spleen is a hematopoietic site in the fetus and can resume this function in certain diseases."
+            },
+            {
+                question: "Which cells are primarily responsible for antigen recognition in humoral immunity?",
+                options: [
+                    "T cells",
+                    "B cells",
+                    "Macrophages",
+                    "Dendritic cells"
+                ],
+                correct: 1,
+                explanation: "B cells recognize antigens in humoral immunity."
+            },
+            {
+                question: "What is the function of the white pulp in the spleen?",
+                options: [
+                    "Site of blood filtration",
+                    "Site of immune responses",
+                    "Stores blood",
+                    "Produces red blood cells"
+                ],
+                correct: 1,
+                explanation: "The white pulp is the site of immune responses in the spleen."
+            },
+            {
+                question: "Which lymphoid organ is most involved in immune responses to inhaled pathogens?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Tonsils",
+                    "Bone marrow"
+                ],
+                correct: 2,
+                explanation: "Tonsils respond to pathogens entering through the mouth and nose."
+            },
+            {
+                question: "What is the role of the spleen in immunoglobulin production?",
+                options: [
+                    "Produces immunoglobulins",
+                    "Stores immunoglobulins",
+                    "No direct role in immunoglobulin production",
+                    "Activates immunoglobulin production"
+                ],
+                correct: 2,
+                explanation: "The spleen itself does not produce immunoglobulins; plasma cells (derived from B cells) do."
+            },
+            {
+                question: "Which cells are primarily responsible for antigen recognition in cell-mediated immunity?",
+                options: [
+                    "B cells",
+                    "T cells",
+                    "Macrophages",
+                    "Natural killer cells"
+                ],
+                correct: 1,
+                explanation: "T cells recognize antigens in cell-mediated immunity."
+            },
+            {
+                question: "What is the function of the marginal zone in the spleen?",
+                options: [
+                    "Produces lymphocytes",
+                    "Site where blood enters white pulp",
+                    "Filters lymph",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "The marginal zone is where blood enters the white pulp of the spleen."
+            },
+            {
+                question: "Which lymphoid organ is most involved in immune responses to intestinal pathogens?",
+                options: [
+                    "Spleen",
+                    "Thymus",
+                    "Peyer's patches",
+                    "Tonsils"
+                ],
+                correct: 2,
+                explanation: "Peyer's patches respond to pathogens in the intestine."
+            },
+            {
+                question: "What is the role of the spleen in autoimmune diseases?",
+                options: [
+                    "Prevents autoimmune diseases",
+                    "Can be target of autoimmune attack",
+                    "Produces autoantibodies",
+                    "No role in autoimmune diseases"
+                ],
+                correct: 1,
+                explanation: "The spleen can be a target of autoimmune attack in diseases like SLE."
+            },
+            {
+                question: "Which cells are primarily responsible for cytokine production?",
+                options: [
+                    "B cells",
+                    "T cells and macrophages",
+                    "Red blood cells",
+                    "Platelets"
+                ],
+                correct: 1,
+                explanation: "T cells and macrophages are major producers of cytokines."
+            },
+            {
+                question: "What is the function of the periarteriolar lymphoid sheath (PALS) in the spleen?",
+                options: [
+                    "Site of B cell accumulation",
+                    "Site of T cell accumulation",
+                    "Filters blood",
+                    "Produces red blood cells"
+                ],
+                correct: 1,
+                explanation: "The PALS is where T cells accumulate in the spleen."
+            }
+        ];
+
+        const defensesQuestions = [
+            {
+                question: "What are the two main systems of body defenses?",
+                options: [
+                    "Circulatory and respiratory",
+                    "Innate and adaptive",
+                    "Nervous and endocrine",
+                    "Skeletal and muscular"
+                ],
+                correct: 1,
+                explanation: "The body's defenders are two systems: the innate (nonspecific) defense system and the adaptive (specific) defense system."
+            },
+            {
+                question: "How do the innate and adaptive defenses differ?",
+                options: [
+                    "Innate is specific, adaptive is nonspecific",
+                    "Innate requires previous exposure, adaptive does not",
+                    "Innate responds immediately, adaptive requires previous exposure",
+                    "Innate uses lymphocytes, adaptive uses phagocytes"
+                ],
+                correct: 2,
+                explanation: "The innate defense system responds immediately to all foreign substances, while the adaptive system must first be exposed to a foreign substance before it can protect against it."
+            },
+            {
+                question: "What are the four common indicators of inflammation?",
+                options: [
+                    "Fever, chills, nausea, vomiting",
+                    "Redness, heat, swelling, pain",
+                    "Itching, rash, hives, sneezing",
+                    "Headache, dizziness, fatigue, weakness"
+                ],
+                correct: 1,
+                explanation: "The four most common indicators of acute inflammation are redness, heat, swelling, and pain."
+            },
+            {
+                question: "What is the role of natural killer (NK) cells?",
+                options: [
+                    "Produce antibodies",
+                    "Engulf bacteria",
+                    "Lyse virus-infected and cancer cells",
+                    "Present antigens to T cells"
+                ],
+                correct: 2,
+                explanation: "Natural killer cells can lyse and kill cancer cells, virus-infected body cells, and some other nonspecific targets."
+            },
+            {
+                question: "How does complement cause lysis of a pathogenic microorganism?",
+                options: [
+                    "By producing antibodies",
+                    "By forming membrane attack complexes (MAC) that create holes in the cell",
+                    "By engulfing the microorganism",
+                    "By releasing histamine"
+                ],
+                correct: 1,
+                explanation: "Complement fixation results in the formation of membrane attack complexes (MAC) that produce lesions with holes in the foreign cell's surface, allowing water to rush in and burst the cell."
+            },
+            {
+                question: "Which type of infectious microorganism causes the body's level of interferons to rise?",
+                options: [
+                    "Bacteria",
+                    "Fungi",
+                    "Viruses",
+                    "Parasites"
+                ],
+                correct: 2,
+                explanation: "Interferons are proteins released by virus-infected cells that protect uninfected tissue cells from viral takeover."
+            },
+            {
+                question: "What is the difference between an antigen and a self-antigen?",
+                options: [
+                    "Antigens are larger molecules",
+                    "Self-antigens trigger immune responses in the body they belong to",
+                    "Antigens are foreign substances, self-antigens are the body's own molecules",
+                    "Self-antigens are only found on red blood cells"
+                ],
+                correct: 2,
+                explanation: "Antigens are foreign substances that provoke an immune response, while self-antigens are the body's own molecules that are recognized as 'self' and do not trigger an immune response in that individual."
+            },
+            {
+                question: "What are the two types of lymphocytes involved in adaptive immune responses?",
+                options: [
+                    "Neutrophils and eosinophils",
+                    "B cells and T cells",
+                    "Macrophages and dendritic cells",
+                    "Basophils and mast cells"
+                ],
+                correct: 1,
+                explanation: "B cells (lymphocytes) produce antibodies and oversee humoral immunity, while T cells (lymphocytes) constitute the cell-mediated arm of the adaptive defense system."
+            },
+            {
+                question: "Where does the 'programming' phase leading to immunocompetence occur for T cells?",
+                options: [
+                    "Bone marrow",
+                    "Spleen",
+                    "Thymus",
+                    "Liver"
+                ],
+                correct: 2,
+                explanation: "T cells arise from lymphocytes that migrate to the thymus, where they undergo a maturation process directed by thymic hormones."
+            },
+            {
+                question: "What is the essential role of macrophages and dendritic cells in adaptive immunity?",
+                options: [
+                    "Produce antibodies",
+                    "Lyse infected cells",
+                    "Engulf antigens and present them to T cells",
+                    "Release histamine"
+                ],
+                correct: 2,
+                explanation: "Antigen-presenting cells (APCs) like macrophages and dendritic cells engulf antigens and present fragments of them on their surfaces where they can be recognized by T cells."
+            },
+            {
+                question: "What is the function of plasma cells?",
+                options: [
+                    "Engulf pathogens",
+                    "Produce antibodies",
+                    "Kill infected cells",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Plasma cells are antibody-producing factories that secrete large amounts of antibodies."
+            },
+            {
+                question: "What is immunological memory?",
+                options: [
+                    "Ability to remember past infections",
+                    "Faster and stronger response to previously encountered antigens",
+                    "Memory of self vs non-self",
+                    "Ability to learn new immune responses"
+                ],
+                correct: 1,
+                explanation: "Immunological memory allows for a faster and stronger response upon second exposure to an antigen."
+            },
+            {
+                question: "What are the five classes of antibodies?",
+                options: [
+                    "IgA, IgB, IgC, IgD, IgE",
+                    "Ig1, Ig2, Ig3, Ig4, Ig5",
+                    "IgA, IgD, IgE, IgG, IgM",
+                    "IgAlpha, IgBeta, IgGamma, IgDelta, IgEpsilon"
+                ],
+                correct: 2,
+                explanation: "The five major immunoglobulin classes are IgA, IgD, IgE, IgG, and IgM."
+            },
+            {
+                question: "What is the function of helper T cells?",
+                options: [
+                    "Produce antibodies",
+                    "Kill infected cells",
+                    "Activate other immune cells",
+                    "Engulf pathogens"
+                ],
+                correct: 2,
+                explanation: "Helper T cells activate other immune cells like B cells and cytotoxic T cells."
+            },
+            {
+                question: "What is the function of cytotoxic T cells?",
+                options: [
+                    "Produce antibodies",
+                    "Kill virus-infected and cancer cells",
+                    "Activate B cells",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Cytotoxic T cells specialize in killing virus-infected cells, cancer cells, and foreign graft cells."
+            },
+            {
+                question: "What is the role of regulatory T cells?",
+                options: [
+                    "Initiate immune responses",
+                    "Suppress immune responses",
+                    "Produce antibodies",
+                    "Kill infected cells"
+                ],
+                correct: 1,
+                explanation: "Regulatory T cells suppress immune responses to prevent excessive or autoimmune reactions."
+            },
+            {
+                question: "What is active immunity?",
+                options: [
+                    "Immunity acquired from another source",
+                    "Immunity developed after exposure to antigen",
+                    "Immunity present at birth",
+                    "Immunity that doesn't require immune cells"
+                ],
+                correct: 1,
+                explanation: "Active immunity develops after exposure to antigens, either naturally or through vaccination."
+            },
+            {
+                question: "What is passive immunity?",
+                options: [
+                    "Immunity acquired from another source",
+                    "Immunity developed after exposure to antigen",
+                    "Immunity present at birth",
+                    "Immunity that doesn't require antibodies"
+                ],
+                correct: 0,
+                explanation: "Passive immunity is acquired by receiving antibodies from another source, such as mother to fetus or through immune serum."
+            },
+            {
+                question: "What is a vaccine?",
+                options: [
+                    "A killed or weakened pathogen",
+                    "A type of antibiotic",
+                    "An immune cell",
+                    "An antibody"
+                ],
+                correct: 0,
+                explanation: "A vaccine contains killed or attenuated (weakened) pathogens that stimulate an immune response without causing disease."
+            },
+            {
+                question: "What is an autoimmune disease?",
+                options: [
+                    "Disease caused by foreign pathogens",
+                    "Immune system attacking body's own tissues",
+                    "Disease with no immune response",
+                    "Overactive immune response to harmless substances"
+                ],
+                correct: 1,
+                explanation: "Autoimmune diseases occur when the immune system attacks the body's own tissues."
+            },
+            {
+                question: "What is an allergy?",
+                options: [
+                    "Immune response to harmful pathogens",
+                    "Overreaction to harmless substances",
+                    "Lack of immune response",
+                    "Autoimmune condition"
+                ],
+                correct: 1,
+                explanation: "Allergies are hypersensitivities to harmless substances (allergens)."
+            },
+            {
+                question: "What is the function of mast cells in allergies?",
+                options: [
+                    "Produce antibodies",
+                    "Release histamine",
+                    "Kill allergens",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Mast cells release histamine and other chemicals that cause allergy symptoms."
+            },
+            {
+                question: "What is anaphylactic shock?",
+                options: [
+                    "Mild allergic reaction",
+                    "Severe systemic allergic reaction",
+                    "Autoimmune disease",
+                    "Type of immunodeficiency"
+                ],
+                correct: 1,
+                explanation: "Anaphylactic shock is a severe, life-threatening systemic allergic reaction."
+            },
+            {
+                question: "What is immunodeficiency?",
+                options: [
+                    "Overactive immune system",
+                    "Underactive immune system",
+                    "Normal immune function",
+                    "Autoimmune condition"
+                ],
+                correct: 1,
+                explanation: "Immunodeficiency involves impaired immune system function."
+            },
+            {
+                question: "What is SCID?",
+                options: [
+                    "Selective antibody deficiency",
+                    "Severe combined immunodeficiency",
+                    "Systemic chronic inflammatory disease",
+                    "Specific cell immunity disorder"
+                ],
+                correct: 1,
+                explanation: "SCID stands for Severe Combined Immunodeficiency Disease, a condition with deficits in both B and T cells."
+            },
+            {
+                question: "What is AIDS?",
+                options: [
+                    "Autoimmune inflammatory disease syndrome",
+                    "Acquired immune deficiency syndrome",
+                    "Acute infectious disease syndrome",
+                    "Antibody insufficiency disorder syndrome"
+                ],
+                correct: 1,
+                explanation: "AIDS stands for Acquired Immune Deficiency Syndrome, caused by HIV infection."
+            },
+            {
+                question: "What is the function of the inflammatory response?",
+                options: [
+                    "Prevent pathogen spread and promote healing",
+                    "Produce antibodies",
+                    "Kill infected cells",
+                    "Present antigens"
+                ],
+                correct: 0,
+                explanation: "The inflammatory response prevents spread of damaging agents, disposes of cell debris and pathogens, and sets the stage for repair."
+            },
+            {
+                question: "What is chemotaxis?",
+                options: [
+                    "Cell movement toward chemicals",
+                    "Chemical digestion of cells",
+                    "Cell division",
+                    "Chemical signaling between cells"
+                ],
+                correct: 0,
+                explanation: "Chemotaxis is the movement of cells toward a chemical gradient, such as inflammatory chemicals."
+            },
+            {
+                question: "What is diapedesis?",
+                options: [
+                    "Cell death",
+                    "Cell movement through blood vessel walls",
+                    "Cell division",
+                    "Cell differentiation"
+                ],
+                correct: 1,
+                explanation: "Diapedesis is the process where white blood cells squeeze through capillary walls to reach sites of infection."
+            },
+            {
+                question: "What is pus?",
+                options: [
+                    "Clear fluid from inflammation",
+                    "Mixture of dead cells and pathogens",
+                    "Blood clot",
+                    "Lymph fluid"
+                ],
+                correct: 1,
+                explanation: "Pus is a mixture of dead or dying neutrophils, broken-down tissue cells, and living and dead pathogens."
+            },
+            {
+                question: "What is an abscess?",
+                options: [
+                    "Mild inflammation",
+                    "Walled-off collection of pus",
+                    "Blood clot",
+                    "Lymph node swelling"
+                ],
+                correct: 1,
+                explanation: "An abscess is a sac of pus that becomes walled off in tissue."
+            },
+            {
+                question: "What is opsonization?",
+                options: [
+                    "Cell lysis",
+                    "Coating pathogens to make them easier to phagocytize",
+                    "Antibody production",
+                    "Antigen presentation"
+                ],
+                correct: 1,
+                explanation: "Opsonization is the coating of pathogens with antibodies or complement proteins to make them easier to phagocytize."
+            },
+            {
+                question: "What is the function of pyrogens?",
+                options: [
+                    "Cause fever",
+                    "Cause inflammation",
+                    "Kill bacteria",
+                    "Produce antibodies"
+                ],
+                correct: 0,
+                explanation: "Pyrogens are chemicals that reset the body's thermostat upward, causing fever."
+            },
+            {
+                question: "What is the benefit of fever?",
+                options: [
+                    "Inhibits bacterial multiplication",
+                    "Kills all pathogens directly",
+                    "Increases blood pressure",
+                    "Decreases metabolic rate"
+                ],
+                correct: 0,
+                explanation: "Fever inhibits bacterial multiplication and speeds up tissue repair processes."
+            },
+            {
+                question: "What is humoral immunity?",
+                options: [
+                    "Immunity mediated by antibodies",
+                    "Immunity mediated by cells",
+                    "Innate immunity",
+                    "Immunity in body fluids only"
+                ],
+                correct: 0,
+                explanation: "Humoral immunity is antibody-mediated immunity provided by antibodies in body fluids."
+            },
+            {
+                question: "What is cell-mediated immunity?",
+                options: [
+                    "Immunity mediated by antibodies",
+                    "Immunity mediated by cells",
+                    "Innate immunity",
+                    "Immunity in cells only"
+                ],
+                correct: 1,
+                explanation: "Cell-mediated immunity is provided by T cells that directly attack infected or cancerous cells."
+            },
+            {
+                question: "What is clonal selection?",
+                options: [
+                    "Selection of antigens by immune cells",
+                    "Proliferation of lymphocytes specific to an antigen",
+                    "Selection of immune cells for destruction",
+                    "Cloning of immune cells"
+                ],
+                correct: 1,
+                explanation: "Clonal selection is the process where lymphocytes that recognize a specific antigen proliferate to form a clone of identical cells."
+            },
+            {
+                question: "What are memory cells?",
+                options: [
+                    "Cells that produce antibodies",
+                    "Long-lived cells that provide immunological memory",
+                    "Cells that engulf pathogens",
+                    "Cells that present antigens"
+                ],
+                correct: 1,
+                explanation: "Memory cells are long-lived lymphocytes that provide immunological memory for faster response to subsequent exposures."
+            },
+            {
+                question: "What is the primary immune response?",
+                options: [
+                    "First exposure to an antigen",
+                    "Second exposure to an antigen",
+                    "Response to self-antigens",
+                    "Innate immune response"
+                ],
+                correct: 0,
+                explanation: "The primary immune response occurs upon first exposure to an antigen."
+            },
+            {
+                question: "What is the secondary immune response?",
+                options: [
+                    "First exposure to an antigen",
+                    "Second exposure to an antigen",
+                    "Response to self-antigens",
+                    "Innate immune response"
+                ],
+                correct: 1,
+                explanation: "The secondary immune response occurs upon subsequent exposures to an antigen and is faster and stronger."
+            },
+            {
+                question: "What is a hapten?",
+                options: [
+                    "Complete antigen",
+                    "Incomplete antigen that binds to body proteins",
+                    "Type of antibody",
+                    "Immune cell"
+                ],
+                correct: 1,
+                explanation: "A hapten is a small molecule that becomes antigenic only when bound to body proteins."
+            },
+            {
+                question: "What is the function of the variable region of an antibody?",
+                options: [
+                    "Binds to antigen",
+                    "Determines antibody class",
+                    "Activates complement",
+                    "Binds to cells"
+                ],
+                correct: 0,
+                explanation: "The variable region of an antibody forms the antigen-binding site."
+            },
+            {
+                question: "What is the function of the constant region of an antibody?",
+                options: [
+                    "Binds to antigen",
+                    "Determines antibody class and biological function",
+                    "Varies between antibodies",
+                    "Contains antigen-binding sites"
+                ],
+                correct: 1,
+                explanation: "The constant region determines the antibody class and how it will carry out its immune functions."
+            },
+            {
+                question: "Which antibody class can cross the placenta?",
+                options: [
+                    "IgA",
+                    "IgD",
+                    "IgE",
+                    "IgG"
+                ],
+                correct: 3,
+                explanation: "IgG is the only antibody class that can cross the placental barrier."
+            },
+            {
+                question: "Which antibody class is found in secretions like saliva and tears?",
+                options: [
+                    "IgA",
+                    "IgD",
+                    "IgE",
+                    "IgG"
+                ],
+                correct: 0,
+                explanation: "IgA is found in secretions like saliva, tears, and mucus."
+            },
+            {
+                question: "Which antibody class is involved in allergies?",
+                options: [
+                    "IgA",
+                    "IgD",
+                    "IgE",
+                    "IgG"
+                ],
+                correct: 2,
+                explanation: "IgE is involved in allergic reactions."
+            },
+            {
+                question: "Which antibody class is the first to be produced in a primary response?",
+                options: [
+                    "IgA",
+                    "IgD",
+                    "IgE",
+                    "IgM"
+                ],
+                correct: 3,
+                explanation: "IgM is the first antibody class released during a primary immune response."
+            },
+            {
+                question: "What is neutralization?",
+                options: [
+                    "Antibody binding to cellular antigens",
+                    "Antibody blocking harmful effects of toxins or viruses",
+                    "Antibody clumping cells together",
+                    "Antibody precipitating soluble antigens"
+                ],
+                correct: 1,
+                explanation: "Neutralization occurs when antibodies bind to toxins or viruses, blocking their harmful effects."
+            },
+            {
+                question: "What is agglutination?",
+                options: [
+                    "Antibody binding to cellular antigens",
+                    "Antibody blocking harmful effects of toxins or viruses",
+                    "Antibody clumping cells together",
+                    "Antibody precipitating soluble antigens"
+                ],
+                correct: 2,
+                explanation: "Agglutination is the clumping of cells by antibodies."
+            },
+            {
+                question: "What is precipitation?",
+                options: [
+                    "Antibody binding to cellular antigens",
+                    "Antibody blocking harmful effects of toxins or viruses",
+                    "Antibody clumping cells together",
+                    "Antibody cross-linking soluble antigens into large complexes"
+                ],
+                correct: 3,
+                explanation: "Precipitation occurs when antibodies cross-link soluble antigens into large, insoluble complexes."
+            },
+            {
+                question: "What is the 'double handshake' in T cell activation?",
+                options: [
+                    "T cell binding to two antigens",
+                    "T cell binding to antigen and self-protein on APC",
+                    "Two T cells binding together",
+                    "T cell binding to two different APCs"
+                ],
+                correct: 1,
+                explanation: "The 'double handshake' refers to T cells recognizing both the foreign antigen and self-proteins on antigen-presenting cells."
+            },
+            {
+                question: "How do cytotoxic T cells kill target cells?",
+                options: [
+                    "By producing antibodies",
+                    "By releasing perforins and granzymes",
+                    "By engulfing them",
+                    "By releasing histamine"
+                ],
+                correct: 1,
+                explanation: "Cytotoxic T cells release perforins that create pores in target cells and granzymes that enter and kill the cells."
+            },
+            {
+                question: "What are cytokines?",
+                options: [
+                    "Antibodies",
+                    "Chemical messengers of immune system",
+                    "Antigens",
+                    "Immune cells"
+                ],
+                correct: 1,
+                explanation: "Cytokines are chemical messengers that mediate immune responses."
+            },
+            {
+                question: "What is the function of interleukin-2?",
+                options: [
+                    "Suppresses immune responses",
+                    "Stimulates T and B cell proliferation",
+                    "Causes fever",
+                    "Kills infected cells"
+                ],
+                correct: 1,
+                explanation: "Interleukin-2 stimulates T cells and B cells to proliferate."
+            },
+            {
+                question: "What is the function of gamma interferon?",
+                options: [
+                    "Suppresses immune responses",
+                    "Activates macrophages and NK cells",
+                    "Causes allergy symptoms",
+                    "Produces antibodies"
+                ],
+                correct: 1,
+                explanation: "Gamma interferon activates macrophages and natural killer cells."
+            },
+            {
+                question: "What is tumor necrosis factor (TNF)?",
+                options: [
+                    "Hormone that causes tumor growth",
+                    "Cytokine that kills tumor cells",
+                    "Antibody against tumors",
+                    "Cell that kills tumors"
+                ],
+                correct: 1,
+                explanation: "Tumor necrosis factor is a cytokine that can kill tumor cells."
+            },
+            {
+                question: "What are the four types of tissue grafts?",
+                options: [
+                    "Auto, iso, allo, xeno",
+                    "Self, twin, other, animal",
+                    "Primary, secondary, tertiary, quaternary",
+                    "Solid, liquid, gas, plasma"
+                ],
+                correct: 0,
+                explanation: "The four types of tissue grafts are autografts, isografts, allografts, and xenografts."
+            },
+            {
+                question: "What is an autograft?",
+                options: [
+                    "Graft from identical twin",
+                    "Graft from same person",
+                    "Graft from another person",
+                    "Graft from different species"
+                ],
+                correct: 1,
+                explanation: "An autograft is tissue transplanted from one site to another in the same person."
+            },
+            {
+                question: "What is an isograft?",
+                options: [
+                    "Graft from identical twin",
+                    "Graft from same person",
+                    "Graft from another person",
+                    "Graft from different species"
+                ],
+                correct: 0,
+                explanation: "An isograft is tissue donated by a genetically identical person (identical twin)."
+            },
+            {
+                question: "What is an allograft?",
+                options: [
+                    "Graft from identical twin",
+                    "Graft from same person",
+                    "Graft from another person",
+                    "Graft from different species"
+                ],
+                correct: 2,
+                explanation: "An allograft is tissue taken from a person other than an identical twin."
+            },
+            {
+                question: "What is a xenograft?",
+                options: [
+                    "Graft from identical twin",
+                    "Graft from same person",
+                    "Graft from another person",
+                    "Graft from different species"
+                ],
+                correct: 3,
+                explanation: "A xenograft is tissue harvested from a different animal species."
+            },
+            {
+                question: "What is graft rejection?",
+                options: [
+                    "Recipient accepting graft",
+                    "Immune system attacking transplanted tissue",
+                    "Graft failing for non-immune reasons",
+                    "Graft attacking recipient"
+                ],
+                correct: 1,
+                explanation: "Graft rejection occurs when the recipient's immune system attacks the transplanted tissue."
+            },
+            {
+                question: "What is immunosuppressive therapy?",
+                options: [
+                    "Treatment to enhance immune responses",
+                    "Treatment to suppress immune responses",
+                    "Treatment with antibodies",
+                    "Treatment with vaccines"
+                ],
+                correct: 1,
+                explanation: "Immunosuppressive therapy uses drugs to suppress the immune system, such as after organ transplants."
+            },
+            {
+                question: "What is rheumatoid arthritis?",
+                options: [
+                    "Allergic condition",
+                    "Autoimmune disease that destroys joints",
+                    "Immunodeficiency",
+                    "Infectious disease"
+                ],
+                correct: 1,
+                explanation: "Rheumatoid arthritis is an autoimmune disease that systematically destroys joints."
+            },
+            {
+                question: "What is multiple sclerosis?",
+                options: [
+                    "Allergic condition",
+                    "Autoimmune disease that destroys myelin sheaths",
+                    "Immunodeficiency",
+                    "Infectious disease"
+                ],
+                correct: 1,
+                explanation: "Multiple sclerosis is an autoimmune disease that destroys the white matter (myelin sheaths) of the brain and spinal cord."
+            },
+            {
+                question: "What is systemic lupus erythematosus (SLE)?",
+                options: [
+                    "Allergic condition",
+                    "Systemic autoimmune disease",
+                    "Immunodeficiency",
+                    "Infectious disease"
+                ],
+                correct: 1,
+                explanation: "SLE is a systemic autoimmune disease that particularly affects kidneys, heart, lungs, and skin."
+            },
+            {
+                question: "What is immediate hypersensitivity?",
+                options: [
+                    "Slow allergic reaction",
+                    "Rapid allergic reaction mediated by IgE",
+                    "Autoimmune reaction",
+                    "Graft rejection"
+                ],
+                correct: 1,
+                explanation: "Immediate hypersensitivity is a rapid allergic reaction mediated by IgE antibodies and mast cells."
+            },
+            {
+                question: "What is delayed hypersensitivity?",
+                options: [
+                    "Slow allergic reaction mediated by T cells",
+                    "Rapid allergic reaction",
+                    "Autoimmune reaction",
+                    "Graft rejection"
+                ],
+                correct: 0,
+                explanation: "Delayed hypersensitivity is a slow allergic reaction mediated by T cells."
+            },
+            {
+                question: "What is the Mantoux test?",
+                options: [
+                    "Test for allergies",
+                    "Skin test for tuberculosis",
+                    "Test for autoimmune disease",
+                    "Test for immunodeficiency"
+                ],
+                correct: 1,
+                explanation: "The Mantoux test is a skin test for tuberculosis that depends on delayed hypersensitivity."
+            },
+            {
+                question: "What is the mechanism of anaphylactic shock?",
+                options: [
+                    "T cell activation",
+                    "Massive histamine release",
+                    "Antibody deficiency",
+                    "Autoantibody production"
+                ],
+                correct: 1,
+                explanation: "Anaphylactic shock involves massive histamine release causing vasodilation and bronchoconstriction."
+            },
+            {
+                question: "What is the treatment for anaphylactic shock?",
+                options: [
+                    "Antihistamines",
+                    "Epinephrine",
+                    "Antibiotics",
+                    "Vaccines"
+                ],
+                correct: 1,
+                explanation: "Epinephrine is the drug of choice for anaphylactic shock as it counteracts histamine effects."
+            },
+            {
+                question: "What is the function of antihistamines?",
+                options: [
+                    "Block histamine receptors",
+                    "Produce histamine",
+                    "Kill mast cells",
+                    "Stimulate antibody production"
+                ],
+                correct: 0,
+                explanation: "Antihistamines block histamine receptors to reduce allergy symptoms."
+            },
+            {
+                question: "What is the role of corticosteroids in allergy treatment?",
+                options: [
+                    "Block histamine",
+                    "Reduce inflammation",
+                    "Kill pathogens",
+                    "Stimulate immune system"
+                ],
+                correct: 1,
+                explanation: "Corticosteroids reduce inflammation in allergic reactions."
+            },
+            {
+                question: "What is the most common cause of death in immunosuppressed patients?",
+                options: [
+                    "Graft rejection",
+                    "Autoimmune disease",
+                    "Infections",
+                    "Allergic reactions"
+                ],
+                correct: 2,
+                explanation: "Infections are the most common cause of death in immunosuppressed patients."
+            },
+            {
+                question: "What is the function of the skin in innate immunity?",
+                options: [
+                    "Produces antibodies",
+                    "Physical barrier to pathogens",
+                    "Kills pathogens",
+                    "Presents antigens"
+                ],
+                correct: 1,
+                explanation: "Intact skin forms a mechanical barrier that prevents entry of pathogens."
+            },
+            {
+                question: "What is the acid mantle?",
+                options: [
+                    "Alkaline layer on skin",
+                    "Acidic layer on skin that inhibits bacterial growth",
+                    "Neutral pH layer",
+                    "Fatty layer on skin"
+                ],
+                correct: 1,
+                explanation: "The acid mantle is the acidic surface of the skin that inhibits bacterial growth."
+            },
+            {
+                question: "What is the function of lysozyme?",
+                options: [
+                    "Digests food",
+                    "Destroys bacteria",
+                    "Produces mucus",
+                    "Kills viruses"
+                ],
+                correct: 1,
+                explanation: "Lysozyme is an enzyme in tears and saliva that destroys bacteria."
+            },
+            {
+                question: "What is the function of mucus in innate immunity?",
+                options: [
+                    "Produces antibodies",
+                    "Traps microorganisms",
+                    "Kills pathogens",
+                    "Presents antigens"
+                ],
+                correct: 1,
+                explanation: "Mucus traps microorganisms in respiratory and digestive tracts."
+            },
+            {
+                question: "What is the function of cilia in innate immunity?",
+                options: [
+                    "Produce mucus",
+                    "Trap pathogens",
+                    "Propel debris-laden mucus away",
+                    "Kill bacteria"
+                ],
+                correct: 2,
+                explanation: "Cilia propel debris-laden mucus away from lower respiratory passages."
+            },
+            {
+                question: "What is the function of gastric juice in innate immunity?",
+                options: [
+                    "Produces antibodies",
+                    "Destroys pathogens in stomach",
+                    "Traps pathogens",
+                    "Presents antigens"
+                ],
+                correct: 1,
+                explanation: "Gastric juice contains hydrochloric acid and enzymes that destroy pathogens in the stomach."
+            },
+            {
+                question: "What is the function of natural killer cells?",
+                options: [
+                    "Produce antibodies",
+                    "Kill virus-infected and cancer cells",
+                    "Engulf pathogens",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Natural killer cells kill virus-infected cells, cancer cells, and some other nonspecific targets."
+            },
+            {
+                question: "What is the function of phagocytes?",
+                options: [
+                    "Produce antibodies",
+                    "Engulf and destroy pathogens",
+                    "Kill infected cells",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Phagocytes engulf and destroy pathogens that breach surface barriers."
+            },
+            {
+                question: "What is the function of the inflammatory response?",
+                options: [
+                    "Prevent spread of pathogens and promote healing",
+                    "Produce antibodies",
+                    "Kill all pathogens",
+                    "Create memory cells"
+                ],
+                correct: 0,
+                explanation: "The inflammatory response prevents spread of injurious agents, disposes of pathogens, and promotes tissue repair."
+            },
+            {
+                question: "What is the function of complement proteins?",
+                options: [
+                    "Produce antibodies",
+                    "Lyse microorganisms and enhance phagocytosis",
+                    "Kill infected cells",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Complement proteins lyse microorganisms, enhance phagocytosis, and intensify inflammation."
+            },
+            {
+                question: "What is the function of interferons?",
+                options: [
+                    "Produce antibodies",
+                    "Protect cells from viral takeover",
+                    "Kill bacteria",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Interferons protect uninfected cells from viral takeover and mobilize the immune system."
+            },
+            {
+                question: "What is the function of fever in innate immunity?",
+                options: [
+                    "Kill all pathogens",
+                    "Inhibit bacterial multiplication and enhance repair",
+                    "Produce antibodies",
+                    "Activate lymphocytes"
+                ],
+                correct: 1,
+                explanation: "Fever inhibits multiplication of bacteria and enhances body repair processes."
+            },
+            {
+                question: "What is the first line of defense?",
+                options: [
+                    "Inflammatory response",
+                    "Surface membrane barriers",
+                    "Immune cells",
+                    "Antibodies"
+                ],
+                correct: 1,
+                explanation: "The first line of defense consists of surface membrane barriers like skin and mucous membranes."
+            },
+            {
+                question: "What is the second line of defense?",
+                options: [
+                    "Surface membrane barriers",
+                    "Cellular and chemical defenses",
+                    "Antibodies",
+                    "Memory cells"
+                ],
+                correct: 1,
+                explanation: "The second line of defense consists of cellular and chemical defenses like phagocytes and inflammation."
+            },
+            {
+                question: "What is the third line of defense?",
+                options: [
+                    "Surface membrane barriers",
+                    "Cellular and chemical defenses",
+                    "Adaptive immune response",
+                    "Inflammatory response"
+                ],
+                correct: 2,
+                explanation: "The third line of defense is the adaptive immune response involving lymphocytes and antibodies."
+            },
+            {
+                question: "What are the characteristics of adaptive immunity?",
+                options: [
+                    "Rapid, nonspecific, no memory",
+                    "Slow, specific, has memory",
+                    "Immediate, general, temporary",
+                    "Constant, broad, innate"
+                ],
+                correct: 1,
+                explanation: "Adaptive immunity is specific, has memory, but is slower to respond than innate immunity."
+            },
+            {
+                question: "What are the characteristics of innate immunity?",
+                options: [
+                    "Slow, specific, has memory",
+                    "Rapid, nonspecific, no memory",
+                    "Variable, targeted, memory",
+                    "Acquired, specific, memory"
+                ],
+                correct: 1,
+                explanation: "Innate immunity is rapid, nonspecific, and has no memory."
+            },
+            {
+                question: "What is the difference between active and passive immunity?",
+                options: [
+                    "Active is permanent, passive is temporary",
+                    "Active uses antibodies, passive uses cells",
+                    "Active is innate, passive is adaptive",
+                    "Active is faster, passive is slower"
+                ],
+                correct: 0,
+                explanation: "Active immunity is long-lasting (often permanent) while passive immunity is temporary."
+            },
+            {
+                question: "What is the difference between natural and artificial immunity?",
+                options: [
+                    "Natural is from exposure, artificial is from medical intervention",
+                    "Natural is stronger, artificial is weaker",
+                    "Natural uses cells, artificial uses antibodies",
+                    "Natural is adaptive, artificial is innate"
+                ],
+                correct: 0,
+                explanation: "Natural immunity comes from actual infection or maternal transfer, while artificial immunity comes from vaccines or immune serum."
+            },
+            {
+                question: "What is herd immunity?",
+                options: [
+                    "Immunity in animal populations",
+                    "Protection of unvaccinated individuals when most population is immune",
+                    "Immunity to herd animals",
+                    "Group vaccination programs"
+                ],
+                correct: 1,
+                explanation: "Herd immunity occurs when a high percentage of the population is immune, reducing disease spread and protecting unvaccinated individuals."
+            },
+            {
+                question: "What is immunological tolerance?",
+                options: [
+                    "Ability to tolerate pathogens",
+                    "Lack of response to self-antigens",
+                    "Tolerance to medications",
+                    "Ability to withstand infection"
+                ],
+                correct: 1,
+                explanation: "Immunological tolerance is the immune system's ability to not attack self-antigens."
+            },
+            {
+                question: "What causes autoimmune diseases?",
+                options: [
+                    "Loss of self-tolerance",
+                    "Overactive immune response to pathogens",
+                    "Immunodeficiency",
+                    "Allergies"
+                ],
+                correct: 0,
+                explanation: "Autoimmune diseases result from loss of self-tolerance, where the immune system attacks self-tissues."
+            },
+            {
+                question: "What is the hygiene hypothesis?",
+                options: [
+                    "Cleanliness prevents all diseases",
+                    "Lack of early childhood exposure to microbes increases allergy risk",
+                    "Hygiene has no effect on immunity",
+                    "Clean environments enhance immune function"
+                ],
+                correct: 1,
+                explanation: "The hygiene hypothesis suggests that lack of early childhood exposure to microbes increases the risk of allergies and autoimmune diseases."
+            },
+            {
+                question: "What is the function of toll-like receptors (TLRs)?",
+                options: [
+                    "Produce antibodies",
+                    "Recognize pathogen-associated molecular patterns",
+                    "Kill infected cells",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Toll-like receptors recognize pathogen-associated molecular patterns (PAMPs) and initiate immune responses."
+            },
+            {
+                question: "What are pathogen-associated molecular patterns (PAMPs)?",
+                options: [
+                    "Antibodies against pathogens",
+                    "Molecules common to groups of pathogens",
+                    "Pathogen antigens",
+                    "Immune cell receptors"
+                ],
+                correct: 1,
+                explanation: "PAMPs are molecules common to groups of pathogens that are recognized by pattern recognition receptors."
+            },
+            {
+                question: "What are pattern recognition receptors (PRRs)?",
+                options: [
+                    "Antibodies",
+                    "Receptors that recognize PAMPs",
+                    "T cell receptors",
+                    "B cell receptors"
+                ],
+                correct: 1,
+                explanation: "Pattern recognition receptors recognize pathogen-associated molecular patterns."
+            },
+            {
+                question: "What is the function of the major histocompatibility complex (MHC)?",
+                options: [
+                    "Produce antibodies",
+                    "Present antigens to T cells",
+                    "Kill infected cells",
+                    "Engulf pathogens"
+                ],
+                correct: 1,
+                explanation: "MHC molecules present antigens to T cells for recognition."
+            },
+            {
+                question: "What is the difference between MHC class I and II?",
+                options: [
+                    "Class I presents to CD8 T cells, class II presents to CD4 T cells",
+                    "Class I presents to CD4 T cells, class II presents to CD8 T cells",
+                    "Class I is on all cells, class II is only on immune cells",
+                    "Both A and C"
+                ],
+                correct: 3,
+                explanation: "MHC class I presents to CD8 T cells and is on all nucleated cells, while MHC class II presents to CD4 T cells and is mainly on immune cells."
+            },
+            {
+                question: "What is the function of CD4 T cells?",
+                options: [
+                    "Kill infected cells",
+                    "Help other immune cells",
+                    "Produce antibodies",
+                    "Engulf pathogens"
+                ],
+                correct: 1,
+                explanation: "CD4 T cells are helper T cells that activate other immune cells."
+            },
+            {
+                question: "What is the function of CD8 T cells?",
+                options: [
+                    "Kill infected cells",
+                    "Help other immune cells",
+                    "Produce antibodies",
+                    "Engulf pathogens"
+                ],
+                correct: 0,
+                explanation: "CD8 T cells are cytotoxic T cells that kill infected or cancerous cells."
+            },
+            {
+                question: "What is the function of B cell receptors?",
+                options: [
+                    "Recognize antigens",
+                    "Kill infected cells",
+                    "Present antigens",
+                    "Produce cytokines"
+                ],
+                correct: 0,
+                explanation: "B cell receptors recognize and bind to specific antigens."
+            },
+            {
+                question: "What is the function of T cell receptors?",
+                options: [
+                    "Recognize antigens presented by MHC",
+                    "Recognize free antigens",
+                    "Produce antibodies",
+                    "Kill infected cells"
+                ],
+                correct: 0,
+                explanation: "T cell receptors recognize antigens presented by MHC molecules on other cells."
+            },
+            {
+                question: "What is somatic hypermutation?",
+                options: [
+                    "Mutation in somatic cells causing cancer",
+                    "Mutation in antibody genes to improve affinity",
+                    "Mutation in T cell receptors",
+                    "Mutation in MHC genes"
+                ],
+                correct: 1,
+                explanation: "Somatic hypermutation introduces mutations in antibody genes to improve antigen binding affinity."
+            },
+            {
+                question: "What is class switching?",
+                options: [
+                    "Changing antibody class while maintaining specificity",
+                    "Changing antigen specificity",
+                    "Switching from innate to adaptive immunity",
+                    "Switching from cellular to humoral immunity"
+                ],
+                correct: 0,
+                explanation: "Class switching allows B cells to change the class of antibody they produce while maintaining the same antigen specificity."
+            },
+            {
+                question: "What is affinity maturation?",
+                options: [
+                    "Increase in antibody affinity over time",
+                    "Maturation of immune cells",
+                    "Development of immunological memory",
+                    "Increase in antigen concentration"
+                ],
+                correct: 0,
+                explanation: "Affinity maturation is the process where antibody affinity increases during an immune response."
+            },
+            {
+                question: "What is a monoclonal antibody?",
+                options: [
+                    "Antibody from multiple B cell clones",
+                    "Antibody from a single B cell clone",
+                    "Natural antibody",
+                    "Antibody against multiple antigens"
+                ],
+                correct: 1,
+                explanation: "Monoclonal antibodies are derived from a single B cell clone and have identical specificity."
+            },
+            {
+                question: "What are the clinical uses of monoclonal antibodies?",
+                options: [
+                    "Cancer treatment, diagnostics, research",
+                    "Vaccines, antibiotics, antivirals",
+                    "Blood transfusions, organ transplants",
+                    "Surgery, physical therapy"
+                ],
+                correct: 0,
+                explanation: "Monoclonal antibodies are used in cancer treatment, diagnostic tests, and research."
+            },
+            {
+                question: "What is immunosenescence?",
+                options: [
+                    "Immune system development",
+                    "Age-related decline in immune function",
+                    "Immune system overactivity",
+                    "Autoimmune disease"
+                ],
+                correct: 1,
+                explanation: "Immunosenescence is the age-related decline in immune function."
+            },
+            {
+                question: "What is the function of the complement system?",
+                options: [
+                    "Produce antibodies",
+                    "Enhance innate and adaptive immunity",
+                    "Kill infected cells",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "The complement system enhances both innate defenses (through opsonization and inflammation) and adaptive immunity."
+            },
+            {
+                question: "What is the membrane attack complex (MAC)?",
+                options: [
+                    "Group of antibodies",
+                    "Complement proteins that form pores in cell membranes",
+                    "T cell receptors",
+                    "B cell clusters"
+                ],
+                correct: 1,
+                explanation: "The membrane attack complex is formed by complement proteins and creates pores in foreign cell membranes."
+            },
+            {
+                question: "What is chemotaxis in immunity?",
+                options: [
+                    "Cell movement toward chemical gradients",
+                    "Chemical digestion of pathogens",
+                    "Cell division in response to chemicals",
+                    "Chemical communication between cells"
+                ],
+                correct: 0,
+                explanation: "Chemotaxis is the movement of immune cells toward chemical gradients, such as inflammatory mediators."
+            },
+            {
+                question: "What is diapedesis in immunity?",
+                options: [
+                    "Cell death",
+                    "Cell movement through blood vessel walls",
+                    "Cell division",
+                    "Cell differentiation"
+                ],
+                correct: 1,
+                explanation: "Diapedesis is the process where white blood cells squeeze through blood vessel walls to reach sites of infection."
+            },
+            {
+                question: "What is margination?",
+                options: [
+                    "Cell death at margins",
+                    "White blood cells clinging to vessel walls",
+                    "Formation of blood clots",
+                    "Tissue repair at wound margins"
+                ],
+                correct: 1,
+                explanation: "Margination is the process where white blood cells cling to the capillary walls during inflammation."
+            },
+            {
+                question: "What is the function of histamine?",
+                options: [
+                    "Kill pathogens",
+                    "Cause vasodilation and increased permeability",
+                    "Produce antibodies",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Histamine causes blood vessels to dilate and become more permeable during inflammation."
+            },
+            {
+                question: "What is the function of kinins?",
+                options: [
+                    "Kill pathogens",
+                    "Cause vasodilation and pain",
+                    "Produce antibodies",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Kinins are inflammatory chemicals that cause vasodilation and activate pain receptors."
+            },
+            {
+                question: "What is the function of prostaglandins?",
+                options: [
+                    "Kill pathogens",
+                    "Intensify histamine and kinin effects",
+                    "Produce antibodies",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Prostaglandins intensify the effects of histamine and kinins in inflammation."
+            },
+            {
+                question: "What is the function of leukotrienes?",
+                options: [
+                    "Kill pathogens",
+                    "Attract white blood cells and increase permeability",
+                    "Produce antibodies",
+                    "Present antigens"
+                ],
+                correct: 1,
+                explanation: "Leukotrienes attract white blood cells and increase blood vessel permeability."
+            },
+            {
+                question: "What is the function of the coagulation system in inflammation?",
+                options: [
+                    "Prevent blood loss",
+                    "Wall off infected area and prevent pathogen spread",
+                    "Kill pathogens",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "The coagulation system helps wall off the infected area to prevent pathogen spread."
+            },
+            {
+                question: "What is the function of the fibrinolytic system?",
+                options: [
+                    "Form blood clots",
+                    "Dissolve blood clots after healing",
+                    "Kill pathogens",
+                    "Produce antibodies"
+                ],
+                correct: 1,
+                explanation: "The fibrinolytic system dissolves blood clots after tissue repair is complete."
+            }
+        ];
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            // Set up tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all quiz sections
+                    document.querySelectorAll('.quiz-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the targeted quiz section
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Initialize lymphatic quiz with first 10 questions (for performance)
+            const lymphaticContainer = document.getElementById('lymphatic-questions');
+            lymphaticQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="lymphatic-q${index}-opt${i}" name="lymphatic-q${index}" value="${i}">
+                                <label for="lymphatic-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="lymphatic-feedback-${index}"></div>
+                `;
+                lymphaticContainer.appendChild(questionDiv);
+            });
+            
+            // Initialize defenses quiz with first 10 questions (for performance)
+            const defensesContainer = document.getElementById('defenses-questions');
+            defensesQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="defenses-q${index}-opt${i}" name="defenses-q${index}" value="${i}">
+                                <label for="defenses-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="defenses-feedback-${index}"></div>
+                `;
+                defensesContainer.appendChild(questionDiv);
+            });
+            
+            // Set up submit buttons
+            document.getElementById('submit-lymphatic').addEventListener('click', function() {
+                calculateScore('lymphatic', lymphaticQuestions.slice(0, 10));
+            });
+            
+            document.getElementById('submit-defenses').addEventListener('click', function() {
+                calculateScore('defenses', defensesQuestions.slice(0, 10));
+            });
+            
+            // Set up navigation
+            setupNavigation('lymphatic');
+            setupNavigation('defenses');
+            
+            // Set up immediate feedback for each question
+            setupImmediateFeedback('lymphatic', lymphaticQuestions.slice(0, 10));
+            setupImmediateFeedback('defenses', defensesQuestions.slice(0, 10));
+        }
+        
+        function setupNavigation(quizType) {
+            const questions = document.querySelectorAll(`#${quizType}-questions .question`);
+            let currentQuestion = 0;
+            
+            // Show first question initially
+            if (questions.length > 0) {
+                questions[0].style.display = 'block';
+            }
+            
+            // Hide all but the first question
+            for (let i = 1; i < questions.length; i++) {
+                questions[i].style.display = 'none';
+            }
+            
+            // Next button
+            document.getElementById(`next-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion < questions.length - 1) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion++;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`prev-${quizType}`).disabled = false;
+                    if (currentQuestion === questions.length - 1) {
+                        this.disabled = true;
+                    }
+                }
+            });
+            
+            // Previous button
+            document.getElementById(`prev-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion--;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`next-${quizType}`).disabled = false;
+                    if (currentQuestion === 0) {
+                        this.disabled = true;
+                    }
+                }
+            });
+        }
+        
+        function setupImmediateFeedback(quizType, questions) {
+            questions.forEach((q, index) => {
+                const options = document.querySelectorAll(`input[name="${quizType}-q${index}"]`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                options.forEach(option => {
+                    option.addEventListener('change', function() {
+                        const selectedValue = parseInt(this.value);
+                        
+                        if (selectedValue === q.correct) {
+                            feedbackElement.innerHTML = `
+                                <div class="correct">Correct! ${q.explanation}</div>
+                            `;
+                            feedbackElement.className = "feedback correct";
+                        } else {
+                            feedbackElement.innerHTML = `
+                                <div class="incorrect">Incorrect. ${q.explanation}</div>
+                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                            `;
+                            feedbackElement.className = "feedback incorrect";
+                        }
+                        
+                        feedbackElement.style.display = 'block';
+                    });
+                });
+            });
+        }
+        
+        function calculateScore(quizType, questions) {
+            let score = 0;
+            const totalQuestions = questions.length;
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="${quizType}-q${index}"]:checked`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                if (selectedOption) {
+                    const selectedValue = parseInt(selectedOption.value);
+                    
+                    if (selectedValue === q.correct) {
+                        score++;
+                        feedbackElement.innerHTML = `
+                            <div class="correct">Correct! ${q.explanation}</div>
+                        `;
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.innerHTML = `
+                            <div class="incorrect">Incorrect. ${q.explanation}</div>
+                            <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                        `;
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                } else {
+                    feedbackElement.innerHTML = `
+                        <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
+                        <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                    `;
+                    feedbackElement.className = "feedback incorrect";
+                }
+                
+                feedbackElement.style.display = 'block';
+            });
+            
+            const percentage = (score / totalQuestions) * 100;
+            const resultsElement = document.getElementById(`${quizType}-results`);
+            resultsElement.innerHTML = `
+                <div class="score">Your Score: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</div>
+                <p>${getPerformanceMessage(percentage)}</p>
+            `;
+            resultsElement.style.display = 'block';
+            
+            // Scroll to results
+            resultsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getPerformanceMessage(percentage) {
+            if (percentage >= 90) return "Excellent work! You have a strong understanding of this material.";
+            if (percentage >= 80) return "Good job! You have a solid grasp of most concepts.";
+            if (percentage >= 70) return "Not bad! Review the incorrect answers to improve your understanding.";
+            if (percentage >= 60) return "You passed, but there's room for improvement. Review the material carefully.";
+            return "You need to study this material more thoroughly. Review the explanations for each question.";
+        }
+        
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>
