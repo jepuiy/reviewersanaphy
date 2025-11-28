@@ -1457,7 +1457,7 @@
             
             // Initialize kidney quiz with first 10 questions (for performance)
             const kidneyContainer = document.getElementById('kidney-questions');
-            kidneyQuestions.slice(0, 10).forEach((q, index) => {
+            kidneyQuestions.slice(0, 50).forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
                 questionDiv.innerHTML = `
@@ -1478,7 +1478,7 @@
             
             // Initialize urine quiz with first 10 questions (for performance)
             const urineContainer = document.getElementById('urine-questions');
-            urineQuestions.slice(0, 10).forEach((q, index) => {
+            urineQuestions.slice(0, 50).forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
                 questionDiv.innerHTML = `
@@ -1499,11 +1499,11 @@
             
             // Set up submit buttons
             document.getElementById('submit-kidney').addEventListener('click', function() {
-                calculateScore('kidney', kidneyQuestions.slice(0, 10));
+                calculateScore('kidney', kidneyQuestions.slice(0, 50));
             });
             
             document.getElementById('submit-urine').addEventListener('click', function() {
-                calculateScore('urine', urineQuestions.slice(0, 10));
+                calculateScore('urine', urineQuestions.slice(0, 50));
             });
             
             // Set up navigation
@@ -1511,8 +1511,8 @@
             setupNavigation('urine');
             
             // Set up immediate feedback for each question
-            setupImmediateFeedback('kidney', kidneyQuestions.slice(0, 10));
-            setupImmediateFeedback('urine', urineQuestions.slice(0, 10));
+            setupImmediateFeedback('kidney', kidneyQuestions.slice(0, 50));
+            setupImmediateFeedback('urine', urineQuestions.slice(0, 50));
         }
         
         function setupNavigation(quizType) {
