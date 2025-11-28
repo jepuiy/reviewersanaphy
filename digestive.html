@@ -1413,7 +1413,7 @@
             
             // Initialize anatomy quiz with first 10 questions (for performance)
             const anatomyContainer = document.getElementById('anatomy-questions');
-            anatomyQuestions.slice(0, 10).forEach((q, index) => {
+            anatomyQuestions.slice(0, 100).forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
                 questionDiv.innerHTML = `
@@ -1434,7 +1434,7 @@
             
             // Initialize processes quiz with first 10 questions (for performance)
             const processesContainer = document.getElementById('processes-questions');
-            processesQuestions.slice(0, 10).forEach((q, index) => {
+            processesQuestions.slice(0, 100).forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
                 questionDiv.innerHTML = `
@@ -1455,11 +1455,11 @@
             
             // Set up submit buttons
             document.getElementById('submit-anatomy').addEventListener('click', function() {
-                calculateScore('anatomy', anatomyQuestions.slice(0, 10));
+                calculateScore('anatomy', anatomyQuestions.slice(0, 100));
             });
             
             document.getElementById('submit-processes').addEventListener('click', function() {
-                calculateScore('processes', processesQuestions.slice(0, 10));
+                calculateScore('processes', processesQuestions.slice(0, 100));
             });
             
             // Set up navigation
@@ -1467,8 +1467,8 @@
             setupNavigation('processes');
             
             // Set up immediate feedback for each question
-            setupImmediateFeedback('anatomy', anatomyQuestions.slice(0, 10));
-            setupImmediateFeedback('processes', processesQuestions.slice(0, 10));
+            setupImmediateFeedback('anatomy', anatomyQuestions.slice(0, 100));
+            setupImmediateFeedback('processes', processesQuestions.slice(0, 100));
         }
         
         function setupNavigation(quizType) {
