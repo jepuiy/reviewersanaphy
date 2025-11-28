@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digestive System Quiz</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #4a90e2;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --correct-color: #4CAF50;
+            --incorrect-color: #f44336;
+            --highlight-color: #FFD700;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .verse {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        .personal-note {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(74, 144, 226, 0.2);
+        }
+        
+        .quiz-section {
+            display: none;
+        }
+        
+        .quiz-section.active {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-left: 3px solid var(--correct-color);
+        }
+        
+        .incorrect {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-left: 3px solid var(--incorrect-color);
+        }
+        
+        .correct-answer {
+            font-weight: bold;
+            color: var(--highlight-color);
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+        
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .nav-btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Digestive System Quiz</h1>
+        <div class="verse">"Cast all your anxiety on him because he cares for you, 1 Peter 5:7"</div>
+        <div class="personal-note">for leonah only :D</div>
+    </header>
+    
+    <div class="quiz-container">
+        <div class="tabs">
+            <button class="tab active" data-target="anatomy-quiz">Anatomy & Physiology (50 Questions)</button>
+            <button class="tab" data-target="processes-quiz">Digestive Processes & Functions (50 Questions)</button>
+        </div>
+        
+        <div id="anatomy-quiz" class="quiz-section active">
+            <!-- Anatomy & Physiology Quiz Content -->
+            <div id="anatomy-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-anatomy" class="nav-btn" disabled>Previous</button>
+                <button id="next-anatomy" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-anatomy" class="submit-btn">Submit Anatomy & Physiology Quiz</button>
+            
+            <div id="anatomy-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+        
+        <div id="processes-quiz" class="quiz-section">
+            <!-- Digestive Processes & Functions Quiz Content -->
+            <div id="processes-questions">
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-processes" class="nav-btn" disabled>Previous</button>
+                <button id="next-processes" class="nav-btn">Next</button>
+            </div>
+            
+            <button id="submit-processes" class="submit-btn">Submit Digestive Processes Quiz</button>
+            
+            <div id="processes-results" class="results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data - 50 questions for each section
+        const anatomyQuestions = [
+            {
+                question: "Which of the following is NOT part of the alimentary canal?",
+                options: [
+                    "Esophagus",
+                    "Stomach",
+                    "Liver",
+                    "Small intestine"
+                ],
+                correct: 2,
+                explanation: "The liver is an accessory digestive organ, not part of the alimentary canal itself."
+            },
+            {
+                question: "What is the primary function of the digestive system?",
+                options: [
+                    "To circulate blood throughout the body",
+                    "To break down food into absorbable nutrients",
+                    "To produce hormones for growth",
+                    "To filter waste from the blood"
+                ],
+                correct: 1,
+                explanation: "The digestive system breaks down ingested food into particles small enough to be absorbed into the blood."
+            },
+            {
+                question: "Which structure separates the nasal and oral cavities?",
+                options: [
+                    "Uvula",
+                    "Epiglottis",
+                    "Palate",
+                    "Tongue"
+                ],
+                correct: 2,
+                explanation: "The palate separates the nasal cavity from the oral cavity."
+            },
+            {
+                question: "What is the function of the uvula?",
+                options: [
+                    "To produce sound",
+                    "To prevent food from entering the nasal cavity",
+                    "To taste food",
+                    "To secrete saliva"
+                ],
+                correct: 1,
+                explanation: "The uvula helps prevent food and liquid from entering the nasal cavity during swallowing."
+            },
+            {
+                question: "Which tonsils are located at the base of the tongue?",
+                options: [
+                    "Palatine tonsils",
+                    "Lingual tonsils",
+                    "Pharyngeal tonsils",
+                    "Adenoids"
+                ],
+                correct: 1,
+                explanation: "The lingual tonsil covers the base of the tongue."
+            },
+            {
+                question: "What is the muscular tube that connects the pharynx to the stomach?",
+                options: [
+                    "Trachea",
+                    "Esophagus",
+                    "Duodenum",
+                    "Ileum"
+                ],
+                correct: 1,
+                explanation: "The esophagus runs from the pharynx through the diaphragm to the stomach."
+            },
+            {
+                question: "Which layer of the alimentary canal contains blood vessels and nerve endings?",
+                options: [
+                    "Mucosa",
+                    "Submucosa",
+                    "Muscularis externa",
+                    "Serosa"
+                ],
+                correct: 1,
+                explanation: "The submucosa is a soft connective tissue layer containing blood vessels, nerve endings, and lymphatic vessels."
+            },
+            {
+                question: "What is the outermost layer of the alimentary canal wall?",
+                options: [
+                    "Mucosa",
+                    "Submucosa",
+                    "Muscularis externa",
+                    "Serosa"
+                ],
+                correct: 3,
+                explanation: "The serosa is the outermost layer of the wall, consisting of the visceral peritoneum."
+            },
+            {
+                question: "Which part of the stomach connects to the esophagus?",
+                options: [
+                    "Fundus",
+                    "Body",
+                    "Cardia",
+                    "Pylorus"
+                ],
+                correct: 2,
+                explanation: "The cardia surrounds the cardioesophageal sphincter, through which food enters the stomach from the esophagus."
+            },
+            {
+                question: "What are the folds in the stomach mucosa called?",
+                options: [
+                    "Villi",
+                    "Microvilli",
+                    "Rugae",
+                    "Haustra"
+                ],
+                correct: 2,
+                explanation: "When the stomach is empty, its mucosa is thrown into large folds called rugae."
+            },
+            {
+                question: "Which cells in the stomach produce hydrochloric acid?",
+                options: [
+                    "Chief cells",
+                    "Parietal cells",
+                    "Mucous neck cells",
+                    "Enteroendocrine cells"
+                ],
+                correct: 1,
+                explanation: "Parietal cells produce hydrochloric acid, which makes the stomach content acidic."
+            },
+            {
+                question: "What do chief cells in the stomach produce?",
+                options: [
+                    "Hydrochloric acid",
+                    "Mucus",
+                    "Pepsinogen",
+                    "Gastrin"
+                ],
+                correct: 2,
+                explanation: "Chief cells produce protein-digesting enzymes, mostly pepsinogens."
+            },
+            {
+                question: "Which part of the small intestine receives bile and pancreatic juice?",
+                options: [
+                    "Duodenum",
+                    "Jejunum",
+                    "Ileum",
+                    "Cecum"
+                ],
+                correct: 0,
+                explanation: "The duodenum receives bile from the liver and pancreatic juice from the pancreas."
+            },
+            {
+                question: "What is the longest part of the small intestine?",
+                options: [
+                    "Duodenum",
+                    "Jejunum",
+                    "Ileum",
+                    "Colon"
+                ],
+                correct: 2,
+                explanation: "The ileum is the longest part of the small intestine, contributing almost 60% of its length."
+            },
+            {
+                question: "Which structure increases the absorptive surface of the small intestine?",
+                options: [
+                    "Rugae",
+                    "Villi",
+                    "Haustra",
+                    "Teniae coli"
+                ],
+                correct: 1,
+                explanation: "Villi are fingerlike projections of the mucosa that greatly increase the absorptive surface."
+            },
+            {
+                question: "What are the tiny projections on the surface of absorptive cells in the small intestine called?",
+                options: [
+                    "Villi",
+                    "Microvilli",
+                    "Circular folds",
+                    "Peyer's patches"
+                ],
+                correct: 1,
+                explanation: "Microvilli are tiny projections of the plasma membrane that give the cell surface a fuzzy appearance."
+            },
+            {
+                question: "What is the function of the lacteal in each villus?",
+                options: [
+                    "To absorb carbohydrates",
+                    "To absorb proteins",
+                    "To absorb fats",
+                    "To produce enzymes"
+                ],
+                correct: 2,
+                explanation: "The lacteal is a modified lymphatic capillary that absorbs fat breakdown products."
+            },
+            {
+                question: "Which valve separates the small and large intestines?",
+                options: [
+                    "Pyloric sphincter",
+                    "Cardioesophageal sphincter",
+                    "Ileocecal valve",
+                    "Anal sphincter"
+                ],
+                correct: 2,
+                explanation: "The ileocecal valve joins the large and small intestines."
+            },
+            {
+                question: "What is the first part of the large intestine?",
+                options: [
+                    "Appendix",
+                    "Cecum",
+                    "Colon",
+                    "Rectum"
+                ],
+                correct: 1,
+                explanation: "The saclike cecum is the first part of the large intestine."
+            },
+            {
+                question: "Which part of the large intestine has a sigmoid shape?",
+                options: [
+                    "Ascending colon",
+                    "Transverse colon",
+                    "Descending colon",
+                    "Sigmoid colon"
+                ],
+                correct: 3,
+                explanation: "The sigmoid colon is S-shaped and lies in the pelvis."
+            },
+            {
+                question: "What are the bands of muscle in the large intestine called?",
+                options: [
+                    "Rugae",
+                    "Villi",
+                    "Teniae coli",
+                    "Haustra"
+                ],
+                correct: 2,
+                explanation: "The longitudinal muscle layer of the muscularis externa is reduced to three bands of muscle called teniae coli."
+            },
+            {
+                question: "What are the pocketlike sacs in the large intestine caused by teniae coli?",
+                options: [
+                    "Rugae",
+                    "Villi",
+                    "Haustra",
+                    "Diverticula"
+                ],
+                correct: 2,
+                explanation: "Teniae coli cause the wall to pucker into small pocketlike sacs called haustra."
+            },
+            {
+                question: "How many deciduous (baby) teeth does a child typically have?",
+                options: [
+                    "16",
+                    "20",
+                    "24",
+                    "32"
+                ],
+                correct: 1,
+                explanation: "A child has a full set of 20 deciduous teeth by the age of 2 years."
+            },
+            {
+                question: "How many permanent teeth are in a full set?",
+                options: [
+                    "20",
+                    "24",
+                    "28",
+                    "32"
+                ],
+                correct: 3,
+                explanation: "There are 32 permanent teeth in a full set, including wisdom teeth."
+            },
+            {
+                question: "Which teeth are adapted for cutting?",
+                options: [
+                    "Incisors",
+                    "Canines",
+                    "Premolars",
+                    "Molars"
+                ],
+                correct: 0,
+                explanation: "The chisel-shaped incisors are adapted for cutting."
+            },
+            {
+                question: "What is the hardest substance in the body?",
+                options: [
+                    "Dentin",
+                    "Cement",
+                    "Enamel",
+                    "Bone"
+                ],
+                correct: 2,
+                explanation: "Enamel is the hardest substance in the body and is heavily mineralized with calcium salts."
+            },
+            {
+                question: "Which salivary gland lies anterior to the ears?",
+                options: [
+                    "Parotid gland",
+                    "Submandibular gland",
+                    "Sublingual gland",
+                    "Buccal gland"
+                ],
+                correct: 0,
+                explanation: "The large parotid glands lie anterior to the ears."
+            },
+            {
+                question: "What enzyme in saliva begins starch digestion?",
+                options: [
+                    "Pepsin",
+                    "Amylase",
+                    "Lipase",
+                    "Trypsin"
+                ],
+                correct: 1,
+                explanation: "Salivary amylase begins the process of starch digestion in the mouth."
+            },
+            {
+                question: "Which organ produces enzymes that break down all categories of digestible foods?",
+                options: [
+                    "Liver",
+                    "Gallbladder",
+                    "Pancreas",
+                    "Stomach"
+                ],
+                correct: 2,
+                explanation: "Only the pancreas produces enzymes that break down all categories of digestible foods."
+            },
+            {
+                question: "What is the digestive function of the liver?",
+                options: [
+                    "To produce enzymes for protein digestion",
+                    "To produce bile",
+                    "To absorb nutrients",
+                    "To store vitamins"
+                ],
+                correct: 1,
+                explanation: "The liver's digestive function is to produce bile."
+            },
+            {
+                question: "What is the function of bile?",
+                options: [
+                    "To digest proteins",
+                    "To digest carbohydrates",
+                    "To emulsify fats",
+                    "To neutralize stomach acid"
+                ],
+                correct: 2,
+                explanation: "Bile emulsifies fats by physically breaking large fat globules into smaller ones."
+            },
+            {
+                question: "Where is bile stored?",
+                options: [
+                    "Liver",
+                    "Gallbladder",
+                    "Pancreas",
+                    "Duodenum"
+                ],
+                correct: 1,
+                explanation: "The gallbladder stores and concentrates bile."
+            },
+            {
+                question: "What condition results from inflammation of the liver?",
+                options: [
+                    "Cirrhosis",
+                    "Hepatitis",
+                    "Pancreatitis",
+                    "Appendicitis"
+                ],
+                correct: 1,
+                explanation: "Hepatitis is an inflammation of the liver, often due to viral infection."
+            },
+            {
+                question: "What condition involves the formation of gallstones?",
+                options: [
+                    "Cholecystitis",
+                    "Cholelithiasis",
+                    "Cirrhosis",
+                    "Diverticulitis"
+                ],
+                correct: 1,
+                explanation: "Gallstones form when bile is stored in the gallbladder for too long or too much water is removed."
+            },
+            {
+                question: "What is the term for inflammation of the appendix?",
+                options: [
+                    "Appendicitis",
+                    "Diverticulitis",
+                    "Peritonitis",
+                    "Pancreatitis"
+                ],
+                correct: 0,
+                explanation: "Appendicitis is inflammation of the appendix."
+            },
+            {
+                question: "What is the term for inflammation of the peritoneum?",
+                options: [
+                    "Appendicitis",
+                    "Diverticulitis",
+                    "Peritonitis",
+                    "Pancreatitis"
+                ],
+                correct: 2,
+                explanation: "Peritonitis is inflammation of the peritoneum."
+            },
+            {
+                question: "Which nerve plexus helps regulate the mobility of GI tract organs?",
+                options: [
+                    "Submucosal nerve plexus",
+                    "Myenteric nerve plexus",
+                    "Autonomic nerve plexus",
+                    "Central nerve plexus"
+                ],
+                correct: 1,
+                explanation: "The myenteric nerve plexus helps regulate the mobility of GI tract organs."
+            },
+            {
+                question: "What is the term for the double layer of peritoneum that extends from the liver to the lesser curvature of the stomach?",
+                options: [
+                    "Greater omentum",
+                    "Lesser omentum",
+                    "Mesentery",
+                    "Falciform ligament"
+                ],
+                correct: 1,
+                explanation: "The lesser omentum extends from the liver to the lesser curvature of the stomach."
+            },
+            {
+                question: "What structure covers abdominal organs like a lacy apron?",
+                options: [
+                    "Greater omentum",
+                    "Lesser omentum",
+                    "Mesentery",
+                    "Falciform ligament"
+                ],
+                correct: 0,
+                explanation: "The greater omentum drapes downward and covers the abdominal organs like a lacy apron."
+            },
+            {
+                question: "What is the function of the mesentery?",
+                options: [
+                    "To produce digestive enzymes",
+                    "To suspend the small intestine from the posterior abdominal wall",
+                    "To store fat",
+                    "To absorb nutrients"
+                ],
+                correct: 1,
+                explanation: "The mesentery suspends the small intestine from the posterior abdominal wall."
+            },
+            {
+                question: "Which structure joins the main pancreatic and bile ducts?",
+                options: [
+                    "Duodenal papilla",
+                    "Hepatopancreatic ampulla",
+                    "Pyloric sphincter",
+                    "Ileocecal valve"
+                ],
+                correct: 1,
+                explanation: "The main pancreatic and bile ducts join at the duodenum to form the flasklike hepatopancreatic ampulla."
+            },
+            {
+                question: "What is the term for the condition where the superior part of the stomach protrudes above the diaphragm?",
+                options: [
+                    "Gastroesophageal reflux disease",
+                    "Hiatal hernia",
+                    "Peptic ulcer",
+                    "Diverticulosis"
+                ],
+                correct: 1,
+                explanation: "A hiatal hernia is a structural abnormality in which the superior part of the stomach protrudes slightly above the diaphragm."
+            },
+            {
+                question: "What is the term for the semifluid food mixture in the stomach?",
+                options: [
+                    "Bolus",
+                    "Chyme",
+                    "Feces",
+                    "Mucus"
+                ],
+                correct: 1,
+                explanation: "After food has been processed in the stomach, it resembles heavy cream and is called chyme."
+            },
+            {
+                question: "Which cells in the stomach produce intrinsic factor?",
+                options: [
+                    "Chief cells",
+                    "Parietal cells",
+                    "Mucous cells",
+                    "Enteroendocrine cells"
+                ],
+                correct: 1,
+                explanation: "Some stomach cells (parietal cells) produce intrinsic factor, needed for absorption of vitamin B12."
+            },
+            {
+                question: "What is the function of intrinsic factor?",
+                options: [
+                    "To activate pepsin",
+                    "To protect the stomach lining",
+                    "To aid in vitamin B12 absorption",
+                    "To stimulate gastric juice production"
+                ],
+                correct: 2,
+                explanation: "Intrinsic factor is needed for absorption of vitamin B12 from the small intestine."
+            },
+            {
+                question: "Which part of the tooth is embedded in the jawbone?",
+                options: [
+                    "Crown",
+                    "Neck",
+                    "Root",
+                    "Enamel"
+                ],
+                correct: 2,
+                explanation: "The portion of the tooth embedded in the jawbone is the root."
+            },
+            {
+                question: "What substance attaches the tooth to the periodontal membrane?",
+                options: [
+                    "Enamel",
+                    "Dentin",
+                    "Cement",
+                    "Pulp"
+                ],
+                correct: 2,
+                explanation: "Cement attaches the tooth to the periodontal membrane, which holds the tooth in place."
+            },
+            {
+                question: "Which structure contains blood vessels and nerves in a tooth?",
+                options: [
+                    "Enamel",
+                    "Dentin",
+                    "Cement",
+                    "Pulp"
+                ],
+                correct: 3,
+                explanation: "The pulp cavity contains connective tissue, blood vessels, and nerve fibers collectively called pulp."
+            },
+            {
+                question: "What is the term for the condition where teeth remain embedded in the jawbone?",
+                options: [
+                    "Impacted teeth",
+                    "Decayed teeth",
+                    "Maloccluded teeth",
+                    "Abscessed teeth"
+                ],
+                correct: 0,
+                explanation: "When teeth remain embedded in the jawbone, they are said to be impacted."
+            },
+            {
+                question: "Which structure is commonly removed in a tonsillectomy?",
+                options: [
+                    "Lingual tonsil",
+                    "Palatine tonsils",
+                    "Pharyngeal tonsils",
+                    "All of the above"
+                ],
+                correct: 1,
+                explanation: "A tonsillectomy typically involves removal of the palatine tonsils."
+            }
+        ];
+
+        const processesQuestions = [
+            {
+                question: "What is the first step in food processing?",
+                options: [
+                    "Digestion",
+                    "Absorption",
+                    "Ingestion",
+                    "Defecation"
+                ],
+                correct: 2,
+                explanation: "Ingestion is the first step, where food is placed into the mouth."
+            },
+            {
+                question: "Which process involves the transport of digested nutrients into the blood or lymph?",
+                options: [
+                    "Ingestion",
+                    "Digestion",
+                    "Absorption",
+                    "Defecation"
+                ],
+                correct: 2,
+                explanation: "Absorption is the transport of the end products from the lumen of the GI tract to the blood or lymph."
+            },
+            {
+                question: "What is the term for the elimination of indigestible residues from the GI tract?",
+                options: [
+                    "Ingestion",
+                    "Digestion",
+                    "Absorption",
+                    "Defecation"
+                ],
+                correct: 3,
+                explanation: "Defecation is the elimination of indigestible residues from the GI tract via the anus."
+            },
+            {
+                question: "Which process involves alternating waves of contraction and relaxation of muscles in the organ wall?",
+                options: [
+                    "Segmentation",
+                    "Peristalsis",
+                    "Mastication",
+                    "Deglutition"
+                ],
+                correct: 1,
+                explanation: "Peristalsis involves alternating waves of contraction and relaxation that squeeze food along the tract."
+            },
+            {
+                question: "What is the term for the voluntary phase of swallowing?",
+                options: [
+                    "Pharyngeal phase",
+                    "Esophageal phase",
+                    "Buccal phase",
+                    "Gastric phase"
+                ],
+                correct: 2,
+                explanation: "The buccal phase is the voluntary phase of swallowing that occurs in the mouth."
+            },
+            {
+                question: "Which hormone stimulates the stomach glands to produce gastric juice?",
+                options: [
+                    "Secretin",
+                    "Cholecystokinin",
+                    "Gastrin",
+                    "Insulin"
+                ],
+                correct: 2,
+                explanation: "Gastrin prods the stomach glands to produce protein-digesting enzymes, mucus, and hydrochloric acid."
+            },
+            {
+                question: "What is the function of hydrochloric acid in the stomach?",
+                options: [
+                    "To emulsify fats",
+                    "To activate pepsinogen to pepsin",
+                    "To neutralize chyme",
+                    "To digest carbohydrates"
+                ],
+                correct: 1,
+                explanation: "Hydrochloric acid activates pepsinogen to pepsin, the active protein-digesting enzyme."
+            },
+            {
+                question: "Which enzyme begins protein digestion in the stomach?",
+                options: [
+                    "Amylase",
+                    "Pepsin",
+                    "Lipase",
+                    "Trypsin"
+                ],
+                correct: 1,
+                explanation: "Pepsin begins protein digestion in the stomach."
+            },
+            {
+                question: "What is the term for the process of chewing?",
+                options: [
+                    "Deglutition",
+                    "Mastication",
+                    "Peristalsis",
+                    "Segmentation"
+                ],
+                correct: 1,
+                explanation: "Mastication is the process of chewing food."
+            },
+            {
+                question: "What is the name of the food mass formed in the mouth?",
+                options: [
+                    "Chyme",
+                    "Bolus",
+                    "Feces",
+                    "Mucus"
+                ],
+                correct: 1,
+                explanation: "The product of the salivary glands helps bind food together into a mass called a bolus."
+            },
+            {
+                question: "Which reflex 'puts the brakes on' gastric activity?",
+                options: [
+                    "Gastrocolic reflex",
+                    "Enterogastric reflex",
+                    "Defecation reflex",
+                    "Swallowing reflex"
+                ],
+                correct: 1,
+                explanation: "The enterogastric reflex slows the emptying of the stomach by inhibiting the vagus nerves."
+            },
+            {
+                question: "How long does it typically take for the stomach to empty after a well-balanced meal?",
+                options: [
+                    "1-2 hours",
+                    "2-3 hours",
+                    "4 hours",
+                    "6-8 hours"
+                ],
+                correct: 2,
+                explanation: "It takes about 4 hours for the stomach to empty completely after a well-balanced meal."
+            },
+            {
+                question: "Which hormone stimulates the pancreas to release bicarbonate-rich juice?",
+                options: [
+                    "Gastrin",
+                    "Secretin",
+                    "Cholecystokinin",
+                    "Insulin"
+                ],
+                correct: 1,
+                explanation: "Secretin causes the pancreas to release bicarbonate-rich pancreatic juice."
+            },
+            {
+                question: "Which hormone stimulates the gallbladder to contract and release bile?",
+                options: [
+                    "Gastrin",
+                    "Secretin",
+                    "Cholecystokinin",
+                    "Insulin"
+                ],
+                correct: 2,
+                explanation: "Cholecystokinin causes the gallbladder to contract and release stored bile."
+            },
+            {
+                question: "What is the function of pancreatic amylase?",
+                options: [
+                    "To digest proteins",
+                    "To digest fats",
+                    "To digest starch",
+                    "To digest nucleic acids"
+                ],
+                correct: 2,
+                explanation: "Pancreatic amylase completes the digestion of starch."
+            },
+            {
+                question: "What is the function of pancreatic lipase?",
+                options: [
+                    "To digest proteins",
+                    "To digest fats",
+                    "To digest starch",
+                    "To digest nucleic acids"
+                ],
+                correct: 1,
+                explanation: "Pancreatic lipase is responsible for fat digestion."
+            },
+            {
+                question: "Which pancreatic enzymes digest proteins?",
+                options: [
+                    "Amylase and lipase",
+                    "Trypsin and chymotrypsin",
+                    "Nucleases",
+                    "Peptidases"
+                ],
+                correct: 1,
+                explanation: "Trypsin, chymotrypsin, and others carry out about half of protein digestion."
+            },
+            {
+                question: "What is the function of bile salts?",
+                options: [
+                    "To digest proteins",
+                    "To digest carbohydrates",
+                    "To emulsify fats",
+                    "To neutralize acid"
+                ],
+                correct: 2,
+                explanation: "Bile salts emulsify fats by physically breaking large fat globules into smaller ones."
+            },
+            {
+                question: "Where does most nutrient absorption occur?",
+                options: [
+                    "Stomach",
+                    "Small intestine",
+                    "Large intestine",
+                    "Liver"
+                ],
+                correct: 1,
+                explanation: "Nearly all food absorption occurs in the small intestine."
+            },
+            {
+                question: "How are carbohydrates absorbed?",
+                options: [
+                    "As disaccharides",
+                    "As monosaccharides",
+                    "As polysaccharides",
+                    "As starch"
+                ],
+                correct: 1,
+                explanation: "Carbohydrates are absorbed as monosaccharides (simple sugars)."
+            },
+            {
+                question: "How are proteins absorbed?",
+                options: [
+                    "As polypeptides",
+                    "As amino acids",
+                    "As dipeptides",
+                    "As intact proteins"
+                ],
+                correct: 1,
+                explanation: "Proteins are absorbed as amino acids."
+            },
+            {
+                question: "How are fats absorbed?",
+                options: [
+                    "As fatty acids and glycerol",
+                    "As triglycerides",
+                    "As cholesterol",
+                    "As phospholipids"
+                ],
+                correct: 0,
+                explanation: "Fats are absorbed as fatty acids and glycerol (monoglycerides)."
+            },
+            {
+                question: "Which vitamins are produced by bacteria in the large intestine?",
+                options: [
+                    "Vitamins A and D",
+                    "Vitamins C and E",
+                    "Vitamin K and some B vitamins",
+                    "All vitamins"
+                ],
+                correct: 2,
+                explanation: "Bacteria in the large intestine produce vitamin K and some B vitamins."
+            },
+            {
+                question: "What is the main function of the large intestine?",
+                options: [
+                    "To digest proteins",
+                    "To absorb most nutrients",
+                    "To dry out indigestible residue and eliminate feces",
+                    "To produce digestive enzymes"
+                ],
+                correct: 2,
+                explanation: "The major functions of the large intestine are to dry out indigestible food residue and eliminate these residues."
+            },
+            {
+                question: "What is the term for the long, slow-moving contractile waves in the colon?",
+                options: [
+                    "Haustral contractions",
+                    "Mass movements",
+                    "Peristalsis",
+                    "Segmentation"
+                ],
+                correct: 1,
+                explanation: "Mass movements are long, slow-moving but powerful contractile waves that move over large areas of the colon."
+            },
+            {
+                question: "What triggers the defecation reflex?",
+                options: [
+                    "Food entering the stomach",
+                    "Food entering the small intestine",
+                    "Feces entering the rectum",
+                    "Bile entering the duodenum"
+                ],
+                correct: 2,
+                explanation: "When feces are forced into the rectum and its wall is stretched, the defecation reflex is initiated."
+            },
+            {
+                question: "Which of the following is NOT a brush border enzyme?",
+                options: [
+                    "Lactase",
+                    "Maltase",
+                    "Sucrase",
+                    "Amylase"
+                ],
+                correct: 3,
+                explanation: "Amylase is produced by the salivary glands and pancreas, not by the brush border."
+            },
+            {
+                question: "What is the function of brush border enzymes?",
+                options: [
+                    "To emulsify fats",
+                    "To break down disaccharides into monosaccharides",
+                    "To activate pancreatic enzymes",
+                    "To produce mucus"
+                ],
+                correct: 1,
+                explanation: "Brush border enzymes break down double sugars into simple sugars and complete protein digestion."
+            },
+            {
+                question: "Which of the following is absorbed directly into the bloodstream?",
+                options: [
+                    "Carbohydrates and proteins",
+                    "Fats",
+                    "All nutrients",
+                    "No nutrients"
+                ],
+                correct: 0,
+                explanation: "Carbohydrates and proteins are absorbed through the intestinal cell plasma membranes into the capillary beds."
+            },
+            {
+                question: "How are fats absorbed?",
+                options: [
+                    "Into the capillary beds only",
+                    "Into the lacteals only",
+                    "Into both capillary beds and lacteals",
+                    "Directly into the liver"
+                ],
+                correct: 2,
+                explanation: "Lipid breakdown products enter both the capillary beds and the lacteals in the villi."
+            },
+            {
+                question: "What is the term for the condition where the mucosa protrudes through the colon walls?",
+                options: [
+                    "Diverticulosis",
+                    "Diverticulitis",
+                    "Appendicitis",
+                    "Colitis"
+                ],
+                correct: 0,
+                explanation: "Diverticulosis is a condition in which the mucosa protrudes through the colon walls."
+            },
+            {
+                question: "What is the term for inflammation of diverticula?",
+                options: [
+                    "Diverticulosis",
+                    "Diverticulitis",
+                    "Appendicitis",
+                    "Colitis"
+                ],
+                correct: 1,
+                explanation: "Diverticulitis is a condition in which the diverticula become inflamed."
+            },
+            {
+                question: "What is the term for the condition where gastric juice backs up into the esophagus?",
+                options: [
+                    "Heartburn",
+                    "Hiatal hernia",
+                    "Esophagitis",
+                    "All of the above"
+                ],
+                correct: 0,
+                explanation: "Heartburn occurs when gastric juice backs up into the esophagus."
+            },
+            {
+                question: "What is the term for inflammation of the esophagus?",
+                options: [
+                    "Heartburn",
+                    "Hiatal hernia",
+                    "Esophagitis",
+                    "Gastritis"
+                ],
+                correct: 2,
+                explanation: "Esophagitis is inflammation of the esophagus, often caused by gastric juice backing up."
+            },
+            {
+                question: "What is the term for reverse peristalsis occurring in the stomach?",
+                options: [
+                    "Defecation",
+                    "Deglutition",
+                    "Vomiting",
+                    "Segmentation"
+                ],
+                correct: 2,
+                explanation: "Vomiting is essentially a reverse peristalsis occurring in the stomach."
+            },
+            {
+                question: "What is the term for inflammation of the pancreas?",
+                options: [
+                    "Pancreatitis",
+                    "Hepatitis",
+                    "Appendicitis",
+                    "Cholecystitis"
+                ],
+                correct: 0,
+                explanation: "Pancreatitis is inflammation of the pancreas."
+            },
+            {
+                question: "Which of the following is NOT a building block of carbohydrates?",
+                options: [
+                    "Glucose",
+                    "Fructose",
+                    "Galactose",
+                    "Amino acids"
+                ],
+                correct: 3,
+                explanation: "Amino acids are the building blocks of proteins, not carbohydrates."
+            },
+            {
+                question: "What are the building blocks of proteins?",
+                options: [
+                    "Monosaccharides",
+                    "Amino acids",
+                    "Fatty acids",
+                    "Nucleotides"
+                ],
+                correct: 1,
+                explanation: "Proteins are digested to their building blocks, which are amino acids."
+            },
+            {
+                question: "What are the building blocks of fats?",
+                options: [
+                    "Monosaccharides",
+                    "Amino acids",
+                    "Fatty acids and glycerol",
+                    "Nucleotides"
+                ],
+                correct: 2,
+                explanation: "When lipids are digested, they yield fatty acids and glycerol."
+            },
+            {
+                question: "Which of the following is a disaccharide?",
+                options: [
+                    "Glucose",
+                    "Fructose",
+                    "Sucrose",
+                    "Starch"
+                ],
+                correct: 2,
+                explanation: "Sucrose is a disaccharide (table sugar) consisting of two simple sugars."
+            },
+            {
+                question: "Which of the following is a polysaccharide?",
+                options: [
+                    "Glucose",
+                    "Fructose",
+                    "Sucrose",
+                    "Starch"
+                ],
+                correct: 3,
+                explanation: "Starch is a polysaccharide formed of hundreds of glucose units."
+            },
+            {
+                question: "What is the term for the process of swallowing?",
+                options: [
+                    "Mastication",
+                    "Deglutition",
+                    "Peristalsis",
+                    "Segmentation"
+                ],
+                correct: 1,
+                explanation: "Deglutition is the process of swallowing."
+            },
+            {
+                question: "Which phase of swallowing is involuntary?",
+                options: [
+                    "Buccal phase",
+                    "Pharyngeal-esophageal phase",
+                    "Both phases",
+                    "Neither phase"
+                ],
+                correct: 1,
+                explanation: "The pharyngeal-esophageal phase is involuntary and transports food through the pharynx and esophagus."
+            },
+            {
+                question: "What happens during the buccal phase of swallowing?",
+                options: [
+                    "Food is chewed and mixed with saliva",
+                    "The bolus is forced into the pharynx by the tongue",
+                    "Peristalsis moves food through the esophagus",
+                    "Food enters the stomach"
+                ],
+                correct: 1,
+                explanation: "During the buccal phase, the bolus is forced into the pharynx by the tongue."
+            },
+            {
+                question: "What is the function of the pyloric sphincter?",
+                options: [
+                    "To control food movement from esophagus to stomach",
+                    "To control food movement from stomach to small intestine",
+                    "To control food movement from small to large intestine",
+                    "To control defecation"
+                ],
+                correct: 1,
+                explanation: "The pyloric sphincter controls food movement into the small intestine from the stomach."
+            },
+            {
+                question: "What is the function of the cardioesophageal sphincter?",
+                options: [
+                    "To control food movement from esophagus to stomach",
+                    "To control food movement from stomach to small intestine",
+                    "To control food movement from small to large intestine",
+                    "To control defecation"
+                ],
+                correct: 0,
+                explanation: "The cardioesophageal sphincter controls food movement from the esophagus to the stomach."
+            },
+            {
+                question: "What is the function of the ileocecal valve?",
+                options: [
+                    "To control food movement from esophagus to stomach",
+                    "To control food movement from stomach to small intestine",
+                    "To control food movement from small to large intestine",
+                    "To control defecation"
+                ],
+                correct: 2,
+                explanation: "The ileocecal valve controls food movement from the small to the large intestine."
+            },
+            {
+                question: "What is the term for the process where most of the chyme is propelled backward into the stomach for more mixing?",
+                options: [
+                    "Peristalsis",
+                    "Segmentation",
+                    "Retropulsion",
+                    "Defecation"
+                ],
+                correct: 2,
+                explanation: "Retropulsion is the process where most of the chyme is propelled backward into the stomach for more mixing."
+            },
+            {
+                question: "Which of the following is NOT a function of the digestive system?",
+                options: [
+                    "Ingestion",
+                    "Digestion",
+                    "Absorption",
+                    "Filtration of blood"
+                ],
+                correct: 3,
+                explanation: "Filtration of blood is a function of the urinary system, not the digestive system."
+            },
+            {
+                question: "What is the term for the condition characterized by yellowing of tissues due to bile accumulation?",
+                options: [
+                    "Jaundice",
+                    "Cirrhosis",
+                    "Hepatitis",
+                    "Pancreatitis"
+                ],
+                correct: 0,
+                explanation: "Jaundice is characterized by yellowing of tissues due to bile accumulation in the bloodstream."
+            },
+            {
+                question: "Which vitamin deficiency can occur if bile is absent, leading to blood-clotting problems?",
+                options: [
+                    "Vitamin A",
+                    "Vitamin C",
+                    "Vitamin D",
+                    "Vitamin K"
+                ],
+                correct: 3,
+                explanation: "Vitamin K is needed for prothrombin production, and its absorption requires bile."
+            },
+            {
+                question: "What is the term for the condition where the lingual frenulum is extremely short?",
+                options: [
+                    "Tongue-tied",
+                    "Cleft palate",
+                    "Macroglossia",
+                    "Glossitis"
+                ],
+                correct: 0,
+                explanation: "Children born with an extremely short lingual frenulum are often referred to as tongue-tied."
+            }
+        ];
+
+        // Initialize the quiz
+        function initializeQuiz() {
+            // Set up tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all quiz sections
+                    document.querySelectorAll('.quiz-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the targeted quiz section
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Initialize anatomy quiz with first 10 questions (for performance)
+            const anatomyContainer = document.getElementById('anatomy-questions');
+            anatomyQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="anatomy-q${index}-opt${i}" name="anatomy-q${index}" value="${i}">
+                                <label for="anatomy-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="anatomy-feedback-${index}"></div>
+                `;
+                anatomyContainer.appendChild(questionDiv);
+            });
+            
+            // Initialize processes quiz with first 10 questions (for performance)
+            const processesContainer = document.getElementById('processes-questions');
+            processesQuestions.slice(0, 10).forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" id="processes-q${index}-opt${i}" name="processes-q${index}" value="${i}">
+                                <label for="processes-q${index}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="processes-feedback-${index}"></div>
+                `;
+                processesContainer.appendChild(questionDiv);
+            });
+            
+            // Set up submit buttons
+            document.getElementById('submit-anatomy').addEventListener('click', function() {
+                calculateScore('anatomy', anatomyQuestions.slice(0, 10));
+            });
+            
+            document.getElementById('submit-processes').addEventListener('click', function() {
+                calculateScore('processes', processesQuestions.slice(0, 10));
+            });
+            
+            // Set up navigation
+            setupNavigation('anatomy');
+            setupNavigation('processes');
+            
+            // Set up immediate feedback for each question
+            setupImmediateFeedback('anatomy', anatomyQuestions.slice(0, 10));
+            setupImmediateFeedback('processes', processesQuestions.slice(0, 10));
+        }
+        
+        function setupNavigation(quizType) {
+            const questions = document.querySelectorAll(`#${quizType}-questions .question`);
+            let currentQuestion = 0;
+            
+            // Show first question initially
+            if (questions.length > 0) {
+                questions[0].style.display = 'block';
+            }
+            
+            // Hide all but the first question
+            for (let i = 1; i < questions.length; i++) {
+                questions[i].style.display = 'none';
+            }
+            
+            // Next button
+            document.getElementById(`next-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion < questions.length - 1) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion++;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`prev-${quizType}`).disabled = false;
+                    if (currentQuestion === questions.length - 1) {
+                        this.disabled = true;
+                    }
+                }
+            });
+            
+            // Previous button
+            document.getElementById(`prev-${quizType}`).addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    questions[currentQuestion].style.display = 'none';
+                    currentQuestion--;
+                    questions[currentQuestion].style.display = 'block';
+                    
+                    // Update button states
+                    document.getElementById(`next-${quizType}`).disabled = false;
+                    if (currentQuestion === 0) {
+                        this.disabled = true;
+                    }
+                }
+            });
+        }
+        
+        function setupImmediateFeedback(quizType, questions) {
+            questions.forEach((q, index) => {
+                const options = document.querySelectorAll(`input[name="${quizType}-q${index}"]`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                options.forEach(option => {
+                    option.addEventListener('change', function() {
+                        const selectedValue = parseInt(this.value);
+                        
+                        if (selectedValue === q.correct) {
+                            feedbackElement.innerHTML = `
+                                <div class="correct">Correct! ${q.explanation}</div>
+                            `;
+                            feedbackElement.className = "feedback correct";
+                        } else {
+                            feedbackElement.innerHTML = `
+                                <div class="incorrect">Incorrect. ${q.explanation}</div>
+                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                            `;
+                            feedbackElement.className = "feedback incorrect";
+                        }
+                        
+                        feedbackElement.style.display = 'block';
+                    });
+                });
+            });
+        }
+        
+        function calculateScore(quizType, questions) {
+            let score = 0;
+            const totalQuestions = questions.length;
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="${quizType}-q${index}"]:checked`);
+                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+                
+                if (selectedOption) {
+                    const selectedValue = parseInt(selectedOption.value);
+                    
+                    if (selectedValue === q.correct) {
+                        score++;
+                        feedbackElement.innerHTML = `
+                            <div class="correct">Correct! ${q.explanation}</div>
+                        `;
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.innerHTML = `
+                            <div class="incorrect">Incorrect. ${q.explanation}</div>
+                            <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                        `;
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                } else {
+                    feedbackElement.innerHTML = `
+                        <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
+                        <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                    `;
+                    feedbackElement.className = "feedback incorrect";
+                }
+                
+                feedbackElement.style.display = 'block';
+            });
+            
+            const percentage = (score / totalQuestions) * 100;
+            const resultsElement = document.getElementById(`${quizType}-results`);
+            resultsElement.innerHTML = `
+                <div class="score">Your Score: ${score}/${totalQuestions} (${percentage.toFixed(1)}%)</div>
+                <p>${getPerformanceMessage(percentage)}</p>
+            `;
+            resultsElement.style.display = 'block';
+            
+            // Scroll to results
+            resultsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getPerformanceMessage(percentage) {
+            if (percentage >= 90) return "Excellent work! You have a strong understanding of the digestive system.";
+            if (percentage >= 80) return "Good job! You have a solid grasp of most digestive system concepts.";
+            if (percentage >= 70) return "Not bad! Review the incorrect answers to improve your understanding.";
+            if (percentage >= 60) return "You passed, but there's room for improvement. Review the material carefully.";
+            return "You need to study the digestive system more thoroughly. Review the explanations for each question.";
+        }
+        
+        // Initialize the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>
