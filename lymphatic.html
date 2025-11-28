@@ -16,6 +16,10 @@
             --highlight-color: #FFD700;
         }
         
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
@@ -49,7 +53,7 @@
         }
         
         .quiz-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -61,6 +65,7 @@
             display: flex;
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
         }
         
         .tab {
@@ -91,7 +96,7 @@
             display: block;
         }
         
-        .question {
+        .question-container {
             margin-bottom: 25px;
             padding: 15px;
             border: 1px solid var(--border-color);
@@ -103,16 +108,29 @@
             font-weight: bold;
             margin-bottom: 10px;
             color: var(--accent-color);
+            font-size: 1.1em;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
         
         .options {
-            margin-left: 20px;
+            margin-left: 10px;
         }
         
         .option {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: flex-start;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: rgba(255, 255, 255, 0.05);
         }
         
         .option input {
@@ -120,9 +138,14 @@
             margin-top: 3px;
         }
         
+        .option label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
         .feedback {
             margin-top: 10px;
-            padding: 8px;
+            padding: 10px;
             border-radius: 4px;
             display: none;
         }
@@ -147,12 +170,15 @@
             background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
             margin-top: 20px;
             transition: background-color 0.3s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .submit-btn:hover {
@@ -161,37 +187,72 @@
         
         .results {
             margin-top: 30px;
-            padding: 15px;
+            padding: 20px;
             border-radius: 6px;
             background-color: rgba(255, 255, 255, 0.05);
             display: none;
+            text-align: center;
         }
         
         .score {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 15px;
-            text-align: center;
         }
         
-        .navigation {
+        .pagination {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
         
-        .nav-btn {
+        .page-btn {
             background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 8px 12px;
+            margin: 2px;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         
-        .nav-btn:disabled {
+        .page-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .page-btn.active {
+            background-color: var(--highlight-color);
+            color: #121212;
+        }
+        
+        .page-btn:disabled {
             background-color: #555;
             cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #333;
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #aaa;
         }
         
         @media (max-width: 600px) {
@@ -206,6 +267,11 @@
             .tab {
                 text-align: center;
                 margin-bottom: 5px;
+            }
+            
+            .pagination {
+                justify-content: flex-start;
+                overflow-x: auto;
             }
         }
     </style>
@@ -224,14 +290,21 @@
         </div>
         
         <div id="lymphatic-quiz" class="quiz-section active">
+            <div class="quiz-info">
+                <span>Page: <span id="lymphatic-current-page">1</span>/<span id="lymphatic-total-pages">10</span></span>
+                <span>Answered: <span id="lymphatic-answered">0</span>/100</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="lymphatic-progress"></div>
+            </div>
+            
             <!-- Lymphatic System Quiz Content -->
             <div id="lymphatic-questions">
                 <!-- Questions will be inserted here by JavaScript -->
             </div>
             
-            <div class="navigation">
-                <button id="prev-lymphatic" class="nav-btn" disabled>Previous</button>
-                <button id="next-lymphatic" class="nav-btn">Next</button>
+            <div class="pagination" id="lymphatic-pagination">
+                <!-- Pagination buttons will be inserted here by JavaScript -->
             </div>
             
             <button id="submit-lymphatic" class="submit-btn">Submit Lymphatic System Quiz</button>
@@ -242,14 +315,21 @@
         </div>
         
         <div id="defenses-quiz" class="quiz-section">
+            <div class="quiz-info">
+                <span>Page: <span id="defenses-current-page">1</span>/<span id="defenses-total-pages">10</span></span>
+                <span>Answered: <span id="defenses-answered">0</span>/100</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="defenses-progress"></div>
+            </div>
+            
             <!-- Body Defenses Quiz Content -->
             <div id="defenses-questions">
                 <!-- Questions will be inserted here by JavaScript -->
             </div>
             
-            <div class="navigation">
-                <button id="prev-defenses" class="nav-btn" disabled>Previous</button>
-                <button id="next-defenses" class="nav-btn">Next</button>
+            <div class="pagination" id="defenses-pagination">
+                <!-- Pagination buttons will be inserted here by JavaScript -->
             </div>
             
             <button id="submit-defenses" class="submit-btn">Submit Body Defenses Quiz</button>
@@ -261,7 +341,7 @@
     </div>
 
     <script>
-        // Quiz data - 100 questions for each topic
+        // Lymphatic System Questions (100 questions)
         const lymphaticQuestions = [
             {
                 question: "What is the primary function of the lymphatic system?",
@@ -1486,6 +1566,7 @@
             }
         ];
 
+        // Body Defenses Questions (100 questions)
         const defensesQuestions = [
             {
                 question: "What are the two main systems of body defenses?",
@@ -2652,193 +2733,6 @@
                 ],
                 correct: 0,
                 explanation: "T cell receptors recognize antigens presented by MHC molecules on other cells."
-            },
-            {
-                question: "What is somatic hypermutation?",
-                options: [
-                    "Mutation in somatic cells causing cancer",
-                    "Mutation in antibody genes to improve affinity",
-                    "Mutation in T cell receptors",
-                    "Mutation in MHC genes"
-                ],
-                correct: 1,
-                explanation: "Somatic hypermutation introduces mutations in antibody genes to improve antigen binding affinity."
-            },
-            {
-                question: "What is class switching?",
-                options: [
-                    "Changing antibody class while maintaining specificity",
-                    "Changing antigen specificity",
-                    "Switching from innate to adaptive immunity",
-                    "Switching from cellular to humoral immunity"
-                ],
-                correct: 0,
-                explanation: "Class switching allows B cells to change the class of antibody they produce while maintaining the same antigen specificity."
-            },
-            {
-                question: "What is affinity maturation?",
-                options: [
-                    "Increase in antibody affinity over time",
-                    "Maturation of immune cells",
-                    "Development of immunological memory",
-                    "Increase in antigen concentration"
-                ],
-                correct: 0,
-                explanation: "Affinity maturation is the process where antibody affinity increases during an immune response."
-            },
-            {
-                question: "What is a monoclonal antibody?",
-                options: [
-                    "Antibody from multiple B cell clones",
-                    "Antibody from a single B cell clone",
-                    "Natural antibody",
-                    "Antibody against multiple antigens"
-                ],
-                correct: 1,
-                explanation: "Monoclonal antibodies are derived from a single B cell clone and have identical specificity."
-            },
-            {
-                question: "What are the clinical uses of monoclonal antibodies?",
-                options: [
-                    "Cancer treatment, diagnostics, research",
-                    "Vaccines, antibiotics, antivirals",
-                    "Blood transfusions, organ transplants",
-                    "Surgery, physical therapy"
-                ],
-                correct: 0,
-                explanation: "Monoclonal antibodies are used in cancer treatment, diagnostic tests, and research."
-            },
-            {
-                question: "What is immunosenescence?",
-                options: [
-                    "Immune system development",
-                    "Age-related decline in immune function",
-                    "Immune system overactivity",
-                    "Autoimmune disease"
-                ],
-                correct: 1,
-                explanation: "Immunosenescence is the age-related decline in immune function."
-            },
-            {
-                question: "What is the function of the complement system?",
-                options: [
-                    "Produce antibodies",
-                    "Enhance innate and adaptive immunity",
-                    "Kill infected cells",
-                    "Present antigens"
-                ],
-                correct: 1,
-                explanation: "The complement system enhances both innate defenses (through opsonization and inflammation) and adaptive immunity."
-            },
-            {
-                question: "What is the membrane attack complex (MAC)?",
-                options: [
-                    "Group of antibodies",
-                    "Complement proteins that form pores in cell membranes",
-                    "T cell receptors",
-                    "B cell clusters"
-                ],
-                correct: 1,
-                explanation: "The membrane attack complex is formed by complement proteins and creates pores in foreign cell membranes."
-            },
-            {
-                question: "What is chemotaxis in immunity?",
-                options: [
-                    "Cell movement toward chemical gradients",
-                    "Chemical digestion of pathogens",
-                    "Cell division in response to chemicals",
-                    "Chemical communication between cells"
-                ],
-                correct: 0,
-                explanation: "Chemotaxis is the movement of immune cells toward chemical gradients, such as inflammatory mediators."
-            },
-            {
-                question: "What is diapedesis in immunity?",
-                options: [
-                    "Cell death",
-                    "Cell movement through blood vessel walls",
-                    "Cell division",
-                    "Cell differentiation"
-                ],
-                correct: 1,
-                explanation: "Diapedesis is the process where white blood cells squeeze through blood vessel walls to reach sites of infection."
-            },
-            {
-                question: "What is margination?",
-                options: [
-                    "Cell death at margins",
-                    "White blood cells clinging to vessel walls",
-                    "Formation of blood clots",
-                    "Tissue repair at wound margins"
-                ],
-                correct: 1,
-                explanation: "Margination is the process where white blood cells cling to the capillary walls during inflammation."
-            },
-            {
-                question: "What is the function of histamine?",
-                options: [
-                    "Kill pathogens",
-                    "Cause vasodilation and increased permeability",
-                    "Produce antibodies",
-                    "Present antigens"
-                ],
-                correct: 1,
-                explanation: "Histamine causes blood vessels to dilate and become more permeable during inflammation."
-            },
-            {
-                question: "What is the function of kinins?",
-                options: [
-                    "Kill pathogens",
-                    "Cause vasodilation and pain",
-                    "Produce antibodies",
-                    "Present antigens"
-                ],
-                correct: 1,
-                explanation: "Kinins are inflammatory chemicals that cause vasodilation and activate pain receptors."
-            },
-            {
-                question: "What is the function of prostaglandins?",
-                options: [
-                    "Kill pathogens",
-                    "Intensify histamine and kinin effects",
-                    "Produce antibodies",
-                    "Present antigens"
-                ],
-                correct: 1,
-                explanation: "Prostaglandins intensify the effects of histamine and kinins in inflammation."
-            },
-            {
-                question: "What is the function of leukotrienes?",
-                options: [
-                    "Kill pathogens",
-                    "Attract white blood cells and increase permeability",
-                    "Produce antibodies",
-                    "Present antigens"
-                ],
-                correct: 1,
-                explanation: "Leukotrienes attract white blood cells and increase blood vessel permeability."
-            },
-            {
-                question: "What is the function of the coagulation system in inflammation?",
-                options: [
-                    "Prevent blood loss",
-                    "Wall off infected area and prevent pathogen spread",
-                    "Kill pathogens",
-                    "Produce antibodies"
-                ],
-                correct: 1,
-                explanation: "The coagulation system helps wall off the infected area to prevent pathogen spread."
-            },
-            {
-                question: "What is the function of the fibrinolytic system?",
-                options: [
-                    "Form blood clots",
-                    "Dissolve blood clots after healing",
-                    "Kill pathogens",
-                    "Produce antibodies"
-                ],
-                correct: 1,
-                explanation: "The fibrinolytic system dissolves blood clots after tissue repair is complete."
             }
         ];
 
@@ -2863,137 +2757,145 @@
                 });
             });
             
-            // Initialize lymphatic quiz with first 10 questions (for performance)
-            const lymphaticContainer = document.getElementById('lymphatic-questions');
-            lymphaticQuestions.slice(0, 10).forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = `
-                    <div class="question-number">Question ${index + 1}</div>
-                    <div class="question-text">${q.question}</div>
-                    <div class="options">
-                        ${q.options.map((option, i) => `
-                            <div class="option">
-                                <input type="radio" id="lymphatic-q${index}-opt${i}" name="lymphatic-q${index}" value="${i}">
-                                <label for="lymphatic-q${index}-opt${i}">${option}</label>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="lymphatic-feedback-${index}"></div>
-                `;
-                lymphaticContainer.appendChild(questionDiv);
-            });
-            
-            // Initialize defenses quiz with first 10 questions (for performance)
-            const defensesContainer = document.getElementById('defenses-questions');
-            defensesQuestions.slice(0, 10).forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = `
-                    <div class="question-number">Question ${index + 1}</div>
-                    <div class="question-text">${q.question}</div>
-                    <div class="options">
-                        ${q.options.map((option, i) => `
-                            <div class="option">
-                                <input type="radio" id="defenses-q${index}-opt${i}" name="defenses-q${index}" value="${i}">
-                                <label for="defenses-q${index}-opt${i}">${option}</label>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="defenses-feedback-${index}"></div>
-                `;
-                defensesContainer.appendChild(questionDiv);
-            });
+            // Initialize both quizzes
+            initializeQuizSection('lymphatic', lymphaticQuestions);
+            initializeQuizSection('defenses', defensesQuestions);
             
             // Set up submit buttons
             document.getElementById('submit-lymphatic').addEventListener('click', function() {
-                calculateScore('lymphatic', lymphaticQuestions.slice(0, 10));
+                calculateScore('lymphatic', lymphaticQuestions);
             });
             
             document.getElementById('submit-defenses').addEventListener('click', function() {
-                calculateScore('defenses', defensesQuestions.slice(0, 10));
+                calculateScore('defenses', defensesQuestions);
             });
-            
-            // Set up navigation
-            setupNavigation('lymphatic');
-            setupNavigation('defenses');
-            
-            // Set up immediate feedback for each question
-            setupImmediateFeedback('lymphatic', lymphaticQuestions.slice(0, 10));
-            setupImmediateFeedback('defenses', defensesQuestions.slice(0, 10));
         }
         
-        function setupNavigation(quizType) {
-            const questions = document.querySelectorAll(`#${quizType}-questions .question`);
-            let currentQuestion = 0;
+        function initializeQuizSection(quizType, questions) {
+            const container = document.getElementById(`${quizType}-questions`);
+            const paginationContainer = document.getElementById(`${quizType}-pagination`);
+            const questionsPerPage = 10;
+            const totalPages = Math.ceil(questions.length / questionsPerPage);
             
-            // Show first question initially
-            if (questions.length > 0) {
-                questions[0].style.display = 'block';
+            // Set total pages display
+            document.getElementById(`${quizType}-total-pages`).textContent = totalPages;
+            
+            // Create pagination buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'page-btn';
+                if (i === 1) pageBtn.classList.add('active');
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', function() {
+                    showPage(quizType, i, questions, questionsPerPage);
+                });
+                paginationContainer.appendChild(pageBtn);
             }
             
-            // Hide all but the first question
-            for (let i = 1; i < questions.length; i++) {
-                questions[i].style.display = 'none';
+            // Show first page initially
+            showPage(quizType, 1, questions, questionsPerPage);
+            
+            // Set up immediate feedback for questions
+            setupImmediateFeedback(quizType, questions);
+        }
+        
+        function showPage(quizType, pageNum, questions, questionsPerPage) {
+            const container = document.getElementById(`${quizType}-questions`);
+            const paginationButtons = document.querySelectorAll(`#${quizType}-pagination .page-btn`);
+            const startIndex = (pageNum - 1) * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
+            
+            // Update active pagination button
+            paginationButtons.forEach(btn => btn.classList.remove('active'));
+            paginationButtons[pageNum - 1].classList.add('active');
+            
+            // Update current page display
+            document.getElementById(`${quizType}-current-page`).textContent = pageNum;
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            // Add questions for this page
+            for (let i = startIndex; i < endIndex; i++) {
+                const q = questions[i];
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${i + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, j) => `
+                            <div class="option">
+                                <input type="radio" id="${quizType}-q${i}-opt${j}" name="${quizType}-q${i}" value="${j}" ${q.userAnswer === j ? 'checked' : ''}>
+                                <label for="${quizType}-q${i}-opt${j}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="${quizType}-feedback-${i}"></div>
+                `;
+                container.appendChild(questionDiv);
             }
             
-            // Next button
-            document.getElementById(`next-${quizType}`).addEventListener('click', function() {
-                if (currentQuestion < questions.length - 1) {
-                    questions[currentQuestion].style.display = 'none';
-                    currentQuestion++;
-                    questions[currentQuestion].style.display = 'block';
-                    
-                    // Update button states
-                    document.getElementById(`prev-${quizType}`).disabled = false;
-                    if (currentQuestion === questions.length - 1) {
-                        this.disabled = true;
-                    }
-                }
-            });
-            
-            // Previous button
-            document.getElementById(`prev-${quizType}`).addEventListener('click', function() {
-                if (currentQuestion > 0) {
-                    questions[currentQuestion].style.display = 'none';
-                    currentQuestion--;
-                    questions[currentQuestion].style.display = 'block';
-                    
-                    // Update button states
-                    document.getElementById(`next-${quizType}`).disabled = false;
-                    if (currentQuestion === 0) {
-                        this.disabled = true;
-                    }
-                }
-            });
+            // Update progress
+            updateProgress(quizType, questions);
         }
         
         function setupImmediateFeedback(quizType, questions) {
-            questions.forEach((q, index) => {
-                const options = document.querySelectorAll(`input[name="${quizType}-q${index}"]`);
-                const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
-                
-                options.forEach(option => {
-                    option.addEventListener('change', function() {
-                        const selectedValue = parseInt(this.value);
-                        
-                        if (selectedValue === q.correct) {
-                            feedbackElement.innerHTML = `
-                                <div class="correct">Correct! ${q.explanation}</div>
-                            `;
-                            feedbackElement.className = "feedback correct";
-                        } else {
-                            feedbackElement.innerHTML = `
-                                <div class="incorrect">Incorrect. ${q.explanation}</div>
-                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
-                            `;
-                            feedbackElement.className = "feedback incorrect";
-                        }
-                        
-                        feedbackElement.style.display = 'block';
-                    });
-                });
+            // Add event listeners for when answers are selected
+            document.addEventListener('change', function(e) {
+                if (e.target.type === 'radio') {
+                    const idParts = e.target.id.split('-');
+                    const quizType = idParts[0];
+                    const questionIndex = parseInt(idParts[1].substring(1));
+                    const optionIndex = parseInt(idParts[2].substring(3));
+                    
+                    let questions;
+                    if (quizType === 'lymphatic') {
+                        questions = lymphaticQuestions;
+                    } else if (quizType === 'defenses') {
+                        questions = defensesQuestions;
+                    } else {
+                        return;
+                    }
+                    
+                    // Store the user's answer
+                    questions[questionIndex].userAnswer = optionIndex;
+                    
+                    // Update progress
+                    updateProgress(quizType, questions);
+                    
+                    // Show immediate feedback
+                    showImmediateFeedback(quizType, questionIndex, questions[questionIndex]);
+                }
             });
+        }
+        
+        function showImmediateFeedback(quizType, index, question) {
+            const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
+            if (!feedbackElement) return;
+            
+            if (question.userAnswer === question.correct) {
+                feedbackElement.innerHTML = `
+                    <div class="correct">Correct! ${question.explanation}</div>
+                `;
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.innerHTML = `
+                    <div class="incorrect">Incorrect. ${question.explanation}</div>
+                    <div class="correct-answer">Correct answer: ${question.options[question.correct]}</div>
+                `;
+                feedbackElement.className = "feedback incorrect";
+            }
+            
+            feedbackElement.style.display = 'block';
+        }
+        
+        function updateProgress(quizType, questions) {
+            const answeredCount = questions.filter(q => q.userAnswer !== undefined).length;
+            const progressPercentage = (answeredCount / questions.length) * 100;
+            
+            document.getElementById(`${quizType}-answered`).textContent = answeredCount;
+            document.getElementById(`${quizType}-progress`).style.width = `${progressPercentage}%`;
         }
         
         function calculateScore(quizType, questions) {
@@ -3001,34 +2903,38 @@
             const totalQuestions = questions.length;
             
             questions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="${quizType}-q${index}"]:checked`);
                 const feedbackElement = document.getElementById(`${quizType}-feedback-${index}`);
                 
-                if (selectedOption) {
-                    const selectedValue = parseInt(selectedOption.value);
-                    
-                    if (selectedValue === q.correct) {
+                if (q.userAnswer !== undefined) {
+                    if (q.userAnswer === q.correct) {
                         score++;
-                        feedbackElement.innerHTML = `
-                            <div class="correct">Correct! ${q.explanation}</div>
-                        `;
-                        feedbackElement.className = "feedback correct";
+                        if (feedbackElement) {
+                            feedbackElement.innerHTML = `
+                                <div class="correct">Correct! ${q.explanation}</div>
+                            `;
+                            feedbackElement.className = "feedback correct";
+                            feedbackElement.style.display = 'block';
+                        }
                     } else {
+                        if (feedbackElement) {
+                            feedbackElement.innerHTML = `
+                                <div class="incorrect">Incorrect. ${q.explanation}</div>
+                                <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                            `;
+                            feedbackElement.className = "feedback incorrect";
+                            feedbackElement.style.display = 'block';
+                        }
+                    }
+                } else {
+                    if (feedbackElement) {
                         feedbackElement.innerHTML = `
-                            <div class="incorrect">Incorrect. ${q.explanation}</div>
+                            <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
                             <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
                         `;
                         feedbackElement.className = "feedback incorrect";
+                        feedbackElement.style.display = 'block';
                     }
-                } else {
-                    feedbackElement.innerHTML = `
-                        <div class="incorrect">You didn't select an answer. ${q.explanation}</div>
-                        <div class="correct-answer">Correct answer: ${q.options[q.correct]}</div>
-                    `;
-                    feedbackElement.className = "feedback incorrect";
                 }
-                
-                feedbackElement.style.display = 'block';
             });
             
             const percentage = (score / totalQuestions) * 100;
